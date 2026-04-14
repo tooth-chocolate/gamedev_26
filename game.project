@@ -5,8 +5,8 @@ main_collection = /main/main.collectionc
 shared_state = 1
 
 [display]
-width = 960
-height = 640
+width = 480
+height = 270
 high_dpi = 1
 
 [android]
@@ -20,5 +20,9 @@ scale = 0.01
 scale_mode = stretch
 
 [project]
-title = Empty Project
+title = Mountain Climber
+
+[graphics]
+default_texture_min_filter = linear_mipmap_nearest
+default_texture_mag_filter = nearest
 

@@ -1,0 +1,16 @@
+image: "/assets/sprites/floor_placeholder.png"
+tile_width: 16
+tile_height: 16
+collision: "/assets/sprites/floor_placeholder.png"
+convex_hulls {
+  index: 0
+  count: 4
+  collision_group: "obstacle"
+}
+collision_groups: "obstacle"
+animations {
+  id: "anim"
+  start_tile: 1
+  end_tile: 1
+}
+extrude_borders: 2
