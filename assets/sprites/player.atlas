@@ -1,4 +1,0 @@
-images {
-  image: "/assets/sprites/player_0_fin.png"
-}
-extrude_borders: 2
