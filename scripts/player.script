@@ -24,6 +24,8 @@ local anim_run = hash("run")
 local anim_idle = hash("idle")
 local anim_jump = hash("jump")
 local anim_fall = hash("fall")
+local trigger = hash("trigger_response")
+local death = hash("death")
 
 function init(self)
 	-- Add initialization code here
@@ -184,6 +186,12 @@ function on_message(self, message_id, message, sender)
 		if message.group == group_obstacle then
 			handle_obstacle_contact(self, message.normal, message.distance)
 		end
+	end
+
+	if message_id == trigger and message.other_group == death then
+		msg.post("/game_controller", "player_died")
+		go.delete()
+		print("player died")
 	end
 end
 
