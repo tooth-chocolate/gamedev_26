@@ -1,5 +1,5 @@
 [bootstrap]
-main_collection = /main/main.collectionc
+main_collection = /testing/testing.collectionc
 
 [script]
 shared_state = 1
@@ -15,6 +15,8 @@ input_method = HiddenInputField
 [physics]
 gravity_y = -1000.0
 scale = 0.01
+debug = 0
+use_fixed_timestep = 1
 
 [html5]
 scale_mode = stretch

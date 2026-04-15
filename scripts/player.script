@@ -24,6 +24,8 @@ local anim_run = hash("run")
 local anim_idle = hash("idle")
 local anim_jump = hash("jump")
 local anim_fall = hash("fall")
+local trigger = hash("trigger_response")
+local death = hash("death")
 
 function init(self)
 	-- Add initialization code here
@@ -82,7 +84,7 @@ local function update_animations(self)
 	end
 end
 
-function update(self, dt)
+function fixed_update(self, dt)
 	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
@@ -150,26 +152,27 @@ end
 -- end
 
 local function handle_obstacle_contact(self, normal, distance)
-	-- project the correction vector onto the contact normal
-	-- (the correction vector is the 0-vector for the first contact point)
-	local proj = vmath.dot(self.correction, normal)
-	-- calculate the compensation we need to make for this contact point
-	local comp = (distance - proj) * normal
-	-- add it to the correction vector
-	self.correction = self.correction + comp
-	-- apply the compensation to the player character
-	go.set_position(go.get_position() + comp)
-	-- check if the normal points enough up to consider the player standing on the ground
-	-- (0.7 is roughly equal to 45 degrees deviation from pure vertical direction)
-	if normal.y > 0.7 then
-		self.ground_contact = true
-	end
-	-- project the velocity onto the normal
-	proj = vmath.dot(self.velocity, normal)
-	-- if the projection is negative, it means that some of the velocity points towards the contact point
-	if proj < 0 then
-		-- remove that component in that case
-		self.velocity = self.velocity - proj * normal
+	if distance > 0 then
+		-- project the correction vector onto the contact normal
+		-- (the correction vector is the 0-vector for the first contact point)
+		local proj = vmath.project(self.correction, normal * distance)
+		-- calculate the compensation we need to make for this contact point
+		local comp = (distance - distance * proj) * normal
+		-- add it to the correction vector
+		self.correction = self.correction + comp
+		-- apply the compensation to the player character
+		go.set_position(go.get_position() + comp)
+		-- check if the normal points enough up to consider the player standing on the ground
+		-- (0.7 is roughly equal to 45 degrees deviation from pure vertical direction)
+		if normal.y > 0.7 then
+			self.ground_contact = true
+			self.velocity.y = 0
+		elseif math.abs(normal.x) > 0.7 then
+			self.wall_contact = true
+			self.velocity.x = 0
+		elseif normal.y < -0.7 then
+			self.velocity.y = 0
+		end
 	end
 end
 
@@ -184,6 +187,12 @@ function on_message(self, message_id, message, sender)
 		if message.group == group_obstacle then
 			handle_obstacle_contact(self, message.normal, message.distance)
 		end
+	end
+
+	if message_id == trigger and message.other_group == death then
+		msg.post("/game_controller", "player_died")
+		go.delete()
+		print("player died")
 	end
 end
 
