@@ -1,0 +1,27 @@
+script: "/gui/rescue.gui_script"
+fonts {
+  name: "rescue_font"
+  font: "/gui/rescue_font.font"
+}
+nodes {
+  position {
+    x: 67.0
+    y: 229.0
+    z: 1.0
+  }
+  scale {
+    x: 0.877359
+    y: 1.004801
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Rescues: 0"
+  font: "rescue_font"
+  id: "rescue"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
