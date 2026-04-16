@@ -221,6 +221,7 @@ local function death_handler(self)
 		msg.post(self.controller, "player_died", {last_safe = self.safe_pos})
 	else
 		msg.post(self.controller, "player_died")
+		msg.post("main_testing:/rescue_board#rescue", "add_rescues", {rescue = 1})
 	end
 
 	if self.robot_torso_used then

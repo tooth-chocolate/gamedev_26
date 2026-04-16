@@ -43,7 +43,7 @@ end
 
 local function respawn_handler(self, message)
 	local spawn_location = self.init_spawn
-	if message == nil then
+	if next(message) ~= nil then
 		if not self.torso_used then
 			self.torso_used = true
 			spawn_location = message.last_safe
