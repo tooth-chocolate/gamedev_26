@@ -1,12 +1,17 @@
-local function spawn_player(self, spawn_location)
-	self.player = factory.create("#player_factory", spawn_location, nil, {controller = go.get_id()})
+local upgrades = require "modules.upgrade_state"
+
+
+local function spawn_player(self, spawn_location, torso_used)
+	self.player = factory.create("#player_factory", spawn_location, nil, {controller = go.get_id(), robot_torso_used = torso_used})
 end
 
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-	spawn_player(self, vmath.vector3(40, 40, 1))
+	self.init_spawn = vmath.vector3(40, 40, 1)
+	self.torso_used = false
+	spawn_player(self, self.init_spawn, false)
 end
 
 function final(self)
@@ -36,14 +41,26 @@ function fixed_update(self, dt)
 	-- Remove this function if not needed
 end
 
+local function respawn_handler(self, message)
+	local spawn_location = self.init_spawn
+	if message then
+		if not self.torso_used then
+			self.torso_used = true
+			spawn_location = message.last_safe
+		end
+	end
+	timer.delay(1.0, false, function() spawn_player(self, spawn_location, self.torso_used) end)
+end
+
 function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
 	
 	if message_id == hash("player_died") then
-		local spawn_location = vmath.vector3(40, 40, 1)
-		timer.delay(1.0, false, function() spawn_player(self, spawn_location) end)
+		-- local spawn_location = vmath.vector3(40, 40, 1)
+		-- timer.delay(1.0, false, function() spawn_player(self, spawn_location) end)
+		respawn_handler(self, message)
 	end
 end
 
