@@ -1,12 +1,13 @@
-local function spawn_player(self, spawn_location)
-	self.player = factory.create("#player_factory", spawn_location, nil, {controller = go.get_id()})
-end
-
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-	spawn_player(self, vmath.vector3(40, 40, 1))
+	self.levels = {"#testing_level_0", "#testing_level_1", "#testing_level_2"}
+	self.current_level = self.levels[1]
+	self.cur_index = 1
+	self.n_levels = #self.levels
+	msg.post(".", "acquire_input_focus")
+	msg.post(self.current_level, "load")
 end
 
 function final(self)
@@ -36,14 +37,30 @@ function fixed_update(self, dt)
 	-- Remove this function if not needed
 end
 
+-- handles what happens if you complete a level. current level gets disabled and next level get loaded.
+local function level_completion_handler(self, message_id)
+	if self.cur_index == self.n_levels then
+		print("game complete")
+	else
+		local next_level = self.levels[self.cur_index + 1]
+		msg.post(self.current_level, "disable")
+		msg.post(self.current_level, "unload")
+		msg.post(next_level, "load")
+		self.cur_index = self.cur_index + 1
+		self.current_level = next_level
+	end
+end
+
 function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
-	
-	if message_id == hash("player_died") then
-		local spawn_location = vmath.vector3(40, 40, 1)
-		timer.delay(1.0, false, function() spawn_player(self, spawn_location) end)
+	if message_id == hash("level_complete") then
+		level_completion_handler(self, message_id)
+	end
+
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender, "enable")
 	end
 end
 

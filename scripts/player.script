@@ -1,3 +1,6 @@
+-- this imports the module that saves available robot parts
+local upgrades = require "modules.upgrade_state"
+
 -- these are the tweaks for the mechanics, feel free to change them for a different feeling
 -- the acceleration to move right/left
 local move_acceleration = 3500
@@ -9,8 +12,6 @@ local max_speed = 450
 local gravity = -1000
 -- take-off speed when jumping in pixel units
 local jump_takeoff_speed = 550
--- time within a double tap must occur to be considered a jump (only used for mouse/touch controls)
-local touch_jump_timeout = 0.2
 
 -- prehashing ids improves performance
 local msg_contact_point_response = hash("contact_point_response")
@@ -19,13 +20,15 @@ local group_obstacle = hash("obstacle")
 local input_left = hash("left")
 local input_right = hash("right")
 local input_jump = hash("jump")
-local input_touch = hash("touch")
 local anim_run = hash("run")
 local anim_idle = hash("idle")
 local anim_jump = hash("jump")
 local anim_fall = hash("fall")
 local trigger = hash("trigger_response")
 local death = hash("death")
+local goal = hash("c_flag")
+
+go.property("controller", hash("idle"))
 
 function init(self)
 	-- Add initialization code here
@@ -34,19 +37,24 @@ function init(self)
 	
 	-- this lets us handle input in this script
 	msg.post(".", "acquire_input_focus")
-
 	-- initial player velocity
 	self.velocity = vmath.vector3(0, 0, 0)
 	-- support variable to keep track of collisions and separation
 	self.correction = vmath.vector3()
 	-- if the player stands on ground or not
 	self.ground_contact = false
+	-- tracks double jump
+	self.jump_count = 0  
+	-- if the player touches wall or not
+	self.wall_contact = false
+	-- -1 = wall on left, 1 = wall on right
+	self.wall_direction = 0  
+	-- if the player is clinging to the wall with a robot arm or not
+	self.clinging = false
 	-- movement input in the range [-1,1]
 	self.move_input = 0
 	-- the currently playing animation
 	self.anim = nil
-	-- timer that controls the jump-window when using mouse/touch
-	self.touch_jump_timer = 0
 end
 
 -- function final(self)
@@ -107,6 +115,26 @@ function fixed_update(self, dt)
 			acceleration.x = air_acceleration_factor * acceleration.x
 		end
 	end
+	-- start clinging when hitting wall with arm
+	if self.wall_contact and upgrades.parts.robot_arm == 1 then
+		self.clinging = true
+	end
+
+	-- stop clinging when hitting ground or pressing away from wall
+	if self.ground_contact then
+		self.clinging = false
+	end
+	if self.clinging and not self.wall_contact and self.move_input ~= 0 then
+		self.clinging = false
+	end
+
+	-- cancel gravity while clinging
+	if self.clinging and upgrades.parts.robot_arm == 1 then
+		acceleration.y = 0
+		if self.velocity.y < 0 then
+			self.velocity.y = 0
+		end
+	end
 	-- calculate the velocity change this frame (dv is short for delta-velocity)
 	local dv = acceleration * dt
 	-- check if dv exceeds the intended speed difference, clamp it in that case
@@ -123,17 +151,14 @@ function fixed_update(self, dt)
 	-- apply it to the player character
 	go.set_position(go.get_position() + dp)
 
-	-- update the jump timer
-	if self.touch_jump_timer > 0 then
-		self.touch_jump_timer = self.touch_jump_timer - dt
-	end
-
 	-- update_animations(self)
 
 	-- reset volatile state
 	self.correction = vmath.vector3()
-	self.move_input = 0
 	self.ground_contact = false
+	self.wall_contact = false
+	self.move_input = 0
+	
 end
 
 -- function late_update(self, dt)
@@ -166,10 +191,15 @@ local function handle_obstacle_contact(self, normal, distance)
 		-- (0.7 is roughly equal to 45 degrees deviation from pure vertical direction)
 		if normal.y > 0.7 then
 			self.ground_contact = true
+			self.jump_count = 0
 			self.velocity.y = 0
 		elseif math.abs(normal.x) > 0.7 then
 			self.wall_contact = true
+			self.wall_direction = normal.x > 0 and 1 or -1
 			self.velocity.x = 0
+			if upgrades.parts.robot_arm == 1 then
+				self.velocity.y = 0  -- stop sliding down
+			end
 		elseif normal.y < -0.7 then
 			self.velocity.y = 0
 		end
@@ -189,21 +219,40 @@ function on_message(self, message_id, message, sender)
 		end
 	end
 
-	if message_id == trigger and message.other_group == death then
-		msg.post("/game_controller", "player_died")
-		go.delete()
-		print("player died")
+	if message_id == trigger then 
+		if message.other_group == death then
+			msg.post(self.controller, "player_died")
+			msg.post("main_testing:/rescue_board#rescue", "add_rescues", {rescue = 1})
+			go.delete()
+		elseif message.other_group == goal then
+			msg.post("main_testing:/loader#game_loader", "level_complete")
+			go.delete()
+			print("GOAL")
+		end
 	end
 end
 
 local function jump(self)
+	local max_jumps = 1
+	if upgrades.parts.robot_legs == 1 then
+		max_jumps = 2
+	end
 	-- only allow jump from ground
-	-- (extend this with a counter to do things like double-jumps)
 	if self.ground_contact then
-		-- set take-off speed
 		self.velocity.y = jump_takeoff_speed
 		-- play animation
 		-- play_animation(self, anim_jump)
+		self.jump_count = 1
+	elseif self.wall_contact or self.clinging then
+		self.velocity.y = jump_takeoff_speed
+		self.velocity.x = self.wall_direction * max_speed
+		self.clinging = false
+		self.jump_count = 1
+	elseif self.jump_count < max_jumps then
+		self.velocity.y = jump_takeoff_speed
+		-- play animation
+		-- play_animation(self, anim_jump)
+		self.jump_count = self.jump_count + 1
 	end
 end
 
@@ -219,13 +268,12 @@ function on_input(self, action_id, action)
 	-- Add input-handling code here. The game object this script is attached to
 	-- must have acquired input focus:
 	--
-	--    msg.post(".", "acquire_input_focus")
+	-- msg.post(".", "acquire_input_focus")
 	--
 	-- All mapped input bindings will be received. Mouse and touch input will
 	-- be received regardless of where on the screen it happened.
 	-- Learn more: https://defold.com/manuals/input/
 	-- Remove this function if not needed
-
 	if action_id == input_left then
 		self.move_input = -action.value
 	elseif action_id == input_right then
@@ -235,25 +283,6 @@ function on_input(self, action_id, action)
 			jump(self)
 		elseif action.released then
 			abort_jump(self)
-		end
-	elseif action_id == input_touch then
-		-- move towards the touch-point
-		local diff = action.x - go.get_position().x
-		-- only give input when far away (more than 10 pixels)
-		if math.abs(diff) > 10 then
-			-- slow down when less than 100 pixels away
-			self.move_input = diff / 100
-			-- clamp input to [-1,1]
-			self.move_input = math.min(1, math.max(-1, self.move_input))
-		end
-		if action.released then
-			-- start timing the last release to see if we are about to jump
-			self.touch_jump_timer = touch_jump_timeout
-		elseif action.pressed then
-			-- jump on double tap
-			if self.touch_jump_timer > 0 then
-				jump(self)
-			end
 		end
 	end
 end

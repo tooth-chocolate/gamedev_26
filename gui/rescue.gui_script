@@ -1,12 +1,8 @@
-local function spawn_player(self, spawn_location)
-	self.player = factory.create("#player_factory", spawn_location, nil, {controller = go.get_id()})
-end
-
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-	spawn_player(self, vmath.vector3(40, 40, 1))
+	self.rescue = 0
 end
 
 function final(self)
@@ -21,29 +17,15 @@ function update(self, dt)
 	-- Remove this function if not needed
 end
 
-function late_update(self, dt)
-	-- This function is called at the end of update cycle but before render
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function fixed_update(self, dt)
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
 function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
-	
-	if message_id == hash("player_died") then
-		local spawn_location = vmath.vector3(40, 40, 1)
-		timer.delay(1.0, false, function() spawn_player(self, spawn_location) end)
+	if message_id == hash("add_rescues") then
+		print("got here")
+		self.rescue = self.rescue + message.rescue
+		local rescue_node = gui.get_node("rescue")
+		gui.set_text(rescue_node, "RESCUES: " ..self.rescue)
 	end
 end
 

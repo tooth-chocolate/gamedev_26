@@ -5,4 +5,11 @@ animations {
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
+animations {
+  id: "completion_flag"
+  images {
+    image: "/assets/sprites/completion_flag.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
 extrude_borders: 2

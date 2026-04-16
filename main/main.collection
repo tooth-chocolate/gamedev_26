@@ -8,6 +8,10 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "game_controller"
+  prototype: "/game_objects/game_controller.go"
+}
 scale_along_z: 0
 embedded_instances {
   id: "map"
