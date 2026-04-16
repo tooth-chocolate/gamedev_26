@@ -29,6 +29,7 @@ local death = hash("death")
 local goal = hash("c_flag")
 
 go.property("controller", hash("idle"))
+go.property("robot_torso_used", true)
 
 function init(self)
 	-- Add initialization code here
@@ -43,6 +44,8 @@ function init(self)
 	self.correction = vmath.vector3()
 	-- if the player stands on ground or not
 	self.ground_contact = false
+	-- safe pos to return to
+	self.safe_pos = go.get_position()
 	-- tracks double jump
 	self.jump_count = 0  
 	-- if the player touches wall or not
@@ -55,6 +58,12 @@ function init(self)
 	self.move_input = 0
 	-- the currently playing animation
 	self.anim = nil
+	-- robot torso
+	if upgrades.parts.robot_torso == 1 then
+		self.robot_torso_active = true
+	else
+		self.robot_torso_active = false
+	end
 end
 
 -- function final(self)
@@ -122,6 +131,7 @@ function fixed_update(self, dt)
 
 	-- stop clinging when hitting ground or pressing away from wall
 	if self.ground_contact then
+		self.safe_pos = go.get_position()
 		self.clinging = false
 	end
 	if self.clinging and not self.wall_contact and self.move_input ~= 0 then
@@ -206,6 +216,20 @@ local function handle_obstacle_contact(self, normal, distance)
 	end
 end
 
+local function death_handler(self)
+	if self.robot_torso_active then
+		msg.post(self.controller, "player_died", {last_safe = self.safe_pos})
+	else
+		msg.post(self.controller, "player_died")
+	end
+
+	if self.robot_torso_used then
+		msg.post("main_testing:/rescue_board#rescue", "add_rescues", {rescue = 1})
+	end
+	go.delete()
+
+end
+
 function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	-- Learn more: https://defold.com/manuals/message-passing/
@@ -221,9 +245,7 @@ function on_message(self, message_id, message, sender)
 
 	if message_id == trigger then 
 		if message.other_group == death then
-			msg.post(self.controller, "player_died")
-			msg.post("main_testing:/rescue_board#rescue", "add_rescues", {rescue = 1})
-			go.delete()
+			death_handler(self)
 		elseif message.other_group == goal then
 			msg.post("main_testing:/loader#game_loader", "level_complete")
 			go.delete()
