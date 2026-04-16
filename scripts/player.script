@@ -26,6 +26,9 @@ local anim_jump = hash("jump")
 local anim_fall = hash("fall")
 local trigger = hash("trigger_response")
 local death = hash("death")
+local goal = hash("c_flag")
+
+go.property("controller", hash("idle"))
 
 function init(self)
 	-- Add initialization code here
@@ -34,7 +37,6 @@ function init(self)
 	
 	-- this lets us handle input in this script
 	msg.post(".", "acquire_input_focus")
-
 	-- initial player velocity
 	self.velocity = vmath.vector3(0, 0, 0)
 	-- support variable to keep track of collisions and separation
@@ -217,10 +219,16 @@ function on_message(self, message_id, message, sender)
 		end
 	end
 
-	if message_id == trigger and message.other_group == death then
-		msg.post("/game_controller", "player_died")
-		go.delete()
-		print("player died")
+	if message_id == trigger then 
+		if message.other_group == death then
+			msg.post(self.controller, "player_died")
+			msg.post("main_testing:/rescue_board#rescue", "add_rescues", {rescue = 1})
+			go.delete()
+		elseif message.other_group == goal then
+			msg.post("main_testing:/loader#game_loader", "level_complete")
+			go.delete()
+			print("GOAL")
+		end
 	end
 end
 
@@ -260,13 +268,12 @@ function on_input(self, action_id, action)
 	-- Add input-handling code here. The game object this script is attached to
 	-- must have acquired input focus:
 	--
-	--    msg.post(".", "acquire_input_focus")
+	-- msg.post(".", "acquire_input_focus")
 	--
 	-- All mapped input bindings will be received. Mouse and touch input will
 	-- be received regardless of where on the screen it happened.
 	-- Learn more: https://defold.com/manuals/input/
 	-- Remove this function if not needed
-
 	if action_id == input_left then
 		self.move_input = -action.value
 	elseif action_id == input_right then

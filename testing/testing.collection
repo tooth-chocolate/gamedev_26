@@ -1,11 +1,10 @@
 name: "testing"
 instances {
-  id: "player"
-  prototype: "/game_objects/player.go"
+  id: "completion"
+  prototype: "/game_objects/completion.go"
   position {
-    x: 41.0
-    y: 40.0
-    z: 1.0
+    x: 240.0
+    y: 78.0
   }
 }
 instances {
