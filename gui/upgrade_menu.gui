@@ -1,0 +1,129 @@
+script: "/gui/upgrade_menu.gui_script"
+fonts {
+  name: "rescue_font"
+  font: "/gui/rescue_font.font"
+}
+nodes {
+  position {
+    x: 240.0
+    y: 137.0
+  }
+  scale {
+    x: 0.1998
+    y: 0.1998
+    z: 0.666
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.7607843
+    y: 0.7607843
+    z: 0.7607843
+  }
+  type: TYPE_TEXT
+  font: "rescue_font"
+  id: "brain"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 240.0
+    y: 161.0
+  }
+  scale {
+    x: 0.1998
+    y: 0.1998
+    z: 0.666
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.7607843
+    y: 0.7607843
+    z: 0.7607843
+  }
+  type: TYPE_TEXT
+  font: "rescue_font"
+  id: "torso"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 240.0
+    y: 185.0
+  }
+  scale {
+    x: 0.1998
+    y: 0.1998
+    z: 0.666
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.7607843
+    y: 0.7607843
+    z: 0.7607843
+  }
+  type: TYPE_TEXT
+  font: "rescue_font"
+  id: "eyes"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 240.0
+    y: 208.0
+  }
+  scale {
+    x: 0.1998
+    y: 0.1998
+    z: 0.666
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.7607843
+    y: 0.7607843
+    z: 0.7607843
+  }
+  type: TYPE_TEXT
+  font: "rescue_font"
+  id: "legs"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 240.0
+    y: 231.0
+  }
+  scale {
+    x: 0.1998
+    y: 0.1998
+    z: 0.666
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.3019608
+    y: 0.3019608
+    z: 0.3019608
+  }
+  type: TYPE_TEXT
+  text: "\n"
+  ""
+  font: "rescue_font"
+  id: "arms"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
