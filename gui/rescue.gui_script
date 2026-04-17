@@ -22,7 +22,6 @@ function on_message(self, message_id, message, sender)
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
 	if message_id == hash("add_rescues") then
-		print("got here")
 		self.rescue = self.rescue + message.rescue
 		local rescue_node = gui.get_node("rescue")
 		gui.set_text(rescue_node, "RESCUES: " ..self.rescue)

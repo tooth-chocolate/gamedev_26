@@ -57,6 +57,7 @@ embedded_components {
   "near_z: 0.0\n"
   "far_z: 2.0\n"
   "orthographic_projection: 1\n"
+  "orthographic_mode: ORTHO_MODE_AUTO_FIT\n"
   ""
 }
 embedded_components {

@@ -1,3 +1,9 @@
+-- prehashing
+local level_complete = hash("level_complete")
+local proxy_loaded = hash("proxy_loaded")
+
+
+
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
@@ -55,12 +61,16 @@ function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
-	if message_id == hash("level_complete") then
+	if message_id == level_complete then
 		level_completion_handler(self, message_id)
 	end
 
-	if message_id == hash("proxy_loaded") then
+	if message_id == proxy_loaded then
+		local controller = msg.url(sender.fragment, "//game_controller", "controller")
 		msg.post(sender, "enable")
+		msg.post(controller, "current_level_configure", {current_level = self.cur_index})
+		msg.post("/upgrade_menu#upgrade_menu", "current_level_configure", {current_level = self.cur_index})
+		msg.post("/upgrade_menu#upgrade_menu", "disable")
 	end
 end
 
