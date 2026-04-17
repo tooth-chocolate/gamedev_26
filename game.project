@@ -1,5 +1,5 @@
 [bootstrap]
-main_collection = /testing/main_testing.collectionc
+main_collection = /main/main.collectionc
 render = /builtins/render/default.renderc
 
 [script]

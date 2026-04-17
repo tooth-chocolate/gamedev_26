@@ -1,0 +1,46 @@
+name: "level1"
+instances {
+  id: "completion"
+  prototype: "/game_objects/completion.go"
+  position {
+    x: 1890.0
+    y: 1630.0
+  }
+}
+instances {
+  id: "game_controller"
+  prototype: "/game_objects/game_controller.go"
+}
+scale_along_z: 0
+embedded_instances {
+  id: "map"
+  data: "components {\n"
+  "  id: \"level1\"\n"
+  "  component: \"/scenes/level1.tilemap\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"obstacle\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/scenes/level1.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"obstacle\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"death\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/scenes/level1.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"death\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}

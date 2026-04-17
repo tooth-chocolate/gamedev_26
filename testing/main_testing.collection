@@ -1,7 +1,7 @@
 name: "main_testing"
 instances {
   id: "loader"
-  prototype: "/game_objects/loader.go"
+  prototype: "/game_objects/loader_lv1.go"
 }
 instances {
   id: "rescue_board"
