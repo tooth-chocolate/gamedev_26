@@ -1,20 +1,13 @@
-local upgrades = require "modules.upgrade_state"
-
-
-local function spawn_player(self, spawn_location, torso_used)
-	self.player = factory.create("#player_factory", spawn_location, nil, {controller = go.get_id(), robot_torso_used = torso_used})
-end
-		
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-	self.init_spawn = vmath.vector3(40, 50, 1)
-	self.torso_used = false
-	self.rescue_threshold = 1
-	self.rescues = 0
-	self.current_level = 0
-	spawn_player(self, self.init_spawn, false)
+	self.levels = {"#level1"}
+	self.current_level = self.levels[1]
+	self.cur_index = 1
+	self.n_levels = #self.levels
+	msg.post(".", "acquire_input_focus")
+	msg.post(self.current_level, "load")
 end
 
 function final(self)
@@ -44,45 +37,30 @@ function fixed_update(self, dt)
 	-- Remove this function if not needed
 end
 
-local function upgrade_ui_caller(self)
-	if self.rescues > self.rescue_threshold then
-		msg.post("main_testing:/upgrade_menu#upgrade_menu", "adapt_menu")
-		-- msg.post("main_testing:/loader#game_loader", "release_input_focus")
-		msg.post("main_testing:/upgrade_menu#upgrade_menu", "enable")
+-- handles what happens if you complete a level. current level gets disabled and next level get loaded.
+local function level_completion_handler(self, message_id)
+	if self.cur_index == self.n_levels then
+		print("game complete")
+	else
+		local next_level = self.levels[self.cur_index + 1]
+		msg.post(self.current_level, "disable")
+		msg.post(self.current_level, "unload")
+		msg.post(next_level, "load")
+		self.cur_index = self.cur_index + 1
+		self.current_level = next_level
 	end
-end
-
-local function upgrade_handler(self)
-	
-end
-
-local function respawn_handler(self, message)
-	local spawn_location = self.init_spawn
-	self.rescues = self.rescues + 1
-	if next(message) ~= nil then
-		if not self.torso_used then
-			self.torso_used = true
-			spawn_location = message.last_safe
-			self.rescues = self.rescues - 1
-		end		
-	end
-	upgrade_ui_caller(self)
-	timer.delay(1.0, false, function() spawn_player(self, spawn_location, self.torso_used) end)
 end
 
 function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
-	
-	if message_id == hash("player_died") then
-		-- local spawn_location = vmath.vector3(40, 40, 1)
-		-- timer.delay(1.0, false, function() spawn_player(self, spawn_location) end)
-		respawn_handler(self, message)
+	if message_id == hash("level_complete") then
+		level_completion_handler(self, message_id)
 	end
 
-	if message_id == hash("current_level_configure") then
-		self.current_level = message.current_level
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender, "enable")
 	end
 end
 

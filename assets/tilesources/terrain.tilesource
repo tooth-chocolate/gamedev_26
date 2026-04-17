@@ -1,12 +1,18 @@
-image: "/assets/sprites/floor_placeholder.png"
+image: "/assets/sprites/obstacle_danger_placeholder.png"
 tile_width: 16
 tile_height: 16
-collision: "/assets/sprites/floor_placeholder.png"
+collision: "/assets/sprites/obstacle_danger_placeholder.png"
 convex_hulls {
   index: 0
   count: 4
   collision_group: "obstacle"
 }
+convex_hulls {
+  index: 4
+  count: 4
+  collision_group: "death"
+}
+collision_groups: "death"
 collision_groups: "obstacle"
 animations {
   id: "anim"
