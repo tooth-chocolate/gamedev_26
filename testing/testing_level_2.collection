@@ -1,6 +1,6 @@
 name: "testing_level_2"
 collection_instances {
-  id: "testing_level_2"
+  id: ""
   collection: "/testing/testing.collection"
 }
 scale_along_z: 0

@@ -7,4 +7,8 @@ instances {
   id: "rescue_board"
   prototype: "/game_objects/rescue_board.go"
 }
+instances {
+  id: "upgrade_menu"
+  prototype: "/game_objects/upgrade_menu.go"
+}
 scale_along_z: 0
