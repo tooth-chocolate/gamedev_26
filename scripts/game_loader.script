@@ -66,8 +66,12 @@ function on_message(self, message_id, message, sender)
 	end
 
 	if message_id == proxy_loaded then
-		local controller = msg.url(sender.fragment, "//game_controller", "controller")
+		local controller = msg.url(sender.fragment, "/game_controller", "controller")
+		print("controller url: ", controller)
+		-- print(controller)
 		msg.post(sender, "enable")
+		-- print(sender.fragment)
+		-- print(sender.socket)
 		msg.post(controller, "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_menu#upgrade_menu", "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_menu#upgrade_menu", "disable")
