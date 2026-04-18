@@ -2043,11 +2043,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 57
-    tile: 1
-  }
-  cell {
     x: 69
     y: 57
     tile: 1
@@ -2121,11 +2116,6 @@ layers {
     x: 88
     y: 57
     tile: 0
-  }
-  cell {
-    x: 68
-    y: 58
-    tile: 1
   }
   cell {
     x: 69
@@ -2203,11 +2193,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 59
-    tile: 1
-  }
-  cell {
     x: 69
     y: 59
     tile: 1
@@ -2283,11 +2268,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 60
-    tile: 1
-  }
-  cell {
     x: 69
     y: 60
     tile: 1
@@ -2356,11 +2336,6 @@ layers {
     x: 88
     y: 60
     tile: 0
-  }
-  cell {
-    x: 68
-    y: 61
-    tile: 1
   }
   cell {
     x: 69
@@ -2433,11 +2408,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 62
-    tile: 1
-  }
-  cell {
     x: 69
     y: 62
     tile: 1
@@ -2508,11 +2478,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 63
-    tile: 1
-  }
-  cell {
     x: 69
     y: 63
     tile: 1
@@ -2581,11 +2546,6 @@ layers {
     x: 88
     y: 63
     tile: 0
-  }
-  cell {
-    x: 68
-    y: 64
-    tile: 1
   }
   cell {
     x: 69
@@ -2663,11 +2623,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 65
-    tile: 1
-  }
-  cell {
     x: 69
     y: 65
     tile: 1
@@ -2741,11 +2696,6 @@ layers {
     x: 88
     y: 65
     tile: 0
-  }
-  cell {
-    x: 68
-    y: 66
-    tile: 1
   }
   cell {
     x: 69
@@ -2823,11 +2773,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 67
-    tile: 1
-  }
-  cell {
     x: 69
     y: 67
     tile: 1
@@ -2903,11 +2848,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 68
-    tile: 1
-  }
-  cell {
     x: 69
     y: 68
     tile: 1
@@ -2976,11 +2916,6 @@ layers {
     x: 88
     y: 68
     tile: 0
-  }
-  cell {
-    x: 68
-    y: 69
-    tile: 1
   }
   cell {
     x: 69
@@ -3053,11 +2988,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 70
-    tile: 1
-  }
-  cell {
     x: 69
     y: 70
     tile: 1
@@ -3128,11 +3058,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 71
-    tile: 1
-  }
-  cell {
     x: 69
     y: 71
     tile: 1
@@ -3201,11 +3126,6 @@ layers {
     x: 88
     y: 71
     tile: 0
-  }
-  cell {
-    x: 68
-    y: 72
-    tile: 1
   }
   cell {
     x: 69
@@ -3281,11 +3201,6 @@ layers {
     x: 88
     y: 72
     tile: 0
-  }
-  cell {
-    x: 68
-    y: 73
-    tile: 1
   }
   cell {
     x: 69
@@ -3463,11 +3378,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 74
-    tile: 1
-  }
-  cell {
     x: 69
     y: 74
     tile: 1
@@ -3641,11 +3551,6 @@ layers {
     x: 108
     y: 74
     tile: 0
-  }
-  cell {
-    x: 68
-    y: 75
-    tile: 1
   }
   cell {
     x: 69
@@ -3823,11 +3728,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 76
-    tile: 1
-  }
-  cell {
     x: 69
     y: 76
     tile: 1
@@ -3983,11 +3883,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 68
-    y: 77
-    tile: 1
-  }
-  cell {
     x: 69
     y: 77
     tile: 1
@@ -4119,11 +4014,6 @@ layers {
   }
   cell {
     x: 99
-    y: 81
-    tile: 1
-  }
-  cell {
-    x: 100
     y: 81
     tile: 0
   }
@@ -4150,7 +4040,7 @@ layers {
   cell {
     x: 99
     y: 82
-    tile: 1
+    tile: 0
   }
   cell {
     x: 100
@@ -4770,7 +4660,7 @@ layers {
   cell {
     x: 100
     y: 101
-    tile: 1
+    tile: 0
   }
 }
 material: "/builtins/materials/tile_map.material"

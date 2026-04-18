@@ -7,7 +7,7 @@ local move_acceleration = 3500
 -- acceleration factor to use when air-borne
 local air_acceleration_factor = 0.8
 -- max speed right/left
-local max_speed = 450
+local max_speed = 400
 -- gravity pulling the player down in pixel units
 local gravity = -1000
 -- take-off speed when jumping in pixel units
@@ -108,6 +108,10 @@ function fixed_update(self, dt)
 
 	-- determine the target speed based on input
 	local target_speed = self.move_input * max_speed
+
+	if not self.ground_contact then
+		target_speed = 0.6*target_speed
+	end
 	-- calculate the difference between our current speed and the target speed
 	local speed_diff = target_speed - self.velocity.x
 	-- the complete acceleration to integrate over this frame
@@ -125,7 +129,7 @@ function fixed_update(self, dt)
 		end
 	end
 	-- start clinging when hitting wall with arm
-	if self.wall_contact and upgrades.parts.robot_arm then
+	if self.wall_contact and upgrades.parts.robot_arms then
 		self.clinging = true
 	end
 
@@ -139,7 +143,7 @@ function fixed_update(self, dt)
 	end
 
 	-- cancel gravity while clinging
-	if self.clinging and upgrades.parts.robot_arm then
+	if self.clinging and upgrades.parts.robot_arms then
 		acceleration.y = 0
 		if self.velocity.y < 0 then
 			self.velocity.y = 0
@@ -207,7 +211,7 @@ local function handle_obstacle_contact(self, normal, distance)
 			self.wall_contact = true
 			self.wall_direction = normal.x > 0 and 1 or -1
 			self.velocity.x = 0
-			if upgrades.parts.robot_arm then
+			if upgrades.parts.robot_arms then
 				self.velocity.y = 0  -- stop sliding down
 			end
 		elseif normal.y < -0.7 then
