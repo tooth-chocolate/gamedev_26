@@ -221,11 +221,11 @@ local function death_handler(self)
 		msg.post(self.controller, "player_died", {last_safe = self.safe_pos})
 	else
 		msg.post(self.controller, "player_died")
-		msg.post("main:/rescue_board#rescue", "add_rescues", {rescue = 1})
+		msg.post("main_testing:/rescue_board#rescue", "add_rescues", {rescue = 1})
 	end
 
 	if self.robot_torso_used then
-		msg.post("main:/rescue_board#rescue", "add_rescues", {rescue = 1})
+		msg.post("main_testing:/rescue_board#rescue", "add_rescues", {rescue = 1})
 	end
 	go.delete()
 
@@ -248,7 +248,7 @@ function on_message(self, message_id, message, sender)
 		if message.other_group == death then
 			death_handler(self)
 		elseif message.other_group == goal then
-			msg.post("main:/loader#game_loader", "level_complete")
+			msg.post("main_testing:/loader#game_loader", "level_complete")
 			go.delete()
 			print("GOAL")
 		end
