@@ -50,17 +50,6 @@ embedded_components {
   ""
 }
 embedded_components {
-  id: "camera"
-  type: "camera"
-  data: "aspect_ratio: 1.0\n"
-  "fov: 0.7854\n"
-  "near_z: 0.0\n"
-  "far_z: 3.0\n"
-  "orthographic_projection: 1\n"
-  "orthographic_mode: ORTHO_MODE_AUTO_FIT\n"
-  ""
-}
-embedded_components {
   id: "death_collision"
   type: "collisionobject"
   data: "type: COLLISION_OBJECT_TYPE_KINEMATIC\n"

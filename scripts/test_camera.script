@@ -1,20 +1,16 @@
--- prehashing
-local level_complete = hash("level_complete")
-local proxy_loaded = hash("proxy_loaded")
-
-
+go.property("tracked", msg.url())
+local track = hash("track")
+local stop = hash("stop")
 
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-	self.levels = {"#testing_level_0", "#testing_level_1", "#testing_level_2"}
-	self.current_level = self.levels[1]
-	self.cur_index = 1
-	self.n_levels = #self.levels
-	msg.post(".", "acquire_input_focus")
-	msg.post(self.current_level, "load")
-	
+	self.smoothing = 0.1
+	self.tracking = false
+	self.offset = vmath.vector3(0, 0, 0)
+	-- print(msg.url())
+	msg.post("#test_camera", "acquire_camera_focus")
 end
 
 function final(self)
@@ -42,40 +38,33 @@ function fixed_update(self, dt)
 	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-end
+	if not self.tracking then return end
+	-- print(self.tracked)
+	
+	local tracked_pos = go.get_position(self.tracked)
+	local current = go.get_position()
 
--- handles what happens if you complete a level. current level gets disabled and next level get loaded.
-local function level_completion_handler(self, message_id)
-	if self.cur_index == self.n_levels then
-		print("game complete")
-	else
-		local next_level = self.levels[self.cur_index + 1]
-		msg.post(self.current_level, "disable")
-		msg.post(self.current_level, "unload")
-		msg.post(next_level, "load")
-		self.cur_index = self.cur_index + 1
-		self.current_level = next_level
-	end
+	-- smooth interpolation toward target
+	local desired = tracked_pos + self.offset
+	local new_pos = vmath.lerp(1 - self.smoothing, current, desired)
+	new_pos.z = current.z  -- preserve camera z
+
+
+	go.set_position(new_pos)
 end
 
 function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
-	if message_id == level_complete then
-		level_completion_handler(self, message_id)
+	-- print(sender)
+	if message_id == track then
+		self.tracking = true
+		self.tracked = message.tracked
 	end
 
-	if message_id == proxy_loaded then
-		local controller = msg.url(sender.fragment, "/game_controller", "controller")
-		print("controller url: ", controller)
-		-- print(controller)
-		msg.post(sender, "enable")
-		-- print(sender.fragment)
-		-- print(sender.socket)
-		msg.post(controller, "current_level_configure", {current_level = self.cur_index})
-		msg.post("/upgrade_menu#upgrade_menu", "current_level_configure", {current_level = self.cur_index})
-		msg.post("/upgrade_menu#upgrade_menu", "disable")
+	if message_id == stop then
+		self.tracking = false
 	end
 end
 

@@ -215,16 +215,16 @@ end
 local function death_handler(self)
 	if upgrades.parts.robot_torso then
 		msg.post(self.controller, "player_died", {last_safe = self.safe_pos})
+		-- msg.post(self.current_collection .."/test_camera#test_camera", "disable")
 	else
 		msg.post(self.controller, "player_died")
+		-- msg.post(self.current_collection .."/test_camera#test_camera", "disable")
 		msg.post(self.current_collection .."/rescue_board#rescue", "add_rescues", {rescue = 1})
 	end
 
 	if self.robot_torso_used then
 		msg.post(self. current_collection .."/rescue_board#rescue", "add_rescues", {rescue = 1})
 	end
-	go.delete()
-
 end
 
 function on_message(self, message_id, message, sender)

@@ -5,7 +5,7 @@ components {
 embedded_components {
   id: "testing_level_0"
   type: "collectionproxy"
-  data: "collection: \"/scenes/level1.collection\"\n"
+  data: "collection: \"/testing/testing_level_0.collection\"\n"
   ""
 }
 embedded_components {
