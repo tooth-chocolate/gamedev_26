@@ -2,22 +2,27 @@ local upgrades = require "modules.upgrade_state"
 
 
 local function spawn_player(self, spawn_location, torso_used)
+	if self.player then
+		go.delete(self.player)
+	end
 	self.player = factory.create("#player_factory", spawn_location, nil, {controller = go.get_id(), robot_torso_used = torso_used})
-	msg.post("/background", "set_target", {id = self.player})
+	msg.post("/test_camera#test_camera", "track", {
+		tracked = msg.url(nil, self.player, nil)
+	})
 end
 		
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-	print(msg.url())
-	self.init_spawn = vmath.vector3(40, 50, 1)
+	-- print(msg.url())
+	self.init_spawn = vmath.vector3(40, 50, 0.1)
 	self.torso_used = false
 	self.rescue_threshold = 1
 	self.rescues = 0
 	self.current_level = 0
-	spawn_player(self, self.init_spawn, false)
 	self.current_collection = "main_testing:"
+	
 end
 
 function final(self)
@@ -82,6 +87,12 @@ function on_message(self, message_id, message, sender)
 
 	if message_id == hash("current_level_configure") then
 		self.current_level = message.current_level
+		spawn_player(self, self.init_spawn, false)
+		--[[msg.post("/test_camera#test_camera", "track", {
+			tracked = msg.url(nil, self.player, nil)
+		})
+		]]
+		-- add current collection
 	end
 end
 

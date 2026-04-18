@@ -5,6 +5,6 @@ components {
 embedded_components {
   id: "level1"
   type: "collectionproxy"
-  data: "collection: \"/scenes/level1.collection\"\n"
+  data: "collection: \"/testing/testing_level_0.collection\"\n"
   ""
 }
