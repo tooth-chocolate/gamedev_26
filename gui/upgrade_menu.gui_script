@@ -12,7 +12,7 @@ function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-	print(msg.url())
+	-- print(msg.url())
 	msg.post(".", "acquire_input_focus")
 	--[[
 	self.option_nodes = {
@@ -44,9 +44,9 @@ function init(self)
 
 	self.cur_option = 1
 
-	self.keys = {"robot_arms", "robot_legs", "robot_eyes", "robot_torso", "robot_brain"}
+	self.keys = {"robot_arm", "robot_legs", "robot_eyes", "robot_torso", "robot_brain"}
 
-	self.current_level = 3
+	self.current_level = 1
 
 	self.level_receivers = {"testing_level_0:", "testing_level_1:", "testing_level_2:"}
 
@@ -172,7 +172,8 @@ function on_input(self, action_id, action)
 		self.options[self.selected].enabled = true
 		adapt_menu(self)
 		upgrade_state.parts[key] = true
-		-- msg.post(self.level_receivers[self.current_level].."//game_controller#controller", "upgrade")
+		-- print(self.level_receivers[self.current_level] .."game_controller#controller")
+		-- msg.post(self.level_receivers[self.current_level] .."/game_controller#controller", "upgrade")
 	end
 
 	return true

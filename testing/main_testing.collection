@@ -1,14 +1,14 @@
 name: "main_testing"
 instances {
-  id: "loader"
-  prototype: "/game_objects/loader_lv1.go"
-}
-instances {
   id: "rescue_board"
   prototype: "/game_objects/rescue_board.go"
 }
 instances {
   id: "upgrade_menu"
   prototype: "/game_objects/upgrade_menu.go"
+}
+instances {
+  id: "loader"
+  prototype: "/game_objects/loader.go"
 }
 scale_along_z: 0

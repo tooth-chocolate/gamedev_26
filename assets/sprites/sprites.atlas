@@ -12,4 +12,11 @@ animations {
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
+animations {
+  id: "level_1_background"
+  images {
+    image: "/assets/backgrounds/level_1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
 extrude_borders: 2

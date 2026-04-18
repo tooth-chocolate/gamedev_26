@@ -1,10 +1,24 @@
 name: "main"
 instances {
-  id: "loader_lv1"
-  prototype: "/game_objects/loader_lv1.go"
-}
-instances {
   id: "rescue_board"
   prototype: "/game_objects/rescue_board.go"
 }
+instances {
+  id: "upgrade_menu"
+  prototype: "/game_objects/upgrade_menu.go"
+}
 scale_along_z: 0
+embedded_instances {
+  id: "loader_object"
+  data: "components {\n"
+  "  id: \"game_loader\"\n"
+  "  component: \"/scripts/game_loader.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"testing_level_0\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/scenes/level1.collection\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}

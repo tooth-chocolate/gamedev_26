@@ -58,12 +58,8 @@ function init(self)
 	self.move_input = 0
 	-- the currently playing animation
 	self.anim = nil
-	-- robot torso
-	if upgrades.parts.robot_torso then
-		self.robot_torso_active = true
-	else
-		self.robot_torso_active = false
-	end
+
+	self.current_collection = "main_testing:"
 end
 
 -- function final(self)
@@ -226,11 +222,11 @@ local function death_handler(self)
 		msg.post(self.controller, "player_died", {last_safe = self.safe_pos})
 	else
 		msg.post(self.controller, "player_died")
-		msg.post("main_testing:/rescue_board#rescue", "add_rescues", {rescue = 1})
+		msg.post(self.current_collection .."/rescue_board#rescue", "add_rescues", {rescue = 1})
 	end
 
 	if self.robot_torso_used then
-		msg.post("main_testing:/rescue_board#rescue", "add_rescues", {rescue = 1})
+		msg.post(self. current_collection .."/rescue_board#rescue", "add_rescues", {rescue = 1})
 	end
 	go.delete()
 
@@ -253,7 +249,7 @@ function on_message(self, message_id, message, sender)
 		if message.other_group == death then
 			death_handler(self)
 		elseif message.other_group == goal then
-			msg.post("main_testing:/loader#game_loader", "level_complete")
+			msg.post(self.current_collection .."/loader#game_loader", "level_complete")
 			go.delete()
 			print("GOAL")
 		end

@@ -10,12 +10,14 @@ function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
+	print(msg.url())
 	self.init_spawn = vmath.vector3(40, 50, 1)
 	self.torso_used = false
 	self.rescue_threshold = 1
 	self.rescues = 0
 	self.current_level = 0
 	spawn_player(self, self.init_spawn, false)
+	self.current_collection = "main_testing:"
 end
 
 function final(self)
@@ -47,14 +49,10 @@ end
 
 local function upgrade_ui_caller(self)
 	if self.rescues > self.rescue_threshold then
-		msg.post("main_testing:/upgrade_menu#upgrade_menu", "adapt_menu")
+		msg.post(self.current_collection .."/upgrade_menu#upgrade_menu", "adapt_menu")
 		-- msg.post("main_testing:/loader#game_loader", "release_input_focus")
-		msg.post("main_testing:/upgrade_menu#upgrade_menu", "enable")
+		msg.post(self.current_collection .."/upgrade_menu#upgrade_menu", "enable")
 	end
-end
-
-local function upgrade_handler(self)
-	
 end
 
 local function respawn_handler(self, message)
