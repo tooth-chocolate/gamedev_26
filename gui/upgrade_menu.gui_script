@@ -46,7 +46,7 @@ function init(self)
 
 	self.keys = {"robot_arm", "robot_legs", "robot_eyes", "robot_torso", "robot_brain"}
 
-	self.current_level = 3
+	self.current_level = 1
 
 	self.level_receivers = {"testing_level_0:", "testing_level_1:", "testing_level_2:"}
 
