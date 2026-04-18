@@ -164,6 +164,7 @@ function fixed_update(self, dt)
 	local dp = (v0 + self.velocity) * dt * 0.5
 	-- apply it to the player character
 	go.set_position(go.get_position() + dp)
+	msg.post("/background#sprite", "update_pos", {pos = go.get_position()})
 
 	-- update_animations(self)
 
