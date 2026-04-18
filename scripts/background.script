@@ -1,0 +1,19 @@
+function init(self)
+	self.target = nil
+end
+
+function update(self, dt)
+	if self.target then
+		local cam_pos = go.get_world_position(self.target)
+		local pos = go.get_position()
+		pos.x = cam_pos.x
+		pos.y = cam_pos.y
+		go.set_position(pos)
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("set_target") then
+		self.target = message.id
+	end
+end
