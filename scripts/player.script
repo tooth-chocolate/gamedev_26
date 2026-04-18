@@ -97,6 +97,23 @@ local function update_animations(self)
 	end
 end
 
+local function calculate_dp(self, dt, acceleration, speed_diff)
+	-- calculate the velocity change this frame (dv is short for delta-velocity)
+	local dv = acceleration * dt
+	-- check if dv exceeds the intended speed difference, clamp it in that case
+	if math.abs(dv.x) > math.abs(speed_diff) then
+		dv.x = speed_diff
+	end
+	-- save the current velocity for later use
+	-- (self.velocity, which right now is the velocity used the previous frame)
+	local v0 = self.velocity
+	-- calculate the new velocity by adding the velocity change
+	self.velocity = self.velocity + dv
+	-- calculate the translation this frame by integrating the velocity
+	local dp = (v0 + self.velocity) * dt * 0.5
+	return dp
+end
+
 function fixed_update(self, dt)
 	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
@@ -134,30 +151,17 @@ function fixed_update(self, dt)
 		self.safe_pos = go.get_position()
 		self.clinging = false
 	end
-	if self.clinging and not self.wall_contact and self.move_input ~= 0 then
+	if self.clinging and not self.wall_contact then
 		self.clinging = false
 	end
 
 	-- cancel gravity while clinging
 	if self.clinging and upgrades.parts.robot_arms then
 		acceleration.y = 0
-		if self.velocity.y < 0 then
-			self.velocity.y = 0
-		end
+		
 	end
-	-- calculate the velocity change this frame (dv is short for delta-velocity)
-	local dv = acceleration * dt
-	-- check if dv exceeds the intended speed difference, clamp it in that case
-	if math.abs(dv.x) > math.abs(speed_diff) then
-		dv.x = speed_diff
-	end
-	-- save the current velocity for later use
-	-- (self.velocity, which right now is the velocity used the previous frame)
-	local v0 = self.velocity
-	-- calculate the new velocity by adding the velocity change
-	self.velocity = self.velocity + dv
-	-- calculate the translation this frame by integrating the velocity
-	local dp = (v0 + self.velocity) * dt * 0.5
+
+	local dp = calculate_dp(self, dt, acceleration, speed_diff)
 	-- apply it to the player character
 	go.set_position(go.get_position() + dp)
 	msg.post("/background#sprite", "update_pos", {pos = go.get_position()})

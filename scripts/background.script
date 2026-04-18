@@ -4,11 +4,15 @@ end
 
 function update(self, dt)
 	if self.target then
-		local cam_pos = go.get_world_position(self.target)
-		local pos = go.get_position()
-		pos.x = cam_pos.x
-		pos.y = cam_pos.y
-		go.set_position(pos)
+		local ok, cam_pos = pcall(go.get_world_position, self.target)
+		if ok then
+			local pos = go.get_position()
+			pos.x = cam_pos.x
+			pos.y = cam_pos.y
+			go.set_position(pos)
+		else
+			self.target = nil
+		end
 	end
 end
 
