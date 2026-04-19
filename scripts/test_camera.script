@@ -1,6 +1,7 @@
 go.property("tracked", msg.url())
 local track = hash("track")
 local stop = hash("stop")
+local upgrades = require "modules.upgrade_state"
 
 function init(self)
 	-- Add initialization code here
@@ -11,6 +12,11 @@ function init(self)
 	self.offset = vmath.vector3(0, 0, 0)
 	-- print(msg.url())
 	msg.post("#test_camera", "acquire_camera_focus")
+	-- disable filter if robot_eyes are available
+	if upgrades.parts.robot_eyes then
+		msg.post("#filter", "disable")
+	end
+	
 end
 
 function final(self)
