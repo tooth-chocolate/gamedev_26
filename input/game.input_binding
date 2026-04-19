@@ -34,6 +34,10 @@ key_trigger {
   input: KEY_ESC
   action: "close"
 }
+key_trigger {
+  input: KEY_S
+  action: "suicide"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_1
   action: "touch"

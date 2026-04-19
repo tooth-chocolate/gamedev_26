@@ -8,13 +8,13 @@ function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-	self.levels = {"#level1"}
+	self.levels = {"#testing_level_0", "#testing_level_1", "#testing_level_2"}
 	self.current_level = self.levels[1]
 	self.cur_index = 1
 	self.n_levels = #self.levels
 	msg.post(".", "acquire_input_focus")
 	msg.post(self.current_level, "load")
-	
+
 end
 
 function final(self)

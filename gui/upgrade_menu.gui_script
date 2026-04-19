@@ -44,7 +44,7 @@ function init(self)
 
 	self.cur_option = 1
 
-	self.keys = {"robot_arm", "robot_legs", "robot_eyes", "robot_torso", "robot_brain"}
+	self.keys = {"robot_arms", "robot_legs", "robot_eyes", "robot_torso", "robot_brain"}
 
 	self.current_level = 1
 

@@ -68,3 +68,39 @@ embedded_instances {
     z: 1.0
   }
 }
+embedded_instances {
+  id: "test_camera"
+  data: "components {\n"
+  "  id: \"test_camera\"\n"
+  "  component: \"/scripts/test_camera.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"camera\"\n"
+  "  type: \"camera\"\n"
+  "  data: \"aspect_ratio: 1.0\\n"
+  "fov: 0.7854\\n"
+  "near_z: 0.0\\n"
+  "far_z: 20.0\\n"
+  "orthographic_projection: 1\\n"
+  "orthographic_mode: ORTHO_MODE_AUTO_FIT\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"background\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"level_2\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/backgrounds/backgrounds.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    z: -10.1\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    z: 10.0
+  }
+}

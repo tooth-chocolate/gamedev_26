@@ -28,6 +28,9 @@ local trigger = hash("trigger_response")
 local death = hash("death")
 local goal = hash("c_flag")
 
+-- for debug, don't forget to delete
+local suicide = hash("suicide")
+
 go.property("controller", hash("idle"))
 go.property("robot_torso_used", true)
 
@@ -160,8 +163,6 @@ function fixed_update(self, dt)
 	local dp = (v0 + self.velocity) * dt * 0.5
 	-- apply it to the player character
 	go.set_position(go.get_position() + dp)
-	msg.post("/background#sprite", "update_pos", {pos = go.get_position()})
-
 	-- update_animations(self)
 
 	-- reset volatile state
@@ -308,6 +309,11 @@ function on_input(self, action_id, action)
 		elseif action.released then
 			abort_jump(self)
 		end
+	end
+
+	-- for debug, don't forget to delete
+	if action_id == suicide and not action.pressed then
+		death_handler(self)
 	end
 end
 

@@ -3,8 +3,20 @@ components {
   component: "/scripts/game_loader.script"
 }
 embedded_components {
-  id: "level1"
+  id: "testing_level_0"
   type: "collectionproxy"
   data: "collection: \"/testing/testing_level_0.collection\"\n"
+  ""
+}
+embedded_components {
+  id: "testing_level_1"
+  type: "collectionproxy"
+  data: "collection: \"/testing/testing_level_1.collection\"\n"
+  ""
+}
+embedded_components {
+  id: "testing_level_2"
+  type: "collectionproxy"
+  data: "collection: \"/testing/testing_level_2.collection\"\n"
   ""
 }

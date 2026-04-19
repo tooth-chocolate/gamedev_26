@@ -15,7 +15,7 @@ animations {
 animations {
   id: "level_1_background"
   images {
-    image: "/assets/backgrounds/level_1.png"
+    image: "/assets/backgrounds/level_1_scaled.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
