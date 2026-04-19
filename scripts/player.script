@@ -28,7 +28,7 @@ local trigger = hash("trigger_response")
 local death = hash("death")
 local goal = hash("c_flag")
 
--- for debug, don't forget to delete
+-- for debug, don't forget to delete it so no hacks
 local suicide = hash("suicide")
 
 go.property("controller", hash("idle"))
