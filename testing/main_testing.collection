@@ -12,3 +12,11 @@ instances {
   prototype: "/game_objects/loader.go"
 }
 scale_along_z: 0
+embedded_instances {
+  id: "upgrade_menu_button"
+  data: "components {\n"
+  "  id: \"upgrade_menu_button\"\n"
+  "  component: \"/gui/upgrade_menu_button.gui\"\n"
+  "}\n"
+  ""
+}
