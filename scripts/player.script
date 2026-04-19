@@ -314,6 +314,9 @@ function on_input(self, action_id, action)
 			abort_jump(self)
 		end
 	end
+	if action_id == suicide and not action.pressed then
+		death_handler(self)
+	end
 end
 
 -- function on_reload(self)
