@@ -57,6 +57,8 @@ function init(self)
 	self.wall_direction = 0  
 	-- if the player is clinging to the wall with a robot arm or not
 	self.clinging = false
+	-- if the player just did a wall jump
+	self.wall_jumped = false
 	-- movement input in the range [-1,1]
 	self.move_input = 0
 	-- the currently playing animation
@@ -130,6 +132,7 @@ function fixed_update(self, dt)
 	end
 	-- calculate the difference between our current speed and the target speed
 	local speed_diff = target_speed - self.velocity.x
+	
 	-- the complete acceleration to integrate over this frame
 	local acceleration = vmath.vector3(0, gravity, 0)
 	if speed_diff ~= 0 then
@@ -152,11 +155,19 @@ function fixed_update(self, dt)
 	-- stop clinging when hitting ground or pressing away from wall
 	if self.ground_contact then
 		self.safe_pos = go.get_position()
+		self.wall_jumped = false
 		self.clinging = false
 	end
 	if self.clinging and not self.wall_contact then
-		self.clinging = false
+		if self.wall_jumped then
+			self.clinging = false
+			self.wall_jumped = false
+		elseif (self.wall_direction > 0 and self.move_input < 0) or
+		(self.wall_direction < 0 and self.move_input > 0) then
+			self.clinging = false
+		end
 	end
+
 
 	-- cancel gravity while clinging
 	if self.clinging and upgrades.parts.robot_arms then
@@ -195,6 +206,9 @@ end
 
 local function handle_obstacle_contact(self, normal, distance)
 	if distance > 0 then
+		if normal.y > 0.7 and distance < 0.15 then
+			return
+		end
 		-- project the correction vector onto the contact normal
 		-- (the correction vector is the 0-vector for the first contact point)
 		local proj = vmath.project(self.correction, normal * distance)
@@ -213,6 +227,7 @@ local function handle_obstacle_contact(self, normal, distance)
 		elseif math.abs(normal.x) > 0.7 then
 			self.wall_contact = true
 			self.wall_direction = normal.x > 0 and 1 or -1
+			self.wall_jumped = false
 			self.velocity.x = 0
 			if upgrades.parts.robot_arms then
 				self.velocity.y = 0  -- stop sliding down
@@ -276,6 +291,7 @@ local function jump(self)
 		self.velocity.y = jump_takeoff_speed
 		self.velocity.x = self.wall_direction * max_speed
 		self.clinging = false
+		self.wall_jumped = true
 		self.jump_count = 1
 	elseif self.jump_count < max_jumps then
 		self.velocity.y = jump_takeoff_speed
