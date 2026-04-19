@@ -19,4 +19,11 @@ animations {
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
+animations {
+  id: "upgrade_menu_ button"
+  images {
+    image: "/assets/sprites/upgrade_menu_button.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
 extrude_borders: 2

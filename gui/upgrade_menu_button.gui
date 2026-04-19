@@ -1,0 +1,25 @@
+script: "/gui/upgrade_menu_button.gui_script"
+textures {
+  name: "sprites"
+  texture: "/assets/sprites/sprites.atlas"
+}
+nodes {
+  position {
+    x: 11.0
+    y: 200.0
+  }
+  scale {
+    x: 0.98699
+    y: 0.995456
+    z: 1.04
+  }
+  type: TYPE_BOX
+  texture: "sprites/upgrade_menu_ button"
+  id: "upgrade_menu_button"
+  pivot: PIVOT_SW
+  inherit_alpha: true
+  alpha: 0.73
+  size_mode: SIZE_MODE_AUTO
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

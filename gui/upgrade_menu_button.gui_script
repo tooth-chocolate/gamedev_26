@@ -1,0 +1,74 @@
+local touch = hash("touch")
+local open_menu = hash("open_menu")
+
+function init(self)
+	-- Add initialization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+	msg.post(".", "acquire_input_focus")
+	self.button = gui.get_node("upgrade_menu_button")
+	self.current_collection = "main_testing:"
+	self.hover = false
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+	if message_id == open_menu then
+		print("opened menu")
+		msg.post("/upgrade_menu#upgrade_menu", "adapt_menu")
+		msg.post("/upgrade_menu#upgrade_menu", "enable")
+	end
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here. The game object this script is attached to
+	-- must have acquired input focus:
+	--
+	--    msg.post(".", "acquire_input_focus")
+	--
+	-- All mapped input bindings will be received. Mouse and touch input will
+	-- be received regardless of where on the screen it happened.
+	-- Learn more: https://defold.com/manuals/input/
+	-- Remove this function if not needed
+	if action_id == touch and action.pressed then
+		if gui.pick_node(self.button, action.x, action.y) then
+			gui.set_scale(self.button, vmath.vector3(0.95, 0.95, 1))
+			msg.post(self.current_collection .."/loader#game_loader", "open")
+		end
+	end
+
+	if action_id == touch and action.released then
+		gui.set_scale(self.button, self.hover and vmath.vector3(1.05, 1.05, 1) or vmath.vector3(1, 1, 1))
+	end
+
+	if action_id == nil then
+		local hover_now = gui.pick_node(self.button, action.x, action.y)
+		local scale = vmath.vector3(1, 1, 1)
+		if hover_now ~= self.hover then
+			if hover_now then
+				scale = vmath.vector3(1.05, 1.05, 1)
+			end
+			gui.set_scale(self.button, scale)
+		end
+	end
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end
