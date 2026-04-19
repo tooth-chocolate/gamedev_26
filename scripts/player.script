@@ -234,7 +234,6 @@ local function death_handler(self)
 	if self.robot_torso_used then
 		msg.post(self. current_collection .."/rescue_board#rescue", "add_rescues", {rescue = 1})
 	end
-	go.delete()
 
 end
 
