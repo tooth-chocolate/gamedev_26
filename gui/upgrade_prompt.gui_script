@@ -1,0 +1,110 @@
+local upgrade_state = require "modules.upgrade_state"
+
+local current_level_configure = hash("current_level_configure")
+local prompt = hash("prompt")
+local yes = hash("yes")
+local no = hash("no")
+local inc_n_upgrade = hash("inc_n_upgrade")
+
+function init(self)
+	-- Add initialization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+	self.current_level = 1
+	self.parts = {"arms ", "legs ", "eyes ", "heart ", "brain "}
+	self.keys = {"robot_arms", "robot_legs", "robot_eyes", "robot_torso", "robot_brain"}
+	self.parts_functions = {"to make your hold on tighter", "to make you jump higher", "to make you see further", "to make your body sturdier", "to make you more precise"}
+	self.current_phrase = "Do you want to replace your " ..self.parts[self.current_level] ..self.parts_functions[self.current_level] .."\n yes (y), no (n)"
+	msg.post(".", "acquire_input_focus")
+	self.active = false
+	self.n_upgrades = 0
+	self.prompt = gui.get_node("ask")
+	--self.upgrade_progress = 0
+end
+
+local function show_prompt(self)
+	print("prompt")
+	if self.n_upgrades == self.current_level then
+		msg.post(".", "disable")
+	end
+	self.current_phrase = "Do you want to replace your " ..self.parts[self.n_upgrades + 1] ..self.parts_functions[self.n_upgrades + 1] .."\n yes (y), no (n)"
+	gui.set_text(self.prompt, self.current_phrase)
+end
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+	if message_id == current_level_configure then
+		self.current_level = message.current_level
+	end
+
+	if message_id == prompt then
+		self.active = true
+		--print("prompt")
+		show_prompt(self)
+		msg.post("/upgrade_menu_button#upgrade_menu_button", "enable")
+	end
+
+	if message_id == inc_n_upgrade and self.n_upgrades < #self.parts then
+		self.n_upgrades = self.n_upgrades + 1
+	end
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here. The game object this script is attached to
+	-- must have acquired input focus:
+	--
+	--    msg.post(".", "acquire_input_focus")
+	--
+	-- All mapped input bindings will be received. Mouse and touch input will
+	-- be received regardless of where on the screen it happened.
+	-- Learn more: https://defold.com/manuals/input/
+	-- Remove this function if not needed
+	if not self.active then
+		return
+	end
+
+	if not action.pressed then
+		return true
+	end
+
+	if action_id == yes then
+		if self.n_upgrades < self.current_level then
+			self.n_upgrades = self.n_upgrades + 1
+			local key = self.keys[self.n_upgrades]
+			upgrade_state.parts[key] = true
+			-- print(upgrade_state[key])
+		else
+			msg.post(".", "disable")
+			gui.set_text(self.prompt, " ")
+		end
+		--print("yes")
+		show_prompt(self)
+	end
+
+	if action_id == no then
+		msg.post(".", "disable")
+		gui.set_text(self.prompt, " ")
+		print("no")
+	end
+
+	return true
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end

@@ -9,7 +9,7 @@ function init(self)
 	self.smoothing = 0.1
 	self.tracking = false
 	self.offset = vmath.vector3(0, 0, 0)
-	-- print(msg.url())
+	print(msg.url())
 	msg.post("#test_camera", "acquire_camera_focus")
 end
 
