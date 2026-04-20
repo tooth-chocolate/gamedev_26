@@ -7,6 +7,8 @@ local down = hash("down")
 local up = hash("up")
 local enter = hash("select")
 local esc = hash("close")
+local current_level_configure = hash("current_level_configure")
+local adapt = hash("adapt_menu")
 
 function init(self)
 	-- Add initialization code here
@@ -35,16 +37,15 @@ function init(self)
 	]]
 
 	self.options = {
-		{node = gui.get_node("arms"), text = "Arms", enabled = false},
-		{node = gui.get_node("legs"), text = "Legs", enabled = false},
-		{node = gui.get_node("eyes"), text = "Eyes", enabled = false},
-		{node = gui.get_node("torso"), text = "Torso", enabled = false},
-		{node = gui.get_node("brain"), text = "Brain", enabled = false},
+		{node = gui.get_node("arms"), text = "?", enabled = false},
+		{node = gui.get_node("legs"), text = "?", enabled = false},
+		{node = gui.get_node("eyes"), text = "?", enabled = false},
+		{node = gui.get_node("torso"), text = "?", enabled = false},
+		{node = gui.get_node("brain"), text = "?", enabled = false},
 	}
 
-	self.cur_option = 1
-
 	self.keys = {"robot_arms", "robot_legs", "robot_eyes", "robot_torso", "robot_brain"}
+	self.parts = {"Arms", "Legs", "Eyes", "Heart", "Brain"}
 
 	self.current_level = 1
 
@@ -72,7 +73,7 @@ function init(self)
 	gui.set_color(self.options[1].node, white)
 
 	self.n_upgrades = 0
-	
+
 end
 
 function final(self)
@@ -88,12 +89,16 @@ function update(self, dt)
 end
 
 local function adapt_menu(self)
-	for i = 1, self.current_level do
-		local option = self.options[i]
-		-- local key = self.options_keys[i]
-		gui.set_text(option.node, option.text)
+	for i, option in ipairs(self.options) do
+		if i <= self.current_level then
+			gui.set_text(option.node, self.parts[i])
+		else
+			gui.set_text(option.node, option.text)
+		end
 		if option.enabled then
 			gui.set_color(option.node, self.selected_color)
+		else 
+			gui.set_color(option.node, self.normal_color)
 		end
 	end
 end
@@ -102,11 +107,11 @@ function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
-	if message_id == hash("current_level_configure") then
+	if message_id == current_level_configure then
 		self.current_level = message.current_level
 	end
 
-	if message_id == hash("adapt_menu") then
+	if message_id == adapt then
 		adapt_menu(self)
 		self.active = true
 	end
@@ -174,6 +179,7 @@ function on_input(self, action_id, action)
 		upgrade_state.parts[key] = true
 		-- print(self.level_receivers[self.current_level] .."game_controller#controller")
 		-- msg.post(self.level_receivers[self.current_level] .."/game_controller#controller", "upgrade")
+		msg.post("/upgrade_prompt#upgrade_prompt", "inc_n_upgrade")
 	end
 
 	return true

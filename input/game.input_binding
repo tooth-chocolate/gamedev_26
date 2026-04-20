@@ -38,6 +38,14 @@ key_trigger {
   input: KEY_S
   action: "suicide"
 }
+key_trigger {
+  input: KEY_Y
+  action: "yes"
+}
+key_trigger {
+  input: KEY_N
+  action: "no"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_LEFT
   action: "touch"
