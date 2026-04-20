@@ -26,4 +26,18 @@ animations {
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
+animations {
+  id: "player_jump"
+  images {
+    image: "/assets/sprites/player_jump_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_jump_2.png"
+  }
+  images {
+    image: "/assets/sprites/player_jump_3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+}
 extrude_borders: 2
