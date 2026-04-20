@@ -63,6 +63,8 @@ function init(self)
 	self.move_input = 0
 	-- the currently playing animation
 	self.anim = nil
+	-- keeps track of ground frames missed
+	self.ground_frames_missed = 0
 
 	self.current_collection = "main_testing:"
 end
@@ -127,14 +129,24 @@ function fixed_update(self, dt)
 	-- determine the target speed based on input
 	local target_speed = self.move_input * max_speed
 
-	if not self.ground_contact then
-		target_speed = 0.6*target_speed
+	if self.ground_frames_missed > 2 then
+		target_speed = 0.6 * target_speed
 	end
 	-- calculate the difference between our current speed and the target speed
 	local speed_diff = target_speed - self.velocity.x
 	
 	-- the complete acceleration to integrate over this frame
-	local acceleration = vmath.vector3(0, gravity, 0)
+	if not self.ground_contact then
+		self.ground_frames_missed = self.ground_frames_missed + 1
+	else
+		self.ground_frames_missed = 0
+	end
+
+	local acceleration = vmath.vector3(0, 0, 0)
+	if self.ground_frames_missed > 1 then
+		acceleration.y = gravity
+	end
+		
 	if speed_diff ~= 0 then
 		-- set the acceleration to work in the direction of the difference
 		if speed_diff < 0 then
@@ -162,8 +174,8 @@ function fixed_update(self, dt)
 		if self.wall_jumped then
 			self.clinging = false
 			self.wall_jumped = false
-		elseif (self.wall_direction > 0 and self.move_input < 0) or
-		(self.wall_direction < 0 and self.move_input > 0) then
+		elseif (self.wall_direction > 0 and self.move_input > 0) or
+		(self.wall_direction < 0 and self.move_input < 0) then
 			self.clinging = false
 		end
 	end
@@ -174,7 +186,6 @@ function fixed_update(self, dt)
 		acceleration.y = 0
 
 	end
-
 	local dp = calculate_dp(self, dt, acceleration, speed_diff)
 	-- apply it to the player character
 	go.set_position(go.get_position() + dp)
@@ -206,18 +217,17 @@ end
 
 local function handle_obstacle_contact(self, normal, distance)
 	if distance > 0 then
-		if normal.y > 0.7 and distance < 0.15 then
-			return
-		end
 		-- project the correction vector onto the contact normal
 		-- (the correction vector is the 0-vector for the first contact point)
 		local proj = vmath.project(self.correction, normal * distance)
 		-- calculate the compensation we need to make for this contact point
-		local comp = (distance - distance * proj) * normal
-		-- add it to the correction vector
-		self.correction = self.correction + comp
-		-- apply the compensation to the player character
-		go.set_position(go.get_position() + comp)
+		if proj < 1 then
+			local comp = (distance - distance * proj) * normal
+			-- add it to the correction vector
+			self.correction = self.correction + comp
+			-- apply the compensation to the player character
+			go.set_position(go.get_position() + comp)
+		end
 		-- check if the normal points enough up to consider the player standing on the ground
 		-- (0.7 is roughly equal to 45 degrees deviation from pure vertical direction)
 		if normal.y > 0.7 then
