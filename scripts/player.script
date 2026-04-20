@@ -130,8 +130,8 @@ function fixed_update(self, dt)
 	-- determine the target speed based on input
 	local target_speed = self.move_input * max_speed
 
-	if not self.ground_frames_missed > 2 then
-		target_speed = 0.6*target_speed
+	if self.ground_frames_missed > 2 then
+		target_speed = 0.6 * target_speed
 	end
 	-- calculate the difference between our current speed and the target speed
 	local speed_diff = target_speed - self.velocity.x
@@ -147,7 +147,7 @@ function fixed_update(self, dt)
 	if self.ground_frames_missed > 1 then
 		acceleration.y = gravity
 	end
-
+		
 	if speed_diff ~= 0 then
 		-- set the acceleration to work in the direction of the difference
 		if speed_diff < 0 then
@@ -187,7 +187,6 @@ function fixed_update(self, dt)
 		acceleration.y = 0
 
 	end
-
 	local dp = calculate_dp(self, dt, acceleration, speed_diff)
 	-- apply it to the player character
 	go.set_position(go.get_position() + dp)

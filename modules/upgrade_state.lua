@@ -9,7 +9,7 @@ local M = {}
 M.parts = {
 	robot_arms = false,
 	robot_legs = false,
-	robot_eyes = false,
+	robot_eyes = true,
 	robot_brain = false,
 	robot_torso = false,
 }
