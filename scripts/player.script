@@ -7,7 +7,7 @@ local move_acceleration = 3500
 -- acceleration factor to use when air-borne
 local air_acceleration_factor = 0.8
 -- max speed right/left
-local max_speed = 400
+local max_speed = 350
 -- gravity pulling the player down in pixel units
 local gravity = -1000
 -- take-off speed when jumping in pixel units
@@ -163,8 +163,8 @@ function fixed_update(self, dt)
 		if self.wall_jumped then
 			self.clinging = false
 			self.wall_jumped = false
-		elseif (self.wall_direction > 0 and self.move_input < 0) or
-		(self.wall_direction < 0 and self.move_input > 0) then
+		elseif (self.wall_direction > 0 and self.move_input > 0) or
+		(self.wall_direction < 0 and self.move_input < 0) then
 			self.clinging = false
 		end
 	end
