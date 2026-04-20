@@ -1,0 +1,25 @@
+script: "/gui/upgrade_prompt.gui_script"
+fonts {
+  name: "rescue_font"
+  font: "/gui/rescue_font.font"
+}
+nodes {
+  position {
+    x: 240.0
+    y: 170.0
+  }
+  scale {
+    x: 0.15
+    y: 0.15
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  font: "rescue_font"
+  id: "ask"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

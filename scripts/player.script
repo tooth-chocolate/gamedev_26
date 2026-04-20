@@ -32,7 +32,7 @@ local goal = hash("c_flag")
 local suicide = hash("suicide")
 
 go.property("controller", hash("idle"))
-go.property("robot_torso_used", true)
+go.property("current_level", 0)
 
 function init(self)
 	-- Add initialization code here
@@ -67,6 +67,7 @@ function init(self)
 	self.ground_frames_missed = 0
 
 	self.current_collection = "main_testing:"
+	self.levels = {"testing_level_0:", "testing_level_1:", "testing_level_2:"}
 end
 
 -- function final(self)
@@ -134,7 +135,7 @@ function fixed_update(self, dt)
 	end
 	-- calculate the difference between our current speed and the target speed
 	local speed_diff = target_speed - self.velocity.x
-	
+
 	-- the complete acceleration to integrate over this frame
 	if not self.ground_contact then
 		self.ground_frames_missed = self.ground_frames_missed + 1
@@ -256,9 +257,8 @@ local function death_handler(self)
 		msg.post(self.current_collection .."/rescue_board#rescue", "add_rescues", {rescue = 1})
 	end
 
-	if self.robot_torso_used then
-		msg.post(self. current_collection .."/rescue_board#rescue", "add_rescues", {rescue = 1})
-	end
+	msg.post(self.levels[self.current_level] .."/test_camera#test_camera", "stop")
+	go.delete()
 
 end
 
