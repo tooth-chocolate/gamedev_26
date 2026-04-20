@@ -131,12 +131,17 @@ function fixed_update(self, dt)
 	local target_speed = self.move_input * max_speed
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if self.ground_frames_missed > 2 then
 		target_speed = 0.6 * target_speed
 =======
 	if not self.ground_frames_missed > 2 then
 		target_speed = 0.6*target_speed
 >>>>>>> 4bbbb4bca08567dcb4dbb0d79065110a762bf4d8
+=======
+	if self.ground_frames_missed > 2 then
+		target_speed = 0.6 * target_speed
+>>>>>>> a131fd28ffcf2d1d05aee435c45bf6f34c7e55a4
 	end
 	-- calculate the difference between our current speed and the target speed
 	local speed_diff = target_speed - self.velocity.x
@@ -153,10 +158,14 @@ function fixed_update(self, dt)
 		acceleration.y = gravity
 	end
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 =======
 
 >>>>>>> 4bbbb4bca08567dcb4dbb0d79065110a762bf4d8
+=======
+		
+>>>>>>> a131fd28ffcf2d1d05aee435c45bf6f34c7e55a4
 	if speed_diff ~= 0 then
 		-- set the acceleration to work in the direction of the difference
 		if speed_diff < 0 then
