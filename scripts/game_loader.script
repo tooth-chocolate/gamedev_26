@@ -13,6 +13,7 @@ function init(self)
 	self.current_level = self.levels[1]
 	self.cur_index = 1
 	self.n_levels = #self.levels
+	msg.post("/upgrade_menu_button#upgrade_menu_button", "disable")
 	msg.post(".", "acquire_input_focus")
 	msg.post(self.current_level, "load")
 
@@ -73,13 +74,14 @@ function on_message(self, message_id, message, sender)
 		msg.post(sender, "enable")
 		msg.post(controller, "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_menu#upgrade_menu", "current_level_configure", {current_level = self.cur_index})
+		msg.post("/upgrade_prompt#upgrade_prompt", "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_menu#upgrade_menu", "disable")
 	end
 
 	if message_id == open then
 		local path = "/upgrade_menu_button#upgrade_menu_button"
-		msg.post(path, "enable")
 		msg.post(path, "open_menu")
+		msg.post(path, "enable")
 	end
 end
 
