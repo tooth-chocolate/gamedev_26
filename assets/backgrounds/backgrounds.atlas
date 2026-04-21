@@ -1,3 +1,6 @@
+images {
+  image: "/assets/backgrounds/level_3.png"
+}
 animations {
   id: "level_1"
   images {
