@@ -10,7 +10,7 @@ function init(self)
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	--self.levels = {"#testing_level_0", "#testing_level_1", "#testing_level_2"}
-	self.levels = {"#testing_level_2"}
+	self.levels = {"#testing_level_3"}
 
 	self.current_level = self.levels[1]
 	self.cur_index = 1

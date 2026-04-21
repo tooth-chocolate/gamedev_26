@@ -68,7 +68,7 @@ function init(self)
 
 	self.current_collection = "main_testing:"
 	--self.levels = {"testing_level_0:", "testing_level_1:", "testing_level_2:"}
-	self.levels = {"testing_level_2:"}
+	self.levels = {"testing_level_3:"}
 end
 
 -- function final(self)
