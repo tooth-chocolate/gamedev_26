@@ -17,6 +17,12 @@ embedded_components {
 embedded_components {
   id: "testing_level_2"
   type: "collectionproxy"
-  data: "collection: \"/testing/testing_level_2.collection\"\n"
+  data: "collection: \"/testing/testing_main_level_2.collection\"\n"
+  ""
+}
+embedded_components {
+  id: "testing_level_3"
+  type: "collectionproxy"
+  data: "collection: \"/testing/testing_main_level_3.collection\"\n"
   ""
 }
