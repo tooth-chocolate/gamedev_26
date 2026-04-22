@@ -46,6 +46,10 @@ key_trigger {
   input: KEY_N
   action: "no"
 }
+key_trigger {
+  input: KEY_C
+  action: "cheat"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_LEFT
   action: "touch"
