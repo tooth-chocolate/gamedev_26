@@ -147,7 +147,7 @@ function fixed_update(self, dt)
 	if self.ground_frames_missed > 1 then
 		acceleration.y = gravity
 	end
-		
+
 	if speed_diff ~= 0 then
 		-- set the acceleration to work in the direction of the difference
 		if speed_diff < 0 then
