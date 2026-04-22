@@ -1,0 +1,354 @@
+animations {
+  id: "player_no_upgrades_idle"
+  images {
+    image: "/assets/sprites/player_no_upgrades_animations/player_idle_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_no_upgrades_animations/player_idle_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_no_upgrades_running"
+  images {
+    image: "/assets/sprites/player_no_upgrades_animations/player_running_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_no_upgrades_animations/player_running_2.png"
+  }
+  images {
+    image: "/assets/sprites/player_no_upgrades_animations/player_running_3.png"
+  }
+  images {
+    image: "/assets/sprites/player_no_upgrades_animations/player_running_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_no_upgrades_jumping"
+  images {
+    image: "/assets/sprites/player_no_upgrades_animations/player_jump_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_no_upgrades_animations/player_jump_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_no_upgrades_wall_cling"
+  images {
+    image: "/assets/sprites/player_no_upgrades_animations/player_wall_cling.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_arms_idle"
+  images {
+    image: "/assets/sprites/player_upgraded_arms_animations/player_idle_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_arms_animations/player_idle_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_arms_running"
+  images {
+    image: "/assets/sprites/player_upgraded_arms_animations/player_arms_running1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_arms_animations/player_arms_running2.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_arms_animations/player_arms_running3.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_arms_animations/player_arms_running4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_arms_jumping"
+  images {
+    image: "/assets/sprites/player_upgraded_arms_animations/player_arms_jump1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_arms_animations/player_arms_jump2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_arms_wall_cling"
+  images {
+    image: "/assets/sprites/player_upgraded_arms_animations/player_arms_wall_cling.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_legs_idle"
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_idle_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_idle_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_legs_running"
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_running_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_running_2.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_running_3.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_running_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_legs_jumping"
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_jump1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_jump2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_legs_double_jumping"
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_double_jump_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_double_jump_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_legs_wall_cling"
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_wall_cling.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_eyes_idle"
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_idle_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_idle_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_eyes_running"
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_running_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_running_2.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_running_3.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_running_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_eyes_jumping"
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_jump_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_jump_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_eyes_double_jumping"
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_double_jump_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_double_jump_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_eyes_wall_cling"
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_wall_cling.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_torso_idle"
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_idle_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_idle_2.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_idle_3.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_idle_4.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_idle_5.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_idle_6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_torso_running"
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_robot_torso_running_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_robot_torso_running_2.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_robot_torso_running_3.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_robot_torso_running_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+}
+animations {
+  id: "player_upgraded_torso_jumping"
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_jump_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_jump_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_torso_double_jumping"
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_double_jump_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_double_jump_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_torso_wall_cling"
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_wall_cling1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_wall_cling2.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_wall_cling3.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_wall_cling4.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_wall_cling5.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_wall_cling6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_brain_idle"
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_idle_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_idle_2.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_idle_3.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_idle_4.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_idle_5.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_idle_6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_brain_running"
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_robot_brain_running_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_robot_brain_running_2.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_robot_brain_running_3.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_robot_brain_running_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_brain_jumping"
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_jump_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_jump_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_brain_double_jumping"
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_double_jump_1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_double_jump_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_upgraded_brain_wall_cling"
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_wall_cling1.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_wall_cling2.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_wall_cling3.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_wall_cling4.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_wall_cling5.png"
+  }
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_wall_cling6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+extrude_borders: 2
