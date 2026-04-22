@@ -1,12 +1,4 @@
-name: "testing_level_2"
-instances {
-  id: "completion"
-  prototype: "/game_objects/completion.go"
-  position {
-    x: 3509.0
-    y: 1374.0
-  }
-}
+name: "testing_level_1"
 instances {
   id: "game_controller"
   prototype: "/game_objects/game_controller.go"
@@ -15,30 +7,30 @@ scale_along_z: 0
 embedded_instances {
   id: "map"
   data: "components {\n"
-  "  id: \"level_3\"\n"
-  "  component: \"/scenes/level3.tilemap\"\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"obstacle\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"collision_shape: \\\"/scenes/level3.tilemap\\\"\\n"
-  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"obstacle\\\"\\n"
-  "mask: \\\"player\\\"\\n"
-  "\"\n"
+  "  id: \"level2\"\n"
+  "  component: \"/scenes/level2.tilemap\"\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"death\"\n"
   "  type: \"collisionobject\"\n"
-  "  data: \"collision_shape: \\\"/scenes/level3.tilemap\\\"\\n"
+  "  data: \"collision_shape: \\\"/scenes/level2.tilemap\\\"\\n"
   "type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
   "mass: 0.0\\n"
   "friction: 0.1\\n"
   "restitution: 0.5\\n"
   "group: \\\"death\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"obstacle\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/scenes/level2.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"obstacle\\\"\\n"
   "mask: \\\"player\\\"\\n"
   "\"\n"
   "}\n"
@@ -57,14 +49,12 @@ embedded_instances {
   "fov: 0.7854\\n"
   "near_z: 0.0\\n"
   "far_z: 20.0\\n"
-  "orthographic_projection: 1\\n"
-  "orthographic_mode: ORTHO_MODE_AUTO_FIT\\n"
   "\"\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"background\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"level_3\\\"\\n"
+  "  data: \"default_animation: \\\"level_2\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "textures {\\n"
   "  sampler: \\\"texture_sampler\\\"\\n"
@@ -87,7 +77,4 @@ embedded_instances {
   "\"\n"
   "}\n"
   ""
-  position {
-    z: 10.0
-  }
 }
