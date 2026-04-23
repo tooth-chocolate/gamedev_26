@@ -8,7 +8,7 @@ local M = {}
 -- 0 = not equipped, 1 = equipped
 M.parts = {
 	robot_arms = false,
-	robot_legs = false,
+	robot_legs = true,
 	robot_eyes = true,
 	robot_brain = false,
 	robot_torso = false,

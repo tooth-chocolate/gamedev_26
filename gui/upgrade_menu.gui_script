@@ -49,7 +49,7 @@ function init(self)
 
 	self.current_level = 1
 
-	self.level_receivers = {"testing_level_0:", "testing_level_1:", "testing_level_2:"}
+	self.level_receivers = {"testing_level_0", "testing_level_1", "testing_level_2", "testing_level_5:"}
 
 	self.highlighted = 1
 	self.selected = 0

@@ -26,3 +26,9 @@ embedded_components {
   data: "collection: \"/testing/testing_main_level_3.collection\"\n"
   ""
 }
+embedded_components {
+  id: "testing_level_5"
+  type: "collectionproxy"
+  data: "collection: \"/testing/testing_main_level_5.collection\"\n"
+  ""
+}

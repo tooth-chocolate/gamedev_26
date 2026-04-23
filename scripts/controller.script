@@ -16,7 +16,7 @@ function init(self)
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	-- print(msg.url())
-	self.init_spawn = vmath.vector3(40, 50, 0.1)
+	self.init_spawn = vmath.vector3(100, 48, 0.1)
 	self.rescue_threshold = 1
 	self.rescues = 0
 	self.current_level = 1
