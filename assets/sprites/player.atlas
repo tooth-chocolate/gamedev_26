@@ -7,6 +7,7 @@ animations {
     image: "/assets/sprites/player_no_upgrades_animations/player_idle_2.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 2
 }
 animations {
   id: "player_no_upgrades_running"
@@ -23,16 +24,14 @@ animations {
     image: "/assets/sprites/player_no_upgrades_animations/player_running_4.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 13
 }
 animations {
   id: "player_no_upgrades_jumping"
   images {
     image: "/assets/sprites/player_no_upgrades_animations/player_jump_1.png"
   }
-  images {
-    image: "/assets/sprites/player_no_upgrades_animations/player_jump_2.png"
-  }
-  playback: PLAYBACK_LOOP_FORWARD
+  fps: 1
 }
 animations {
   id: "player_no_upgrades_wall_cling"
@@ -50,6 +49,7 @@ animations {
     image: "/assets/sprites/player_upgraded_arms_animations/player_idle_2.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 2
 }
 animations {
   id: "player_upgraded_arms_running"
@@ -66,16 +66,14 @@ animations {
     image: "/assets/sprites/player_upgraded_arms_animations/player_arms_running4.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 13
 }
 animations {
   id: "player_upgraded_arms_jumping"
   images {
     image: "/assets/sprites/player_upgraded_arms_animations/player_arms_jump1.png"
   }
-  images {
-    image: "/assets/sprites/player_upgraded_arms_animations/player_arms_jump2.png"
-  }
-  playback: PLAYBACK_LOOP_FORWARD
+  fps: 1
 }
 animations {
   id: "player_upgraded_arms_wall_cling"
@@ -93,6 +91,7 @@ animations {
     image: "/assets/sprites/player_upgraded_legs_animations/player_legs_idle_2.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 2
 }
 animations {
   id: "player_upgraded_legs_running"
@@ -109,16 +108,14 @@ animations {
     image: "/assets/sprites/player_upgraded_legs_animations/player_legs_running_4.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 13
 }
 animations {
   id: "player_upgraded_legs_jumping"
   images {
     image: "/assets/sprites/player_upgraded_legs_animations/player_legs_jump1.png"
   }
-  images {
-    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_jump2.png"
-  }
-  playback: PLAYBACK_LOOP_FORWARD
+  fps: 1
 }
 animations {
   id: "player_upgraded_legs_double_jumping"
@@ -128,7 +125,7 @@ animations {
   images {
     image: "/assets/sprites/player_upgraded_legs_animations/player_legs_double_jump_2.png"
   }
-  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
 }
 animations {
   id: "player_upgraded_legs_wall_cling"
@@ -146,6 +143,7 @@ animations {
     image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_idle_2.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 2
 }
 animations {
   id: "player_upgraded_eyes_running"
@@ -162,16 +160,14 @@ animations {
     image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_running_4.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 13
 }
 animations {
   id: "player_upgraded_eyes_jumping"
   images {
     image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_jump_1.png"
   }
-  images {
-    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_jump_2.png"
-  }
-  playback: PLAYBACK_LOOP_FORWARD
+  fps: 1
 }
 animations {
   id: "player_upgraded_eyes_double_jumping"
@@ -181,7 +177,7 @@ animations {
   images {
     image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_double_jump_2.png"
   }
-  playback: PLAYBACK_LOOP_FORWARD
+  fps: 2
 }
 animations {
   id: "player_upgraded_eyes_wall_cling"
@@ -211,6 +207,7 @@ animations {
     image: "/assets/sprites/player_upgraded_torso_animations/player_torso_idle_6.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 2
 }
 animations {
   id: "player_upgraded_torso_running"
@@ -227,17 +224,14 @@ animations {
     image: "/assets/sprites/player_upgraded_torso_animations/player_robot_torso_running_4.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 4
+  fps: 13
 }
 animations {
   id: "player_upgraded_torso_jumping"
   images {
     image: "/assets/sprites/player_upgraded_torso_animations/player_torso_jump_1.png"
   }
-  images {
-    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_jump_2.png"
-  }
-  playback: PLAYBACK_LOOP_FORWARD
+  fps: 1
 }
 animations {
   id: "player_upgraded_torso_double_jumping"
@@ -247,7 +241,7 @@ animations {
   images {
     image: "/assets/sprites/player_upgraded_torso_animations/player_torso_double_jump_2.png"
   }
-  playback: PLAYBACK_LOOP_FORWARD
+  fps: 2
 }
 animations {
   id: "player_upgraded_torso_wall_cling"
@@ -292,6 +286,7 @@ animations {
     image: "/assets/sprites/player_upgraded_brain_animations/player_brain_idle_6.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 2
 }
 animations {
   id: "player_upgraded_brain_running"
@@ -308,16 +303,14 @@ animations {
     image: "/assets/sprites/player_upgraded_brain_animations/player_robot_brain_running_4.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+  fps: 13
 }
 animations {
   id: "player_upgraded_brain_jumping"
   images {
     image: "/assets/sprites/player_upgraded_brain_animations/player_brain_jump_1.png"
   }
-  images {
-    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_jump_2.png"
-  }
-  playback: PLAYBACK_LOOP_FORWARD
+  fps: 1
 }
 animations {
   id: "player_upgraded_brain_double_jumping"
@@ -327,7 +320,7 @@ animations {
   images {
     image: "/assets/sprites/player_upgraded_brain_animations/player_brain_double_jump_2.png"
   }
-  playback: PLAYBACK_LOOP_FORWARD
+  fps: 2
 }
 animations {
   id: "player_upgraded_brain_wall_cling"
@@ -350,5 +343,47 @@ animations {
     image: "/assets/sprites/player_upgraded_brain_animations/player_brain_wall_cling6.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "player_no_upgrades_air"
+  images {
+    image: "/assets/sprites/player_no_upgrades_animations/player_jump_2.png"
+  }
+  fps: 1
+}
+animations {
+  id: "player_upgraded_arms_air"
+  images {
+    image: "/assets/sprites/player_upgraded_arms_animations/player_arms_jump2.png"
+  }
+  fps: 1
+}
+animations {
+  id: "player_upgraded_legs_air"
+  images {
+    image: "/assets/sprites/player_upgraded_legs_animations/player_legs_jump2.png"
+  }
+  fps: 1
+}
+animations {
+  id: "player_upgraded_eyes_air"
+  images {
+    image: "/assets/sprites/player_upgraded_eyes_animations/player_eyes_jump_2.png"
+  }
+  fps: 1
+}
+animations {
+  id: "player_upgraded_torso_air"
+  images {
+    image: "/assets/sprites/player_upgraded_torso_animations/player_torso_jump_2.png"
+  }
+  fps: 1
+}
+animations {
+  id: "player_upgraded_brain_air"
+  images {
+    image: "/assets/sprites/player_upgraded_brain_animations/player_brain_jump_2.png"
+  }
+  fps: 1
 }
 extrude_borders: 2

@@ -5,11 +5,11 @@ components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "default_animation: \"player_idle\"\n"
+  data: "default_animation: \"player_no_upgrades_idle\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/sprites/sprites.atlas\"\n"
+  "  texture: \"/assets/sprites/player.atlas\"\n"
   "}\n"
   ""
 }
