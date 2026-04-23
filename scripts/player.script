@@ -361,7 +361,7 @@ function on_input(self, action_id, action)
 	if action_id == cheat and upgrades.parts.robot_brain then
 		msg.post(self.current_collection .."/loader#game_loader", "level_complete")
 		go.delete()
-		print("GOAL")
+		--print("GOAL")
 	end
 end
 
