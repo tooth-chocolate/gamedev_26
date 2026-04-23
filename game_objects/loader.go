@@ -27,8 +27,8 @@ embedded_components {
   ""
 }
 embedded_components {
-  id: "testing_level_5"
+  id: "testing_level_4"
   type: "collectionproxy"
-  data: "collection: \"/testing/testing_main_level_5.collection\"\n"
+  data: "collection: \"/testing/testing_main_level_4.collection\"\n"
   ""
 }
