@@ -5185,7 +5185,7 @@ layers {
   cell {
     x: 91
     y: 124
-    tile: 2
+    tile: 1
   }
   cell {
     x: 92
@@ -5213,11 +5213,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 91
-    y: 125
-    tile: 0
-  }
-  cell {
     x: 92
     y: 125
     tile: 1
@@ -5243,11 +5238,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 91
-    y: 126
-    tile: 0
-  }
-  cell {
     x: 92
     y: 126
     tile: 1
@@ -5269,11 +5259,6 @@ layers {
   }
   cell {
     x: 78
-    y: 127
-    tile: 0
-  }
-  cell {
-    x: 91
     y: 127
     tile: 0
   }
@@ -5303,11 +5288,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 91
-    y: 128
-    tile: 0
-  }
-  cell {
     x: 92
     y: 128
     tile: 1
@@ -5333,11 +5313,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 91
-    y: 129
-    tile: 0
-  }
-  cell {
     x: 92
     y: 129
     tile: 1
@@ -5353,11 +5328,6 @@ layers {
     tile: 1
   }
   cell {
-    x: 91
-    y: 130
-    tile: 0
-  }
-  cell {
     x: 92
     y: 130
     tile: 1
@@ -5365,11 +5335,6 @@ layers {
   cell {
     x: 102
     y: 130
-    tile: 0
-  }
-  cell {
-    x: 91
-    y: 131
     tile: 0
   }
   cell {
@@ -5383,11 +5348,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 91
-    y: 132
-    tile: 0
-  }
-  cell {
     x: 92
     y: 132
     tile: 1
@@ -5395,11 +5355,6 @@ layers {
   cell {
     x: 102
     y: 132
-    tile: 0
-  }
-  cell {
-    x: 91
-    y: 133
     tile: 0
   }
   cell {
@@ -5413,11 +5368,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 91
-    y: 134
-    tile: 0
-  }
-  cell {
     x: 92
     y: 134
     tile: 1
@@ -5425,11 +5375,6 @@ layers {
   cell {
     x: 102
     y: 134
-    tile: 0
-  }
-  cell {
-    x: 91
-    y: 135
     tile: 0
   }
   cell {
@@ -5443,11 +5388,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 91
-    y: 136
-    tile: 0
-  }
-  cell {
     x: 92
     y: 136
     tile: 1
@@ -5455,11 +5395,6 @@ layers {
   cell {
     x: 102
     y: 136
-    tile: 0
-  }
-  cell {
-    x: 91
-    y: 137
     tile: 0
   }
   cell {
@@ -5473,11 +5408,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 91
-    y: 138
-    tile: 0
-  }
-  cell {
     x: 92
     y: 138
     tile: 1
@@ -5488,11 +5418,6 @@ layers {
     tile: 0
   }
   cell {
-    x: 91
-    y: 139
-    tile: 0
-  }
-  cell {
     x: 92
     y: 139
     tile: 1
@@ -5500,11 +5425,6 @@ layers {
   cell {
     x: 102
     y: 139
-    tile: 0
-  }
-  cell {
-    x: 91
-    y: 140
     tile: 0
   }
   cell {
