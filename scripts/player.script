@@ -21,10 +21,6 @@ local group_obstacle = hash("obstacle")
 local input_left = hash("left")
 local input_right = hash("right")
 local input_jump = hash("jump")
-local anim_run = hash("run")
-local anim_idle = hash("idle")
-local anim_jump = hash("jump")
-local anim_fall = hash("fall")
 local trigger = hash("trigger_response")
 local death = hash("death")
 local goal = hash("c_flag")
@@ -35,8 +31,26 @@ local cheat = hash("cheat")
 -- for debug, don't forget to delete it so no hacks
 local suicide = hash("suicide")
 
+local function get_upgrade_status(self)
+	if upgrades.parts.robot_brain then
+		return "upgraded_brain"
+	elseif upgrades.parts.robot_torso then
+		return "upgraded_torso"
+	elseif upgrades.parts.robot_eyes then
+		return "upgraded_eyes"
+	elseif upgrades.parts.robot_legs then
+		return "upgraded_legs"
+	elseif upgrades.parts.robot_arms then
+		return "upgraded_arms"
+	else
+		return "no_upgrades"
+	end
+end
+
 go.property("controller", hash("idle"))
 go.property("current_level", 0)
+
+
 
 function init(self)
 	-- Add initialization code here
@@ -50,7 +64,7 @@ function init(self)
 	-- support variable to keep track of collisions and separation
 	self.correction = vmath.vector3()
 	-- if the player stands on ground or not
-	self.ground_contact = false
+	self.ground_contact = true
 	-- safe pos to return to
 	self.safe_pos = go.get_position()
 	-- tracks double jump
@@ -63,12 +77,28 @@ function init(self)
 	self.clinging = false
 	-- if the player just did a wall jump
 	self.wall_jumped = false
+	-- if the player just did a double jump
+	self.double_jumped = true
 	-- movement input in the range [-1,1]
 	self.move_input = 0
 	-- the currently playing animation
 	self.anim = nil
 	-- keeps track of ground frames missed
 	self.ground_frames_missed = 0
+	-- keeps track if character is facing left
+	self.facing_left = false
+	-- how long the jump frame is shown
+	self.jump_animation_timer = 0
+
+	self.upgrade_state = get_upgrade_status(self)
+
+	self.anim_run = hash("player_" .. self.upgrade_state .. "_running")
+	self.anim_idle = hash("player_" .. self.upgrade_state .. "_idle")
+	self.anim_jump = hash("player_" .. self.upgrade_state .. "_jumping")
+	self.anim_air = hash("player_" .. self.upgrade_state .. "_air")
+	self.anim_wall = hash("player_" .. self.upgrade_state .. "_wall_cling")
+	self.anim_doublejump = hash("player_" .. self.upgrade_state .. "_double_jumping")
+
 
 	self.current_collection = level_collection.collection
 	self.levels = level_collection.levels
@@ -80,6 +110,9 @@ end
 -- Learn more: https://defold.com/manuals/script/
 -- Remove this function if not needed
 -- end
+
+
+	
 
 local function play_animation(self, anim)
 	-- only play animations which are not already playing
@@ -93,20 +126,29 @@ end
 
 local function update_animations(self)
 	-- make sure the player character faces the right way
-	sprite.set_hflip("#sprite", self.move_input < 0)
+	if self.move_input < 0 then
+		self.facing_left = true
+	elseif self.move_input > 0 then
+		self.facing_left = false
+	end
+	sprite.set_hflip("#sprite", self.facing_left)
+
+	
 	-- make sure the right animation is playing
-	if self.ground_contact then
+	if self.jump_animation_timer > 0 then
+		play_animation(self, self.anim_jump)
+	elseif self.wall_contact or self.clinging then
+		play_animation(self, self.anim_wall)
+	elseif self.ground_contact or self.ground_frames_missed < 3 then
 		if self.velocity.x == 0 then
-			play_animation(self, anim_idle)
+			play_animation(self, self.anim_idle)
 		else
-			play_animation(self, anim_run)
+			play_animation(self, self.anim_run)
 		end
+	elseif self.double_jumped then
+		return
 	else
-		if self.velocity.y > 0 then
-			play_animation(self, anim_jump)
-		else
-			play_animation(self, anim_fall)
-		end
+		play_animation(self, self.anim_air)
 	end
 end
 
@@ -196,7 +238,10 @@ function fixed_update(self, dt)
 	-- apply it to the player character
 	go.set_position(go.get_position() + dp)
 
-	-- update_animations(self)
+	if self.jump_animation_timer > 0 then
+		self.jump_animation_timer = self.jump_animation_timer - dt
+	end
+	update_animations(self)
 
 	-- reset volatile state
 	self.correction = vmath.vector3()
@@ -240,10 +285,12 @@ local function handle_obstacle_contact(self, normal, distance)
 			self.ground_contact = true
 			self.jump_count = 0
 			self.velocity.y = 0
+			self.double_jumped = false
 		elseif math.abs(normal.x) > 0.7 then
 			self.wall_contact = true
 			self.wall_direction = normal.x > 0 and 1 or -1
 			self.wall_jumped = false
+			self.double_jumped = false
 			self.velocity.x = 0
 			if upgrades.parts.robot_arms then
 				self.velocity.y = 0  -- stop sliding down
@@ -297,10 +344,11 @@ local function jump(self)
 		max_jumps = 2
 	end
 	-- only allow jump from ground
-	if self.ground_contact then
+	if self.ground_contact or self.ground_frames_missed < 3 then
 		self.velocity.y = jump_takeoff_speed
 		-- play animation
-		-- play_animation(self, anim_jump)
+		self.jump_animation_timer = 0.2
+		play_animation(self, self.anim_jump)
 		self.jump_count = 1
 	elseif self.wall_contact or self.clinging then
 		self.velocity.y = jump_takeoff_speed
@@ -311,12 +359,15 @@ local function jump(self)
 	elseif self.jump_count < max_jumps and self.ground_frames_missed < 3 then
 		self.velocity.y = jump_takeoff_speed
 		-- play animation
-		-- play_animation(self, anim_jump)
+		self.jump_animation_timer = 0.2
+		play_animation(self, self.anim_jump)
 		self.jump_count = self.jump_count + 1
+	-- allow jumping in air with robot legs
 	elseif self.jump_count < max_jumps and max_jumps == 2 then
 		self.velocity.y = jump_takeoff_speed
 		-- play animation
-		-- play_animation(self, anim_jump)
+		play_animation(self, self.anim_doublejump)
+		self.double_jumped = true
 		if self.jump_count == 0 then
 			self.jump_count = self.jump_count + 2
 		else 
