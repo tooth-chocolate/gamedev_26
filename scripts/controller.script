@@ -1,5 +1,5 @@
 local upgrades = require "modules.upgrade_state"
-
+local level_collection = require "modules.level_collection"
 
 local function spawn_player(self, spawn_location)
 	--[[if self.player then
@@ -15,12 +15,11 @@ function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
-	-- print(msg.url())
 	self.init_spawn = vmath.vector3(100, 48, 0.1)
-	self.rescue_threshold = 1
+	self.rescue_threshold = 5
 	self.rescues = 0
 	self.current_level = 1
-	self.current_collection = "main_testing:"
+	self.current_collection = level_collection.collection
 	self.prompted = false
 	
 end
@@ -94,11 +93,11 @@ function on_message(self, message_id, message, sender)
 		self.current_level = message.current_level
 		spawn_player(self, self.init_spawn)
 		self.prompted = false
+		self.rescue_threshold = message.rescue_threshold
 		--[[msg.post("/test_camera#test_camera", "track", {
 			tracked = msg.url(nil, self.player, nil)
 		})
 		]]
-		-- add current collection
 	end
 end
 

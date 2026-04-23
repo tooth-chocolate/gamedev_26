@@ -102,7 +102,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"filter\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"test_filter\\\"\\n"
+  "  data: \"default_animation: \\\"no_filter\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "size {\\n"
   "  x: 480.0\\n"

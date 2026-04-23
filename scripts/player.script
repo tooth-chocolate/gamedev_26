@@ -1,5 +1,6 @@
 -- this imports the module that saves available robot parts
 local upgrades = require "modules.upgrade_state"
+local level_collection = require "modules.level_collection"
 
 -- these are the tweaks for the mechanics, feel free to change them for a different feeling
 -- the acceleration to move right/left
@@ -69,9 +70,9 @@ function init(self)
 	-- keeps track of ground frames missed
 	self.ground_frames_missed = 0
 
-	self.current_collection = "main_testing:"
-	--self.levels = {"testing_level_0:", "testing_level_1:", "testing_level_2:"}
-	self.levels = {"testing_level_4:"}
+	self.current_collection = level_collection.collection
+	self.levels = level_collection.levels
+	-- self.levels = {"testing_level_0:"}
 end
 
 -- function final(self)
@@ -285,7 +286,7 @@ function on_message(self, message_id, message, sender)
 		elseif message.other_group == goal then
 			msg.post(self.current_collection .."/loader#game_loader", "level_complete")
 			go.delete()
-			print("GOAL")
+			-- print("GOAL")
 		end
 	end
 end

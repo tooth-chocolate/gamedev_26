@@ -1,4 +1,6 @@
 local upgrade_state = require "modules.upgrade_state"
+local level_collection = require "modules.level_collection"
+
 local green = vmath.vector3(0.027450980392156862, 0.611764705882353, 0.1843137254901961)
 local light_green = vmath.vector3(0.7294117647058823, 1, 0.7607843137254902)
 local white = vmath.vector3(1, 1, 1)
@@ -49,8 +51,8 @@ function init(self)
 
 	self.current_level = 1
 
-	self.level_receivers = {"testing_level_0", "testing_level_1", "testing_level_2", "testing_level_5:"}
-
+	self.levels = level_collection.levels
+	self.collection = level_collection.collection
 	self.highlighted = 1
 	self.selected = 0
 	self.highlight_color = white
@@ -121,6 +123,9 @@ function on_message(self, message_id, message, sender)
 	end
 
 	if message_id == adapt then
+		for i, key in ipairs(self.keys) do
+			self.options[i].enabled = upgrade_state.parts[key]
+		end	
 		adapt_menu(self)
 		highlighter(self)
 		self.active = true
@@ -175,6 +180,10 @@ function on_input(self, action_id, action)
 		self.options[self.selected].enabled = true
 		adapt_menu(self)
 		upgrade_state.parts[key] = true
+		
+		if key == "robot_eyes" then
+			msg.post(self.levels[self.current_level] .."test_camera#test_camera", "upgraded_eyes")
+		end
 		-- print(self.level_receivers[self.current_level] .."game_controller#controller")
 		-- msg.post(self.level_receivers[self.current_level] .."/game_controller#controller", "upgrade")
 		msg.post("/upgrade_prompt#upgrade_prompt", "inc_n_upgrade")

@@ -1,4 +1,7 @@
 images {
   image: "/assets/filters/test_filter.png"
 }
+images {
+  image: "/assets/filters/no_filter.png"
+}
 extrude_borders: 2
