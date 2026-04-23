@@ -3,6 +3,11 @@ local level_complete = hash("level_complete")
 local proxy_loaded = hash("proxy_loaded")
 local open = hash("open")
 
+-- arms: 5 rescues
+-- legs: 4 rescues
+-- eyes: 3 rescues
+-- torso: 7 rescues
+-- brain: 2 rescues
 
 
 function init(self)
@@ -10,15 +15,16 @@ function init(self)
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	--self.levels = {"#testing_level_0", "#testing_level_1", "#testing_level_2"}
-	self.levels = {"#testing_level_4"}
+	print("loader init")
+	self.levels = {"#testing_level_0", "#testing_level_1", "#testing_level_2", "#testing_level_3", "#testing_level_4", "#testing_level_5"}
 
 	self.current_level = self.levels[1]
 	self.cur_index = 1
 	self.n_levels = #self.levels
+	self.rescue_thresholds = {5, 4, 3, 7, 2}
 	msg.post("/upgrade_menu_button#upgrade_menu_button", "disable")
 	msg.post(".", "acquire_input_focus")
 	msg.post(self.current_level, "load")
-
 end
 
 function final(self)
@@ -72,9 +78,9 @@ function on_message(self, message_id, message, sender)
 
 	if message_id == proxy_loaded then
 		local controller = msg.url(sender.fragment, "/game_controller", "controller")
-		print("controller url: ", controller)
+		-- print("controller url: ", controller)
 		msg.post(sender, "enable")
-		msg.post(controller, "current_level_configure", {current_level = self.cur_index})
+		msg.post(controller, "current_level_configure", {current_level = self.cur_index, rescue_threshold = self.rescue_thresholds[self.cur_index]})
 		msg.post("/upgrade_menu#upgrade_menu", "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_prompt#upgrade_prompt", "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_menu#upgrade_menu", "disable")

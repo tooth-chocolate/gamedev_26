@@ -2,6 +2,7 @@ go.property("tracked", msg.url())
 local track = hash("track")
 local stop = hash("stop")
 local upgrades = require "modules.upgrade_state"
+local eyes = hash("upgraded_eyes")
 
 function init(self)
 	-- Add initialization code here
@@ -10,7 +11,7 @@ function init(self)
 	self.smoothing = 0.1
 	self.tracking = false
 	self.offset = vmath.vector3(0, 0, 0)
-	print(msg.url())
+	-- print(msg.url())
 	msg.post("#test_camera", "acquire_camera_focus")
 	-- disable filter if robot_eyes are available
 	if upgrades.parts.robot_eyes then
@@ -55,7 +56,6 @@ function fixed_update(self, dt)
 	local new_pos = vmath.lerp(1 - self.smoothing, current, desired)
 	new_pos.z = current.z  -- preserve camera z
 
-
 	go.set_position(new_pos)
 end
 
@@ -71,6 +71,11 @@ function on_message(self, message_id, message, sender)
 
 	if message_id == stop then
 		self.tracking = false
+	end
+
+	if message_id == eyes then
+		print("disable filter")
+		msg.post("#filter", "disable")
 	end
 end
 

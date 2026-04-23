@@ -4,13 +4,15 @@
 -- in any script using the functions.
 local L = {}
 
-L = {
-	{level = "testing_level_0:"},
-	{level = "testing_level_1:"},
-	{level = "testing_level_2:"},
-	{level = "testing_level_3:"},
-	{level = "testing_level_4:"},
-	{level = "testing_level_5:"},
+L.collection =  "main_testing:"
+
+L.levels = {
+	"testing_level_0:",
+	"testing_level_1:",
+	"testing_level_2:",
+	"testing_level_3:",
+	"testing_level_4:",
+	"testing_level_5:",
 }
 
 return L
