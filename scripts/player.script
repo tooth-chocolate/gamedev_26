@@ -308,11 +308,20 @@ local function jump(self)
 		self.clinging = false
 		self.wall_jumped = true
 		self.jump_count = 1
-	elseif self.jump_count < max_jumps then
+	elseif self.jump_count < max_jumps and self.ground_frames_missed < 3 then
 		self.velocity.y = jump_takeoff_speed
 		-- play animation
 		-- play_animation(self, anim_jump)
 		self.jump_count = self.jump_count + 1
+	elseif self.jump_count < max_jumps and max_jumps == 2 then
+		self.velocity.y = jump_takeoff_speed
+		-- play animation
+		-- play_animation(self, anim_jump)
+		if self.jump_count == 0 then
+			self.jump_count = self.jump_count + 2
+		else 
+			self.jump_count = self.jump_count + 1
+		end
 	end
 end
 
