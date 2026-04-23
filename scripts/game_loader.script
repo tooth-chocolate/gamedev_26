@@ -15,7 +15,6 @@ function init(self)
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	--self.levels = {"#testing_level_0", "#testing_level_1", "#testing_level_2"}
-	print("loader init")
 	self.levels = {"#testing_level_0", "#testing_level_1", "#testing_level_2", "#testing_level_3", "#testing_level_4", "#testing_level_5"}
 
 	self.current_level = self.levels[1]
@@ -57,7 +56,7 @@ end
 -- handles what happens if you complete a level. current level gets disabled and next level get loaded.
 local function level_completion_handler(self, message_id)
 	if self.cur_index == self.n_levels then
-		print("game complete")
+		-- print("game complete")
 	else
 		local next_level = self.levels[self.cur_index + 1]
 		msg.post(self.current_level, "disable")
