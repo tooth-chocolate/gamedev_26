@@ -17,7 +17,7 @@ function init(self)
 	if upgrades.parts.robot_eyes then
 		msg.post("#filter", "disable")
 	end
-	
+
 end
 
 function final(self)
@@ -47,7 +47,7 @@ function fixed_update(self, dt)
 	-- Remove this function if not needed
 	if not self.tracking then return end
 	-- print(self.tracked)
-	
+
 	local tracked_pos = go.get_position(self.tracked)
 	local current = go.get_position()
 

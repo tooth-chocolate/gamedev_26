@@ -1,6 +1,10 @@
 local upgrades = require "modules.upgrade_state"
 local level_collection = require "modules.level_collection"
 
+local menu_spawn = hash("menu_spawn")
+local normal_spawn = hash("normal_spawn")
+local prompt_spawn = hash("prompt_spawn")
+
 local function spawn_player(self, spawn_location)
 	--[[if self.player then
 		go.delete(self.player)
@@ -16,11 +20,17 @@ function init(self)
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	self.init_spawn = vmath.vector3(100, 41, 0.1)
-	self.rescue_threshold = 5
+	self.rescue_thresholds = {5, 4, 3 ,7, 2}
 	self.rescues = 0
 	self.current_level = 1
 	self.current_collection = level_collection.collection
-	self.prompted = false
+	self.level_prompted = false
+	-- self.upgrade_prompted = {false, false, false, false, false}
+	self.part = 1
+	self.current_spawn_location = self.init_spawn
+	
+
+	self.current_rescue_threshold = self.rescue_thresholds[upgrades.n_upgrades+1]
 	
 end
 
@@ -60,22 +70,26 @@ end
 end]]
 
 local function upgrade_ui_caller(self)
-	if self.rescues > self.rescue_threshold and not self.prompted then
+	--print(self.prompted)
+	--print(self.rescues)
+	--print(self.current_rescue_threshold)
+	if self.rescues > self.current_rescue_threshold and not self.level_prompted and upgrades.n_upgrades < self.current_level then
+		print("upgrade_ui_called")
 		local path = self.current_collection .."/upgrade_prompt#upgrade_prompt"
-		msg.post(path, "prompt")
 		msg.post(path, "enable")
-		self.prompted = true
+		msg.post(path, "prompt")
+	else
+		msg.post(".", "normal_spawn")
 	end
 end
 
 local function respawn_handler(self, message)
-	local spawn_location = self.init_spawn
 	self.rescues = self.rescues + 1
 	if next(message) ~= nil then
-		spawn_location = message.last_safe
+		self.current_spawn_location = message.last_safe
 	end
 	upgrade_ui_caller(self)
-	timer.delay(1.0, false, function() spawn_player(self, spawn_location) end)
+	-- timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)
 end
 
 function on_message(self, message_id, message, sender)
@@ -93,12 +107,56 @@ function on_message(self, message_id, message, sender)
 		self.current_level = message.current_level
 		spawn_player(self, self.init_spawn)
 		self.prompted = false
-		self.rescue_threshold = message.rescue_threshold
+		-- self.rescue_threshold = message.rescue_threshold
 		--[[msg.post("/test_camera#test_camera", "track", {
 			tracked = msg.url(nil, self.player, nil)
 		})
 		]]
 	end
+
+	--[[if message_id == hash("spawn") then
+		if message.n_upgrades > self.n_upgrades then
+			self.rescues = 0
+			self.n_upgrades = message.n_upgrades
+			
+			if self.n_upgrades < self.current_level then
+				self.current_rescue_threshold = self.rescue_thresholds[self.n_upgrades + 1]
+			end
+		end
+		self.prompted = message.prompted
+		timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)
+	end
+	]]
+
+	if message_id == normal_spawn then
+		spawn_player(self, self.current_spawn_location)
+	end
+
+	if message_id == prompt_spawn then
+		print("prompt spawn")
+		if message.upgraded then
+			self.rescues = 0
+			if upgrades.n_upgrades < self.current_level then
+				self.current_rescue_threshold = self.rescue_thresholds[upgrades.n_upgrades + 1]
+			end
+		end
+		for i = 1, 5 do
+			if not upgrades.prompted[i] then
+				self.part = i
+			end
+		end
+		msg.post(self.current_collection .."/upgrade_menu#upgrade_menu", "upgrade_menu", {part = self.part})
+		timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)
+	end
+
+	if message_id == menu_spawn then
+		go.delete(self.player)
+		timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)
+	end
+
+	--[[_if message_id == hash("spawn") then
+		timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)
+	end]]
 end
 
 function on_input(self, action_id, action)

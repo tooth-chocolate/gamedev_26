@@ -123,12 +123,42 @@ layers {
     tile: 1
   }
   cell {
+    x: 0
+    y: -2
+    tile: 1
+  }
+  cell {
+    x: 1
+    y: -2
+    tile: 1
+  }
+  cell {
     x: 145
     y: -2
     tile: 0
   }
   cell {
     x: 158
+    y: -2
+    tile: 1
+  }
+  cell {
+    x: -4
+    y: -2
+    tile: 1
+  }
+  cell {
+    x: -3
+    y: -2
+    tile: 1
+  }
+  cell {
+    x: -2
+    y: -2
+    tile: 1
+  }
+  cell {
+    x: -1
     y: -2
     tile: 1
   }
