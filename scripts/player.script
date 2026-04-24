@@ -13,6 +13,9 @@ local max_speed = 350
 local gravity = -1000
 -- take-off speed when jumping in pixel units
 local jump_takeoff_speed = 400
+-- time between two step sounds while walking
+local step_interval = 0.3
+
 
 -- prehashing ids improves performance
 local msg_contact_point_response = hash("contact_point_response")
@@ -88,6 +91,10 @@ function init(self)
 	self.facing_left = false
 	-- how long the jump frame is shown
 	self.jump_animation_timer = 0
+	-- how long since the last step
+	self.step_timer = 0
+	-- if the current wall has already been touched
+	self.wall_touched = false
 
 	-- self.upgrade_state = get_upgrade_status(self)
 
@@ -155,16 +162,25 @@ local function update_animations(self)
 		play_animation(self, self.anim_jump)
 	elseif self.wall_contact or self.clinging then
 		play_animation(self, self.anim_wall)
+		if not self.wall_touched then
+			msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_sfx", {sfx = "wall"})
+			self.wall_touched = true
+		end
 	elseif self.ground_contact or self.ground_frames_missed < 3 then
 		if self.velocity.x == 0 then
 			play_animation(self, self.anim_idle)
 		else
 			play_animation(self, self.anim_run)
+			if self.step_timer <= 0 then
+				msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_sfx", {sfx = "step"})
+				self.step_timer = step_interval
+			end
 		end
 	elseif self.double_jumped then
 		return
 	else
 		play_animation(self, self.anim_air)
+		self.wall_touched = false
 	end
 end
 
@@ -257,6 +273,9 @@ function fixed_update(self, dt)
 	if self.jump_animation_timer > 0 then
 		self.jump_animation_timer = self.jump_animation_timer - dt
 	end
+	if self.step_timer > 0 then
+		self.step_timer = self.step_timer - dt
+	end
 	update_animations(self)
 
 	-- reset volatile state
@@ -318,6 +337,7 @@ local function handle_obstacle_contact(self, normal, distance)
 end
 
 local function death_handler(self)
+	msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_sfx", {sfx = "death"})
 	if upgrades.parts.robot_torso then
 		msg.post(self.controller, "player_died", {last_safe = self.safe_pos})
 	else
@@ -366,6 +386,7 @@ local function jump(self)
 		-- play animation
 		self.jump_animation_timer = 0.2
 		play_animation(self, self.anim_jump)
+		msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_sfx", {sfx = "jump"})
 		self.jump_count = 1
 	elseif self.wall_contact or self.clinging then
 		self.velocity.y = jump_takeoff_speed
@@ -378,12 +399,14 @@ local function jump(self)
 		-- play animation
 		self.jump_animation_timer = 0.2
 		play_animation(self, self.anim_jump)
+		msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_sfx", {sfx = "jump"})
 		self.jump_count = self.jump_count + 1
 		-- allow jumping in air with robot legs
 	elseif self.jump_count < max_jumps and max_jumps == 2 then
 		self.velocity.y = jump_takeoff_speed
 		-- play animation
 		play_animation(self, self.anim_doublejump)
+		msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_sfx", {sfx = "jump"})
 		self.double_jumped = true
 		if self.jump_count == 0 then
 			self.jump_count = self.jump_count + 2
