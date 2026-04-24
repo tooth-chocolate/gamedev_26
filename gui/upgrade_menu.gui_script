@@ -182,6 +182,7 @@ function on_input(self, action_id, action)
 		upgrade_state.parts[key] = true
 		
 		if key == "robot_eyes" then
+			print(self.levels[self.current_level] .."test_camera#test_camera")
 			msg.post(self.levels[self.current_level] .."test_camera#test_camera", "upgraded_eyes")
 		end
 		-- print(self.level_receivers[self.current_level] .."game_controller#controller")
