@@ -43,10 +43,10 @@ animations {
 animations {
   id: "player_upgraded_arms_idle"
   images {
-    image: "/assets/sprites/player_upgraded_arms_animations/player_idle_1.png"
+    image: "/assets/sprites/player_upgraded_arms_animations/player_upgrade_arms_idle1.png"
   }
   images {
-    image: "/assets/sprites/player_upgraded_arms_animations/player_idle_2.png"
+    image: "/assets/sprites/player_upgraded_arms_animations/player_upgrade_arms_idle2.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
   fps: 2
@@ -207,7 +207,7 @@ animations {
     image: "/assets/sprites/player_upgraded_torso_animations/player_torso_idle_6.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 2
+  fps: 6
 }
 animations {
   id: "player_upgraded_torso_running"

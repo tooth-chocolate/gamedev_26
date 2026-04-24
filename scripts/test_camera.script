@@ -49,7 +49,7 @@ function fixed_update(self, dt)
 	-- Remove this function if not needed
 	if not self.tracking then return end
 	-- print(self.tracked)
-	
+
 	local tracked_pos = go.get_position(self.tracked)
 	local current = go.get_position()
 
