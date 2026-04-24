@@ -188,26 +188,6 @@ layers {
     tile: 2
   }
   cell {
-    x: 37
-    y: 0
-    tile: 2
-  }
-  cell {
-    x: 38
-    y: 0
-    tile: 2
-  }
-  cell {
-    x: 39
-    y: 0
-    tile: 2
-  }
-  cell {
-    x: 40
-    y: 0
-    tile: 2
-  }
-  cell {
     x: 41
     y: 0
     tile: 2
@@ -788,26 +768,6 @@ layers {
     tile: 2
   }
   cell {
-    x: 37
-    y: 1
-    tile: 2
-  }
-  cell {
-    x: 38
-    y: 1
-    tile: 2
-  }
-  cell {
-    x: 39
-    y: 1
-    tile: 2
-  }
-  cell {
-    x: 40
-    y: 1
-    tile: 2
-  }
-  cell {
     x: 41
     y: 1
     tile: 2
@@ -1284,26 +1244,6 @@ layers {
   }
   cell {
     x: 36
-    y: 2
-    tile: 2
-  }
-  cell {
-    x: 37
-    y: 2
-    tile: 2
-  }
-  cell {
-    x: 38
-    y: 2
-    tile: 2
-  }
-  cell {
-    x: 39
-    y: 2
-    tile: 2
-  }
-  cell {
-    x: 40
     y: 2
     tile: 2
   }
@@ -1788,26 +1728,6 @@ layers {
     tile: 2
   }
   cell {
-    x: 37
-    y: 3
-    tile: 2
-  }
-  cell {
-    x: 38
-    y: 3
-    tile: 2
-  }
-  cell {
-    x: 39
-    y: 3
-    tile: 2
-  }
-  cell {
-    x: 40
-    y: 3
-    tile: 2
-  }
-  cell {
     x: 41
     y: 3
     tile: 2
@@ -2284,26 +2204,6 @@ layers {
   }
   cell {
     x: 36
-    y: 4
-    tile: 2
-  }
-  cell {
-    x: 37
-    y: 4
-    tile: 2
-  }
-  cell {
-    x: 38
-    y: 4
-    tile: 2
-  }
-  cell {
-    x: 39
-    y: 4
-    tile: 2
-  }
-  cell {
-    x: 40
     y: 4
     tile: 2
   }
@@ -2790,22 +2690,22 @@ layers {
   cell {
     x: 37
     y: 5
-    tile: 2
+    tile: 1
   }
   cell {
     x: 38
     y: 5
-    tile: 2
+    tile: 1
   }
   cell {
     x: 39
     y: 5
-    tile: 2
+    tile: 1
   }
   cell {
     x: 40
     y: 5
-    tile: 2
+    tile: 1
   }
   cell {
     x: 41
@@ -8283,6 +8183,26 @@ layers {
     tile: 0
   }
   cell {
+    x: 53
+    y: 18
+    tile: 1
+  }
+  cell {
+    x: 54
+    y: 18
+    tile: 1
+  }
+  cell {
+    x: 55
+    y: 18
+    tile: 1
+  }
+  cell {
+    x: 56
+    y: 18
+    tile: 1
+  }
+  cell {
     x: 57
     y: 18
     tile: 0
@@ -22251,6 +22171,26 @@ layers {
     x: 100
     y: 67
     tile: 0
+  }
+  cell {
+    x: 101
+    y: 67
+    tile: 1
+  }
+  cell {
+    x: 102
+    y: 67
+    tile: 1
+  }
+  cell {
+    x: 103
+    y: 67
+    tile: 1
+  }
+  cell {
+    x: 104
+    y: 67
+    tile: 1
   }
   cell {
     x: 105

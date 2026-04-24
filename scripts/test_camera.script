@@ -2,6 +2,7 @@ go.property("tracked", msg.url())
 local track = hash("track")
 local stop = hash("stop")
 local upgrades = require "modules.upgrade_state"
+local level_collection = require "modules.level_collection"
 local eyes = hash("upgraded_eyes")
 
 function init(self)
@@ -17,6 +18,7 @@ function init(self)
 	if upgrades.parts.robot_eyes then
 		msg.post("#filter", "disable")
 	end
+	self.boundaries = level_collection.boundaries[self.current_level]
 	
 end
 
@@ -56,6 +58,12 @@ function fixed_update(self, dt)
 	local new_pos = vmath.lerp(1 - self.smoothing, current, desired)
 	new_pos.z = current.z  -- preserve camera z
 
+	-- correct for level boundaries
+	new_pos.x = math.max(new_pos.x, self.boundaries.left + 240)
+	new_pos.x = math.min(new_pos.x, self.boundaries.right - 240)
+	new_pos.y = math.max(new_pos.y, self.boundaries.bottom + 135)
+	new_pos.y = math.min(new_pos.y, self.boundaries.top - 135)
+
 	go.set_position(new_pos)
 end
 
@@ -67,6 +75,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == track then
 		self.tracking = true
 		self.tracked = message.tracked
+		self.boundaries = level_collection.boundaries[message.current_level]
 	end
 
 	if message_id == stop then
