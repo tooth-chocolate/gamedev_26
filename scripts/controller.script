@@ -1,6 +1,18 @@
 local upgrades = require "modules.upgrade_state"
 local level_collection = require "modules.level_collection"
 
+local function get_track_name(self, upgrades)
+	if self.current_level == 3 then
+		return "cave"
+	elseif upgrades.parts.robot_torso then
+		return "level_robot"
+	elseif upgrades.parts.robot_arms then
+		return "level_halfrobot"
+	else
+		return "level_human"
+	end
+end
+
 local function spawn_player(self, spawn_location)
 	--[[if self.player then
 		go.delete(self.player)
@@ -9,6 +21,8 @@ local function spawn_player(self, spawn_location)
 	msg.post("/test_camera#test_camera", "track", {
 		tracked = msg.url(nil, self.player, nil)
 	})
+	
+	msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_music", {track = get_track_name(self, upgrades)})
 end
 		
 function init(self)
