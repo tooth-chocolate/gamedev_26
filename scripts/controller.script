@@ -22,7 +22,8 @@ local function spawn_player(self, spawn_location)
 	end]]
 	self.player = factory.create("#player_factory", spawn_location, nil, {controller = go.get_id(), current_level = self.current_level})
 	msg.post("/test_camera#test_camera", "track", {
-		tracked = msg.url(nil, self.player, nil)
+		tracked = msg.url(nil, self.player, nil),
+		current_level = self.current_level
 	})
 	
 	msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_music", {track = get_track_name(self, upgrades)})

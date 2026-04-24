@@ -52,8 +52,6 @@ end
 go.property("controller", hash("idle"))
 go.property("current_level", 1)
 
-
-
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
@@ -95,6 +93,8 @@ function init(self)
 	self.step_timer = 0
 	-- if the current wall has already been touched
 	self.wall_touched = false
+	-- level boundaries
+	self.boundaries = level_collection.boundaries[self.current_level]
 
 	-- self.upgrade_state = get_upgrade_status(self)
 
@@ -268,7 +268,10 @@ function fixed_update(self, dt)
 	end
 	local dp = calculate_dp(self, dt, acceleration, speed_diff)
 	-- apply it to the player character
-	go.set_position(go.get_position() + dp)
+	local target_position = go.get_position() + dp
+	target_position.x = math.max(target_position.x, self.boundaries.left)
+	target_position.x = math.min(target_position.x, self.boundaries.right)
+	go.set_position(target_position)
 
 	if self.jump_animation_timer > 0 then
 		self.jump_animation_timer = self.jump_animation_timer - dt
