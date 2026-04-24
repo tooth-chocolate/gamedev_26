@@ -31,10 +31,8 @@ local goal = hash("c_flag")
 -- brain functionality or debugging purpose
 local cheat = hash("cheat")
 
--- for debug, don't forget to delete it so no hacks
-local suicide = hash("suicide")
 
-local function get_upgrade_status(self)
+--[[local function get_upgrade_status(self)
 	if upgrades.parts.robot_brain then
 		return "upgraded_brain"
 	elseif upgrades.parts.robot_torso then
@@ -49,9 +47,10 @@ local function get_upgrade_status(self)
 		return "no_upgrades"
 	end
 end
+]]
 
 go.property("controller", hash("idle"))
-go.property("current_level", 0)
+go.property("current_level", 1)
 
 
 
@@ -97,16 +96,33 @@ function init(self)
 	-- if the current wall has already been touched
 	self.wall_touched = false
 
-	self.upgrade_state = get_upgrade_status(self)
+	-- self.upgrade_state = get_upgrade_status(self)
 
+	--[[
 	self.anim_run = hash("player_" .. self.upgrade_state .. "_running")
 	self.anim_idle = hash("player_" .. self.upgrade_state .. "_idle")
 	self.anim_jump = hash("player_" .. self.upgrade_state .. "_jumping")
 	self.anim_air = hash("player_" .. self.upgrade_state .. "_air")
 	self.anim_wall = hash("player_" .. self.upgrade_state .. "_wall_cling")
 	self.anim_doublejump = hash("player_" .. self.upgrade_state .. "_double_jumping")
+	]]
 
-
+	if upgrades.n_upgrades == 0 then
+		self.anim_run = "player_no_upgrades_running"
+		self.anim_idle = "player_no_upgrades_idle"
+		self.anim_jump = "player_no_upgrades_jumping"
+		self.anim_air = "player_no_upgrades_air"
+		self.anim_wall = "player_no_upgrades_wall_cling"
+		self.anim_doublejump = "player_no_upgrades_jumping"
+	else
+		self.anim_run = upgrades.anims[upgrades.n_upgrades].anim_run
+		self.anim_idle = upgrades.anims[upgrades.n_upgrades].anim_idle
+		self.anim_jump = upgrades.anims[upgrades.n_upgrades].anim_jump
+		self.anim_air = upgrades.anims[upgrades.n_upgrades].anim_air
+		self.anim_wall = upgrades.anims[upgrades.n_upgrades].anim_wall
+		self.anim_doublejump = upgrades.anims[upgrades.n_upgrades].anim_doublejump
+	end
+	
 	self.current_collection = level_collection.collection
 	self.levels = level_collection.levels
 	-- self.levels = {"testing_level_0:"}
@@ -119,7 +135,7 @@ end
 -- end
 
 
-	
+
 
 local function play_animation(self, anim)
 	-- only play animations which are not already playing
@@ -140,7 +156,7 @@ local function update_animations(self)
 	end
 	sprite.set_hflip("#sprite", self.facing_left)
 
-	
+
 	-- make sure the right animation is playing
 	if self.jump_animation_timer > 0 then
 		play_animation(self, self.anim_jump)
@@ -329,6 +345,7 @@ local function death_handler(self)
 		msg.post(self.current_collection .."/rescue_board#rescue", "add_rescues", {rescue = 1})
 	end
 
+	-- print(self.levels[self.current_level] .."/test_camera#test_camera")
 	msg.post(self.levels[self.current_level] .."/test_camera#test_camera", "stop")
 	go.delete()
 
@@ -384,7 +401,7 @@ local function jump(self)
 		play_animation(self, self.anim_jump)
 		msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_sfx", {sfx = "jump"})
 		self.jump_count = self.jump_count + 1
-	-- allow jumping in air with robot legs
+		-- allow jumping in air with robot legs
 	elseif self.jump_count < max_jumps and max_jumps == 2 then
 		self.velocity.y = jump_takeoff_speed
 		-- play animation
@@ -428,11 +445,8 @@ function on_input(self, action_id, action)
 			abort_jump(self)
 		end
 	end
-	if action_id == suicide and not action.pressed then
-		death_handler(self)
-	end
 
-	if action_id == cheat and upgrades.parts.robot_brain then
+	if action_id == cheat and action.pressed then
 		msg.post(self.current_collection .."/loader#game_loader", "level_complete")
 		go.delete()
 		--print("GOAL")

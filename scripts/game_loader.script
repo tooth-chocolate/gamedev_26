@@ -20,7 +20,7 @@ function init(self)
 	self.current_level = self.levels[1]
 	self.cur_index = 1
 	self.n_levels = #self.levels
-	self.rescue_thresholds = {5, 4, 3, 7, 2}
+	-- self.rescue_thresholds = {5, 4, 3, 7, 2}
 	msg.post("/upgrade_menu_button#upgrade_menu_button", "disable")
 	msg.post(".", "acquire_input_focus")
 	msg.post(self.current_level, "load")
@@ -79,7 +79,8 @@ function on_message(self, message_id, message, sender)
 		local controller = msg.url(sender.fragment, "/game_controller", "controller")
 		-- print("controller url: ", controller)
 		msg.post(sender, "enable")
-		msg.post(controller, "current_level_configure", {current_level = self.cur_index, rescue_threshold = self.rescue_thresholds[self.cur_index]})
+		-- msg.post(controller, "current_level_configure", {current_level = self.cur_index, rescue_threshold = self.rescue_thresholds[self.cur_index]})
+		msg.post(controller, "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_menu#upgrade_menu", "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_prompt#upgrade_prompt", "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_menu#upgrade_menu", "disable")

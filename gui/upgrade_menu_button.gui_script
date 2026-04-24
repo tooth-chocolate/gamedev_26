@@ -29,7 +29,7 @@ function on_message(self, message_id, message, sender)
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
 	if message_id == open_menu then
-		msg.post("/upgrade_menu#upgrade_menu", "adapt_menu")
+		msg.post("/upgrade_menu#upgrade_menu", "adapt_menu", {add_visible = 0})
 		msg.post("/upgrade_menu#upgrade_menu", "enable")
 	end
 end
@@ -49,7 +49,7 @@ function on_input(self, action_id, action)
 			gui.set_scale(self.button, vmath.vector3(0.95, 0.95, 1))
 			-- msg.post(self.current_collection .."/loader#game_loader", "open")
 			if not self.menu_open then
-				msg.post("/upgrade_menu#upgrade_menu", "adapt_menu")
+				msg.post("/upgrade_menu#upgrade_menu", "adapt_menu", {add_visible = 0})
 				msg.post("/upgrade_menu#upgrade_menu", "enable")
 				self.menu_open = true
 			else
