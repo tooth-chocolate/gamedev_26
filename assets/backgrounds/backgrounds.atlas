@@ -2,10 +2,13 @@ images {
   image: "/assets/backgrounds/level_3.png"
 }
 images {
-  image: "/assets/backgrounds/level_4_5.png"
+  image: "/assets/backgrounds/level_4.png"
 }
 images {
   image: "/assets/backgrounds/level_6.png"
+}
+images {
+  image: "/assets/backgrounds/level_5.png"
 }
 animations {
   id: "level_1"
