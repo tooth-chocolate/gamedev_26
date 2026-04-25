@@ -4,7 +4,8 @@ local level_collection = require "modules.level_collection"
 local menu_spawn = hash("menu_spawn")
 local normal_spawn = hash("normal_spawn")
 local prompt_spawn = hash("prompt_spawn")
-local function get_track_name(self, upgrades)
+
+local function get_track_name(self)
 	if self.current_level == 3 then
 		return "cave"
 	elseif upgrades.parts.robot_torso then
@@ -21,12 +22,15 @@ local function spawn_player(self, spawn_location)
 		go.delete(self.player)
 	end]]
 	self.player = factory.create("#player_factory", spawn_location, nil, {controller = go.get_id(), current_level = self.current_level})
+	if upgrades.parts.robot_eyes then
+		msg.post("/test_camera#test_camera", "upgraded_eyes")
+	end
 	msg.post("/test_camera#test_camera", "track", {
 		tracked = msg.url(nil, self.player, nil),
 		current_level = self.current_level
 	})
 	
-	msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_music", {track = get_track_name(self, upgrades)})
+	msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_music", {track = get_track_name(self)})
 end
 		
 function init(self)
@@ -87,9 +91,10 @@ local function upgrade_ui_caller(self)
 	--print(self.prompted)
 	--print(self.rescues)
 	--print(self.current_rescue_threshold)
-	if self.rescues > self.current_rescue_threshold and not self.level_prompted and upgrades.n_upgrades < self.current_level then
+	if self.rescues > self.current_rescue_threshold and not self.level_prompted and upgrades.n_upgrades <= self.current_level then
 		print("upgrade_ui_called")
-		local path = self.current_collection .."/upgrade_prompt#upgrade_prompt"
+		--local path = self.current_collection .."/upgrade_prompt#upgrade_prompt"
+		local path = self.current_collection .."/upgrade_handler#upgrade_handler"
 		msg.post(path, "enable")
 		msg.post(path, "prompt")
 	else
@@ -120,7 +125,6 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("current_level_configure") then
 		self.current_level = message.current_level
 		spawn_player(self, self.init_spawn)
-		self.prompted = false
 		-- self.rescue_threshold = message.rescue_threshold
 		--[[msg.post("/test_camera#test_camera", "track", {
 			tracked = msg.url(nil, self.player, nil)
@@ -154,16 +158,17 @@ function on_message(self, message_id, message, sender)
 				self.current_rescue_threshold = self.rescue_thresholds[upgrades.n_upgrades + 1]
 			end
 		end
-		for i = 1, 5 do
-			if not upgrades.prompted[i] then
-				self.part = i
-			end
-		end
-		msg.post(self.current_collection .."/upgrade_menu#upgrade_menu", "upgrade_menu", {part = self.part})
+		-- msg.post(self.current_collection .."/upgrade_menu#upgrade_menu", "upgrade_menu", {part = self.part})
+		self.level_prompted = message.prompted
 		timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)
 	end
 
 	if message_id == menu_spawn then
+		if upgrades.n_upgrades < self.current_level then
+			self.level_prompted = false
+			self.rescues = 0
+		end
+		msg.post("test_camera#test_camera", "stop")
 		go.delete(self.player)
 		timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)
 	end

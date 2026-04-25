@@ -19,6 +19,10 @@ instances {
   id: "sound_manager"
   prototype: "/game_objects/sound_manager.go"
 }
+instances {
+  id: "upgrade_handler"
+  prototype: "/game_objects/upgrade_handler.go"
+}
 scale_along_z: 0
 embedded_instances {
   id: "upgrade_menu_button"

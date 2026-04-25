@@ -83,6 +83,7 @@ function on_message(self, message_id, message, sender)
 		msg.post(controller, "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_menu#upgrade_menu", "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_prompt#upgrade_prompt", "current_level_configure", {current_level = self.cur_index})
+		msg.post("/upgrade_handler#upgrade_handler", "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_menu#upgrade_menu", "disable")
 	end
 

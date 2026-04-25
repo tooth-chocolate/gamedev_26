@@ -21,6 +21,7 @@ function init(self)
 	self.levels = level_collection.levels
 	self.collection = level_collection.collection
 	--self.upgrade_progress = 0
+	
 end
 
 local function show_prompt(self)

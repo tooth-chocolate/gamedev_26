@@ -5,124 +5,155 @@ fonts {
 }
 nodes {
   position {
-    x: 240.0
-    y: 137.0
+    x: 428.0
+    y: 190.0
   }
   scale {
-    x: 0.1998
-    y: 0.1998
-    z: 0.666
+    x: 0.417256
+    y: 1.398576
+    z: 0.9072
   }
   size {
     x: 200.0
     y: 100.0
   }
   color {
-    x: 0.7607843
-    y: 0.7607843
-    z: 0.7607843
+    x: 0.4
+    y: 0.4
+    z: 0.4
   }
-  type: TYPE_TEXT
-  font: "rescue_font"
-  id: "brain"
+  type: TYPE_BOX
+  id: "menu_box"
   inherit_alpha: true
+  alpha: 0.85
+  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: 240.0
-    y: 161.0
+    x: 1.0E-6
+    y: 36.46566
   }
   scale {
-    x: 0.1998
-    y: 0.1998
-    z: 0.666
+    x: 0.4
+    y: 0.25
   }
   size {
     x: 200.0
-    y: 100.0
+    y: 50.0
   }
   color {
-    x: 0.7607843
-    y: 0.7607843
-    z: 0.7607843
-  }
-  type: TYPE_TEXT
-  font: "rescue_font"
-  id: "torso"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 240.0
-    y: 185.0
-  }
-  scale {
-    x: 0.1998
-    y: 0.1998
-    z: 0.666
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.7607843
-    y: 0.7607843
-    z: 0.7607843
-  }
-  type: TYPE_TEXT
-  font: "rescue_font"
-  id: "eyes"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 240.0
-    y: 208.0
-  }
-  scale {
-    x: 0.1998
-    y: 0.1998
-    z: 0.666
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.7607843
-    y: 0.7607843
-    z: 0.7607843
-  }
-  type: TYPE_TEXT
-  font: "rescue_font"
-  id: "legs"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 240.0
-    y: 231.0
-  }
-  scale {
-    x: 0.1998
-    y: 0.1998
-    z: 0.666
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.3019608
-    y: 0.3019608
-    z: 0.3019608
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   type: TYPE_TEXT
   text: "\n"
   ""
   font: "rescue_font"
   id: "arms"
+  parent: "menu_box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1.0E-6
+    y: 20.020365
+  }
+  scale {
+    x: 0.4
+    y: 0.25
+  }
+  size {
+    x: 200.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "\n"
+  ""
+  font: "rescue_font"
+  id: "legs"
+  parent: "menu_box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -1.0E-6
+    y: 3.575065
+  }
+  scale {
+    x: 0.4
+    y: 0.25
+  }
+  size {
+    x: 200.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  font: "rescue_font"
+  id: "eyes"
+  parent: "menu_box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -1.0E-6
+    y: -13.585246
+  }
+  scale {
+    x: 0.4
+    y: 0.25
+  }
+  size {
+    x: 200.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "\n"
+  ""
+  font: "rescue_font"
+  id: "torso"
+  parent: "menu_box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -1.0E-6
+    y: -30.745558
+  }
+  scale {
+    x: 0.4
+    y: 0.25
+  }
+  size {
+    x: 200.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "\n"
+  ""
+  font: "rescue_font"
+  id: "brain"
+  parent: "menu_box"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
