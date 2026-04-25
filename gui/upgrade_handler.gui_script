@@ -19,14 +19,6 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.current_level = 1
 
-	self.options = {
-		{node = gui.get_node("upgrade_menu/arms"), key = "robot_arms", first_prompted = false},
-		{node = gui.get_node("upgrade_menu/legs"), key = "robot_legs", first_prompted = false},
-		{node = gui.get_node("upgrade_menu/eyes"), key = "robot_eyes", first_prompted = false},
-		{node = gui.get_node("upgrade_menu/torso"), key = "robot_torso", first_prompted = false},
-		{node = gui.get_node("upgrade_menu/brain"), key = "robot_brain", first_prompted = false},
-	}
-
 	-- useful lists for indexing
 	self.parts = {"arms ", "legs ", "eyes ", "heart ", "brain "}
 	self.keys = {"robot_arms", "robot_legs", "robot_eyes", "robot_torso", "robot_brain"}
@@ -80,13 +72,6 @@ end
 
 local function display_state(self)
 	if self.state == "prompt" then
-		for i, option in ipairs(self.options) do
-			print(option.key ..": ", option.first_prompted)
-		end
-		if not self.options[self.current_prompt_index].first_prompted then
-			self.options[self.current_prompt_index].first_prompted = true
-			print("current_prompt index, prompt state init: ", self.current_prompt_index)
-		end
 		gui.set_enabled(self.prompt_text, true)
 		show_prompt(self)
 		return
