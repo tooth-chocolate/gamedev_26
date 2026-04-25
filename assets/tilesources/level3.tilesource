@@ -27,6 +27,11 @@ convex_hulls {
   count: 5
   collision_group: "death"
 }
+convex_hulls {
+  index: 23
+  count: 5
+  collision_group: ""
+}
 collision_groups: "death"
 collision_groups: "obstacle"
 animations {

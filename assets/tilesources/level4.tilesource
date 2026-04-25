@@ -1,7 +1,7 @@
-image: "/assets/tilesources/tiles_level_2.png"
+image: "/assets/tilesources/tiles_level_4.png"
 tile_width: 16
 tile_height: 16
-collision: "/assets/tilesources/tiles_level_2.png"
+collision: "/assets/tilesources/tiles_level_4.png"
 convex_hulls {
   index: 0
   count: 4
