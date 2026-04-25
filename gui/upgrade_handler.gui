@@ -11,47 +11,5 @@ nodes {
   parent: "upgrade_prompt"
   template_node_child: true
 }
-nodes {
-  type: TYPE_TEMPLATE
-  id: "upgrade_menu"
-  inherit_alpha: true
-  template: "/gui/upgrade_menu.gui"
-}
-nodes {
-  type: TYPE_BOX
-  id: "upgrade_menu/menu_box"
-  parent: "upgrade_menu"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "upgrade_menu/arms"
-  parent: "upgrade_menu/menu_box"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "upgrade_menu/legs"
-  parent: "upgrade_menu/menu_box"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "upgrade_menu/eyes"
-  parent: "upgrade_menu/menu_box"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "upgrade_menu/torso"
-  parent: "upgrade_menu/menu_box"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "upgrade_menu/brain"
-  parent: "upgrade_menu/menu_box"
-  template_node_child: true
-}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
