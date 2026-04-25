@@ -1,7 +1,8 @@
 local level_collection = require "modules.level_collection"
+local upgrades = require "modules.upgrade_state"
 
 local touch = hash("touch")
-local open_menu = hash("open_menu")
+local open_prompt = hash("open_prompt")
 
 function init(self)
 	-- Add initialization code here
@@ -30,9 +31,10 @@ function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
-	if message_id == open_menu then
-		msg.post("/upgrade_handler#upgrade_handler", "menu")
+	if message_id == open_prompt then
+		msg.post("/upgrade_handler#upgrade_handler", "prompt")
 		msg.post("/upgrade_handler#upgrade_handler", "enable")
+		print(msg.url())
 	end
 end
 
@@ -51,9 +53,11 @@ function on_input(self, action_id, action)
 			gui.set_scale(self.button, vmath.vector3(0.95, 0.95, 1))
 			-- msg.post(self.current_collection .."/loader#game_loader", "open")
 			if not self.menu_open then
-				msg.post("/upgrade_handler#upgrade_handler", "menu")
-				msg.post("/upgrade_handler#upgrade_handler", "enable")
-				self.menu_open = true
+				if upgrades.prompted[upgrades.n_upgrades + 1] then
+					msg.post("/upgrade_handler#upgrade_handler", "prompt")
+					msg.post("/upgrade_handler#upgrade_handler", "enable")
+					self.menu_open = true
+				end
 			else
 				msg.post("/upgrade_handler#upgrade_handler", "disable")
 				self.menu_open = false

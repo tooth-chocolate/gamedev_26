@@ -1,7 +1,6 @@
 local upgrades = require "modules.upgrade_state"
 local level_collection = require "modules.level_collection"
 
-local menu_spawn = hash("menu_spawn")
 local normal_spawn = hash("normal_spawn")
 local prompt_spawn = hash("prompt_spawn")
 
@@ -88,24 +87,26 @@ end
 end]]
 
 local function upgrade_ui_caller(self)
-	--print(self.prompted)
-	--print(self.rescues)
-	--print(self.current_rescue_threshold)
-	if self.rescues > self.current_rescue_threshold and not self.level_prompted and upgrades.n_upgrades <= self.current_level then
-		print("upgrade_ui_called")
-		--local path = self.current_collection .."/upgrade_prompt#upgrade_prompt"
-		local path = self.current_collection .."/upgrade_handler#upgrade_handler"
+	local path = self.current_collection .."/upgrade_handler#upgrade_handler"
+	local next_idx = math.min(upgrades.n_upgrades + 1, 5)
+	local threshold_reached = self.rescues > self.rescue_thresholds[next_idx]
+	local not_yet_prompted = not upgrades.prompted[next_idx]
+
+	if threshold_reached and not_yet_prompted and upgrades.n_upgrades < self.current_level then
+		upgrades.prompted[next_idx] = true
 		msg.post(path, "enable")
-		msg.post(path, "prompt")
+		msg.post(path, "prompt", {from_death = true})
 	else
 		msg.post(".", "normal_spawn")
 	end
 end
 
 local function respawn_handler(self, message)
-	self.rescues = self.rescues + 1
 	if next(message) ~= nil then
 		self.current_spawn_location = message.last_safe
+	end
+	if upgrades.n_upgrades < self.current_level then
+		self.rescues = self.rescues + 1
 	end
 	upgrade_ui_caller(self)
 	-- timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)
@@ -132,6 +133,10 @@ function on_message(self, message_id, message, sender)
 		]]
 	end
 
+	if message_id == hash("delete_player") then
+		go.delete(self.player)
+	end
+
 	--[[if message_id == hash("spawn") then
 		if message.n_upgrades > self.n_upgrades then
 			self.rescues = 0
@@ -151,7 +156,6 @@ function on_message(self, message_id, message, sender)
 	end
 
 	if message_id == prompt_spawn then
-		print("prompt spawn")
 		if message.upgraded then
 			self.rescues = 0
 			if upgrades.n_upgrades < self.current_level then
@@ -160,16 +164,6 @@ function on_message(self, message_id, message, sender)
 		end
 		-- msg.post(self.current_collection .."/upgrade_menu#upgrade_menu", "upgrade_menu", {part = self.part})
 		self.level_prompted = message.prompted
-		timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)
-	end
-
-	if message_id == menu_spawn then
-		if upgrades.n_upgrades < self.current_level then
-			self.level_prompted = false
-			self.rescues = 0
-		end
-		msg.post("test_camera#test_camera", "stop")
-		go.delete(self.player)
 		timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)
 	end
 
