@@ -3,46 +3,6 @@ layers {
   id: "layer1"
   z: 0.0
   cell {
-    x: 0
-    y: -1
-    tile: 1
-  }
-  cell {
-    x: 1
-    y: -1
-    tile: 1
-  }
-  cell {
-    x: 2
-    y: -1
-    tile: 1
-  }
-  cell {
-    x: -5
-    y: -1
-    tile: 1
-  }
-  cell {
-    x: -4
-    y: -1
-    tile: 1
-  }
-  cell {
-    x: -3
-    y: -1
-    tile: 1
-  }
-  cell {
-    x: -2
-    y: -1
-    tile: 1
-  }
-  cell {
-    x: -1
-    y: -1
-    tile: 1
-  }
-  cell {
     x: 38
     y: 0
     tile: 1

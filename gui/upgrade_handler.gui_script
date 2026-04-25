@@ -3,28 +3,14 @@ local level_collection = require "modules.level_collection"
 
 local current_level_configure = hash("current_level_configure")
 
--- colors for menu
-local green = vmath.vector3(0.027450980392156862, 0.611764705882353, 0.1843137254901961)
-local light_green = vmath.vector3(0.7294117647058823, 1, 0.7607843137254902)
-local white = vmath.vector3(1, 1, 1)
-local grey = vmath.vector3(0.30196078431372547, 0.30196078431372547, 0.30196078431372547)
-
 -- states
-local menu_state = "menu"
 local prompt_state = "prompt"
 local invisible = "invisible"
 
 -- actions
-local down = hash("down")
-local up = hash("up")
-local enter = hash("select")
-local esc = hash("close")
-local menu = hash("menu")
 local prompt = hash("prompt")
 local yes = hash("yes")
 local no = hash("no")
-
-
 
 function init(self)
 	-- Add initialization code here
@@ -33,14 +19,12 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.current_level = 1
 
-
-	-- first_prompted should only be for menu to know which upgrade to display
 	self.options = {
-		{node = gui.get_node("upgrade_menu/arms"), text = "?", key = "robot_arms", first_prompted = false},
-		{node = gui.get_node("upgrade_menu/legs"), text = "?", key = "robot_legs", first_prompted = false},
-		{node = gui.get_node("upgrade_menu/eyes"), text = "?", key = "robot_eyes", first_prompted = false},
-		{node = gui.get_node("upgrade_menu/torso"), text = "?", key = "robot_torso", first_prompted = false},
-		{node = gui.get_node("upgrade_menu/brain"), text = "?", key = "robot_brain", first_prompted = false},
+		{node = gui.get_node("upgrade_menu/arms"), key = "robot_arms", first_prompted = false},
+		{node = gui.get_node("upgrade_menu/legs"), key = "robot_legs", first_prompted = false},
+		{node = gui.get_node("upgrade_menu/eyes"), key = "robot_eyes", first_prompted = false},
+		{node = gui.get_node("upgrade_menu/torso"), key = "robot_torso", first_prompted = false},
+		{node = gui.get_node("upgrade_menu/brain"), key = "robot_brain", first_prompted = false},
 	}
 
 	-- useful lists for indexing
@@ -63,23 +47,14 @@ function init(self)
 	self.levels = level_collection.levels
 	self.current_collection = level_collection.collection
 
+	-- if the prompt was opened via button or upon death
+	self.from_death = false
+
 	-- gui nodes
-	self.menu_node = gui.get_node("upgrade_menu/menu_box")
-	self.n_visible_menu = 0
 	self.prompt_text = gui.get_node("upgrade_prompt/ask")
 
 	-- at start both nodes are disabled
-	gui.set_enabled(self.menu_node, false)
 	gui.set_enabled(self.prompt_text, false)
-
-	-- for menu selection and navigation
-	self.highlighted = 1
-	self.selected = 0
-	self.highlight_color = white
-	self.normal_color = vmath.vector3(0, 0, 0)
-	self.selected_color_highlighted = light_green
-	self.selected_color = green
-	
 end
 
 local function show_prompt(self)
@@ -103,50 +78,8 @@ local function show_prompt(self)
 	return true
 end
 
-
-local function show_menu(self)
-	
-	if self.state ~= menu_state then
-		return
-	end
-	-- iterate through options and display the ones that have been first prompted to white and the ones that have been upgraded to greeen
-	-- what has already been upgraded.
-	for i, option in ipairs(self.options) do
-		if option.first_prompted then
-			gui.set_text(option.node, self.parts[i])
-			if upgrade_state.parts[option.key] then
-				gui.set_color(option.node, green)
-			else
-				gui.set_color(option.node, white)
-			end
-		end
-	end
-end
-
-
--- for menu navigation colors
-local function selecting(self)
-	for i, option in ipairs(self.options) do
-		if not upgrade_state[option.key] then
-			local color = (i == self.highlighted) and self.highlight_color or self.normal_color
-			gui.set_color(option.node, color)
-		else
-			local color = (i == self.highlighted) and self.selected_color_highlighted or self.selected_color
-			gui.set_color(option.node, color)
-		end
-	end
-end
-
-
-
 local function display_state(self)
-	if self.state == "menu" then
-		gui.set_enabled(self.menu_node, true)
-		gui.set_enabled(self.prompt_text, false)
-		show_menu(self)
-		return
-	-- if prompted check if it is the first prompted of that part and if no set first_prompted of that upgrade part to true and increase the current_prompt_index
-	elseif self.state == "prompt" then
+	if self.state == "prompt" then
 		for i, option in ipairs(self.options) do
 			print(option.key ..": ", option.first_prompted)
 		end
@@ -155,7 +88,6 @@ local function display_state(self)
 			print("current_prompt index, prompt state init: ", self.current_prompt_index)
 		end
 		gui.set_enabled(self.prompt_text, true)
-		gui.set_enabled(self.menu_node, false)
 		show_prompt(self)
 		return
 	else
@@ -189,26 +121,11 @@ function on_message(self, message_id, message, sender)
 	if message_id == prompt then
 		self.active = true
 		self.state = prompt_state
+		self.from_death = message.from_death or false
 		--print("prompt")
 		display_state(self)
 		msg.post("/upgrade_menu_button#upgrade_menu_button", "enable")
 	end
-
-	
-	if message_id == menu then
-		self.active = true
-		self.state = menu_state
-		
-		-- maybe irrelevant
-		for i, option in ipairs(self.options) do
-			if option.first_prompted then
-				print(option.key)
-				self.n_visible_menu = self.n_visible_menu + 1
-			end
-		end
-		display_state(self)
-	end
-
 end
 
 function on_input(self, action_id, action)
@@ -249,7 +166,6 @@ function on_input(self, action_id, action)
 			
 			print("self.current_prompt_index:  said yes ", self.current_level, ": ", self.current_prompt_index)
 			
-
 			self.current_prompt_index = math.min(self.current_prompt_index + 1, 5)
 			if self.current_prompt_index == self.current_level then
 				last_prompted = true
@@ -257,55 +173,25 @@ function on_input(self, action_id, action)
 			gui.set_text(self.prompt_text, " ")
 
 			print("last_prompted:  said yes ", last_prompted)
-			msg.post(self.levels[self.current_level] .."/game_controller#controller", "prompt_spawn", {upgraded = true, prompted = last_prompted})
-			msg.post(".", "disable")
+			if self.from_death then
+				msg.post(self.levels[self.current_level] .."/game_controller#controller", "prompt_spawn", {upgraded = true, prompted = last_prompted})
+				msg.post(".", "disable")
+			else
+				msg.post(self.levels[self.current_level] .."/test_camera#test_camera", "stop")
+				msg.post(self.levels[self.current_level] .."/game_controller#controller", "delete_player")
+				msg.post(self.levels[self.current_level] .."/game_controller#controller", "prompt_spawn", {upgraded = true, prompted = last_prompted})
+				msg.post(".", "disable")
+			end
 		end
 
 		if action_id == no then
 			msg.post(".", "disable")
 			gui.set_text(self.prompt_text, " ")
-			msg.post(self.levels[self.current_level] .."/game_controller#controller", "prompt_spawn", {upgraded = false, prompted = true})
-		end
-	end
-
-	if self.state == menu_state then
-		
-		if action_id == down then
-			local highlighted = (self.highlighted < self.current_level and self.options[self.highlighted + 1].first_prompted) and self.highlighted + 1 or 1
-			self.highlighted = highlighted
-			selecting(self)
-		end
-
-		if action_id == up then
-			local highlighted = (self.highlighted > 1 and self.options[self.highlighted - 1].first_prompted) and self.highlighted - 1 or self.current_level
-			self.highlighted = highlighted
-			selecting(self)
-		end
-
-		if action_id == enter then
-			self.selected = self.highlighted
-			
-			local key = self.options[self.selected].key
-			
-			if not upgrade_state.parts[key] then
-				upgrade_state.parts[key] = true
-				upgrade_state.n_upgrades = upgrade_state.n_upgrades + 1
-			end
-
-			show_menu(self)
-			print(self.n_visible_menu)
-			if upgrade_state.n_upgrades == self.current_level or upgrade_state.n_upgrades == self.n_visible_menu then
-				msg.post(self.levels[self.current_level] .."/game_controller#controller", "menu_spawn")
-				msg.post(".", "disable")
+			if self.from_death then
+				msg.post(self.levels[self.current_level] .."/game_controller#controller", "prompt_spawn", {upgraded = false, prompted = true})
 			end
 		end
-
-		if action_id == esc then
-			msg.post(self.levels[self.current_level] .."/game_controller#controller", "menu_spawn")
-			msg.post(".", "disable")
-		end
 	end
-
 	return true
 end
 

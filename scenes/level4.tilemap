@@ -408,16 +408,6 @@ layers {
     tile: 1
   }
   cell {
-    x: 0
-    y: -2
-    tile: 1
-  }
-  cell {
-    x: 1
-    y: -2
-    tile: 1
-  }
-  cell {
     x: 20
     y: -2
     tile: 0
@@ -714,36 +704,6 @@ layers {
   }
   cell {
     x: 172
-    y: -2
-    tile: 1
-  }
-  cell {
-    x: -6
-    y: -2
-    tile: 1
-  }
-  cell {
-    x: -5
-    y: -2
-    tile: 1
-  }
-  cell {
-    x: -4
-    y: -2
-    tile: 1
-  }
-  cell {
-    x: -3
-    y: -2
-    tile: 1
-  }
-  cell {
-    x: -2
-    y: -2
-    tile: 1
-  }
-  cell {
-    x: -1
     y: -2
     tile: 1
   }
