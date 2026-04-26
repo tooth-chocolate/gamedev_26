@@ -1,15 +1,4 @@
 embedded_components {
-  id: "sprite"
-  type: "sprite"
-  data: "default_animation: \"completion_flag\"\n"
-  "material: \"/builtins/materials/sprite.material\"\n"
-  "textures {\n"
-  "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/sprites/sprites.atlas\"\n"
-  "}\n"
-  ""
-}
-embedded_components {
   id: "completion_object"
   type: "collisionobject"
   data: "type: COLLISION_OBJECT_TYPE_TRIGGER\n"
@@ -22,7 +11,8 @@ embedded_components {
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
   "    position {\n"
-  "      x: 3.0\n"
+  "      x: -2.0\n"
+  "      y: 11.0\n"
   "    }\n"
   "    rotation {\n"
   "    }\n"
@@ -30,9 +20,9 @@ embedded_components {
   "    count: 3\n"
   "    id: \"c_flag_box\"\n"
   "  }\n"
-  "  data: 11.911659\n"
-  "  data: 29.711046\n"
-  "  data: 7.2192\n"
+  "  data: 31.420898\n"
+  "  data: 25.923597\n"
+  "  data: 7.239414\n"
   "}\n"
   ""
 }

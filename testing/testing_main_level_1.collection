@@ -5,10 +5,10 @@ instances {
 }
 instances {
   id: "completion"
-  prototype: "/game_objects/completion.go"
+  prototype: "/game_objects/completion_objects/completion_lv2.go"
   position {
-    x: 6118.0
-    y: 1214.0
+    x: 6127.0
+    y: 1213.0
   }
 }
 scale_along_z: 0
@@ -41,6 +41,21 @@ embedded_instances {
   "group: \\\"obstacle\\\"\\n"
   "mask: \\\"player\\\"\\n"
   "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"house_level_2\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/sprites/sprites.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 98.0\n"
+  "    y: 96.0\n"
+  "  }\n"
   "}\n"
   ""
 }

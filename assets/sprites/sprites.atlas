@@ -1,3 +1,18 @@
+images {
+  image: "/assets/sprites/cave_entrance_level_5.png"
+}
+images {
+  image: "/assets/sprites/cave_exit_level_4.png"
+}
+images {
+  image: "/assets/sprites/house_level_2.png"
+}
+images {
+  image: "/assets/sprites/tent_level_5.png"
+}
+images {
+  image: "/assets/sprites/trail_start.png"
+}
 animations {
   id: "player_idle"
   images {

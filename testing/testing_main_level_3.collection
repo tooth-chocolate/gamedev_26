@@ -1,10 +1,11 @@
 name: "testing_level_3"
 instances {
   id: "completion"
-  prototype: "/game_objects/completion.go"
+  prototype: "/game_objects/completion_objects/completion_lv4.go"
   position {
-    x: 6228.0
-    y: 3630.0
+    x: 6338.0
+    y: 3602.0
+    z: 1.0
   }
 }
 instances {
@@ -41,6 +42,25 @@ embedded_instances {
   "group: \\\"death\\\"\\n"
   "mask: \\\"player\\\"\\n"
   "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"cave_exit_level_4\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/sprites/sprites.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: -205.0\n"
+  "    y: 89.0\n"
+  "  }\n"
+  "  scale {\n"
+  "    x: 0.9\n"
+  "    y: 0.9\n"
+  "  }\n"
   "}\n"
   ""
 }
