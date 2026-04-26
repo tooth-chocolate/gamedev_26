@@ -12,7 +12,6 @@ end
 
 function next_frame(self)
 	local current_node = gui.get_node(frames[self.current_frame])
-
 	-- fade out current frame
 	gui.animate(current_node, "color.w", 0, gui.EASING_LINEAR, 0.5, 0, function()
 		gui.set_enabled(current_node, false)
