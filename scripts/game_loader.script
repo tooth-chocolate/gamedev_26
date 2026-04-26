@@ -56,6 +56,7 @@ end
 -- handles what happens if you complete a level. current level gets disabled and next level get loaded.
 local function level_completion_handler(self, message_id)
 	if self.cur_index == self.n_levels then
+		print("game complete, n_upgrades:", upgrades.n_upgrades)
 		-- disable level
 		msg.post(self.current_level, "disable")
 		msg.post(self.current_level, "unload")
@@ -63,17 +64,23 @@ local function level_completion_handler(self, message_id)
 		msg.post("/rescue_board#rescue", "disable")
 		msg.post("/upgrade_menu_button#upgrade_menu_button", "disable")
 		if upgrades.n_upgrades >= 4 then
-			msg.post("/sound_manager#sound_manager", "play_music", {track = "ending_robot"})
 			msg.post("/endings#ending_robot", "enable")
 			msg.post("/endings#ending_robot", "start")
+			timer.delay(2.0, false, function()
+				msg.post("/sound_manager#sound_manager", "play_music", {track = "ending_robot"})
+			end)
 		elseif upgrades.n_upgrades >= 1 then
-			msg.post("/sound_manager#sound_manager", "play_music", {track = "ending_halfrobot"})
 			msg.post("/endings#ending_halfrobot", "enable")
 			msg.post("/endings#ending_halfrobot", "start")
+			timer.delay(2.0, false, function()
+				msg.post("/sound_manager#sound_manager", "play_music", {track = "ending_halfrobot"})
+			end)
 		else
-			msg.post("/sound_manager#sound_manager", "play_music", {track = "ending"})
 			msg.post("/endings#ending_true", "enable")
 			msg.post("/endings#ending_true", "start")
+			timer.delay(2.0, false, function()
+				msg.post("/sound_manager#sound_manager", "play_music", {track = "ending"})
+			end)
 			-- print("game complete")
 		end
 	else
