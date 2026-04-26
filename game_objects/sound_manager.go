@@ -47,7 +47,7 @@ embedded_components {
 embedded_components {
   id: "ending_halfrobot"
   type: "sound"
-  data: "sound: \"/assets/music/level_halfrobot.ogg\"\n"
+  data: "sound: \"/assets/music/ending_halfrobot.ogg\"\n"
   ""
 }
 embedded_components {

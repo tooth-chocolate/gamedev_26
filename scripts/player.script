@@ -329,6 +329,7 @@ local function handle_obstacle_contact(self, normal, distance)
 			self.wall_direction = normal.x > 0 and 1 or -1
 			self.wall_jumped = false
 			self.double_jumped = false
+			self.jump_count = 0
 			self.velocity.x = 0
 			if upgrades.parts.robot_arms then
 				self.velocity.y = 0  -- stop sliding down

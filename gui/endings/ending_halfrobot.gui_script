@@ -49,6 +49,7 @@ function on_message(self, message_id, message, sender)
 		gui.set_enabled(blackout, true)
 		-- wait 2 seconds on black
 		timer.delay(2.0, false, function()
+			msg.post("/sound_manager#sound_manager", "play_music", {track = "ending_halfrobot"})
 			-- fade in first frame behind blackout
 			local first = gui.get_node(frames[1])
 			gui.set_enabled(first, true)

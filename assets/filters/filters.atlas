@@ -4,4 +4,18 @@ images {
 images {
   image: "/assets/filters/no_filter.png"
 }
+animations {
+  id: "filter_snow"
+  images {
+    image: "/assets/filters/filter_second_draft1.png"
+  }
+  images {
+    image: "/assets/filters/filter_second_draft2.png"
+  }
+  images {
+    image: "/assets/filters/filter_second_draft3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 3
+}
 extrude_borders: 2
