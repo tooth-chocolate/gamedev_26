@@ -1,7 +1,7 @@
 name: "testing_level_2"
 instances {
   id: "completion"
-  prototype: "/game_objects/completion.go"
+  prototype: "/game_objects/completion_objects/completion_lv1.go"
   position {
     x: 240.0
     y: 78.0
