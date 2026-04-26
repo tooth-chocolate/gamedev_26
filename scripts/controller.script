@@ -5,7 +5,9 @@ local normal_spawn = hash("normal_spawn")
 local prompt_spawn = hash("prompt_spawn")
 
 local function get_track_name(self)
-	if self.current_level == 3 then
+	if self.current_level == 6 then
+		return nil
+	elseif self.current_level == 3 then
 		return "cave"
 	elseif upgrades.parts.robot_torso then
 		return "level_robot"

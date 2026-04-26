@@ -146,18 +146,13 @@ function on_input(self, action_id, action)
 			-- update upgrades modul
 			upgrade_state.n_upgrades = upgrade_state.n_upgrades + 1
 			local key = self.keys[upgrade_state.n_upgrades]
-			print("n_upgrades, said yes", upgrade_state.n_upgrades)
-			upgrade_state.parts[key] = true
-			
-			print("self.current_prompt_index:  said yes ", self.current_level, ": ", self.current_prompt_index)
-			
+			upgrade_state.parts[key] = true			
 			self.current_prompt_index = math.min(self.current_prompt_index + 1, 5)
 			if self.current_prompt_index == self.current_level then
 				last_prompted = true
 			end
 			gui.set_text(self.prompt_text, " ")
 
-			print("last_prompted:  said yes ", last_prompted)
 			if self.from_death then
 				msg.post(self.levels[self.current_level] .."/game_controller#controller", "prompt_spawn", {upgraded = true, prompted = last_prompted})
 				msg.post(".", "disable")

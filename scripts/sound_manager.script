@@ -54,6 +54,14 @@ function on_message(self, message_id, message, sender)
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
 	if message_id == hash("play_music") then
+		if not message.track then
+			-- stop current music
+			if current_track then
+				sound.stop(current_track)
+				current_track = nil
+			end
+			return
+		end
 		local track = "#" .. message.track
 		-- already playing the right track, do nothing
 		if current_track == track then return end

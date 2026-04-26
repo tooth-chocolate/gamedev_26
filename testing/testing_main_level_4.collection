@@ -3,8 +3,8 @@ instances {
   id: "completion"
   prototype: "/game_objects/completion.go"
   position {
-    x: 1567.0
-    y: 5025.0
+    x: 1569.0
+    y: 5007.0
   }
 }
 instances {

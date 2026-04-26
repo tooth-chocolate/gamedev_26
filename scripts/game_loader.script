@@ -63,12 +63,15 @@ local function level_completion_handler(self, message_id)
 		msg.post("/rescue_board#rescue", "disable")
 		msg.post("/upgrade_menu_button#upgrade_menu_button", "disable")
 		if upgrades.n_upgrades >= 4 then
+			msg.post("/sound_manager#sound_manager", "play_music", {track = "ending_robot"})
 			msg.post("/endings#ending_robot", "enable")
 			msg.post("/endings#ending_robot", "start")
 		elseif upgrades.n_upgrades >= 1 then
+			msg.post("/sound_manager#sound_manager", "play_music", {track = "ending_halfrobot"})
 			msg.post("/endings#ending_halfrobot", "enable")
 			msg.post("/endings#ending_halfrobot", "start")
 		else
+			msg.post("/sound_manager#sound_manager", "play_music", {track = "ending"})
 			msg.post("/endings#ending_true", "enable")
 			msg.post("/endings#ending_true", "start")
 			-- print("game complete")
