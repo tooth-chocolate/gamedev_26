@@ -64,7 +64,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"background\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"level_6\\\"\\n"
+  "  data: \"default_animation: \\\"level_5\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "textures {\\n"
   "  sampler: \\\"texture_sampler\\\"\\n"

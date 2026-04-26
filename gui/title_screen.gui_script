@@ -1,0 +1,22 @@
+local touch = hash("touch")
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.start_button = gui.get_node("start_box")
+end
+
+function on_input(self, action_id, action)
+	if action_id == touch and action.pressed then
+		if gui.pick_node(self.start_button, action.x, action.y) then
+			msg.post("/loader#game_loader", "start_game")
+			msg.post(".", "disable")
+			msg.post(".", "release_input_focus")
+		end
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("enable") then
+		msg.post(".", "acquire_input_focus")
+	end
+end

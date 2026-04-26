@@ -4,16 +4,8 @@ instances {
   prototype: "/game_objects/rescue_board.go"
 }
 instances {
-  id: "upgrade_menu"
-  prototype: "/game_objects/upgrade_menu.go"
-}
-instances {
   id: "loader"
   prototype: "/game_objects/loader.go"
-}
-instances {
-  id: "upgrade_prompt"
-  prototype: "/game_objects/upgrade_prompt.go"
 }
 instances {
   id: "sound_manager"
@@ -23,12 +15,32 @@ instances {
   id: "upgrade_handler"
   prototype: "/game_objects/upgrade_handler.go"
 }
+instances {
+  id: "title_screen"
+  prototype: "/game_objects/title_screen.go"
+}
 scale_along_z: 0
 embedded_instances {
   id: "upgrade_menu_button"
   data: "components {\n"
   "  id: \"upgrade_menu_button\"\n"
   "  component: \"/gui/upgrade_menu_button.gui\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "endings"
+  data: "components {\n"
+  "  id: \"ending_halfrobot\"\n"
+  "  component: \"/gui/endings/ending_halfrobot.gui\"\n"
+  "}\n"
+  "components {\n"
+  "  id: \"ending_robot\"\n"
+  "  component: \"/gui/endings/ending_robot.gui\"\n"
+  "}\n"
+  "components {\n"
+  "  id: \"ending_true\"\n"
+  "  component: \"/gui/endings/ending_true.gui\"\n"
   "}\n"
   ""
 }
