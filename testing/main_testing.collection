@@ -19,6 +19,10 @@ instances {
   id: "title_screen"
   prototype: "/game_objects/title_screen.go"
 }
+instances {
+  id: "tutorial_wheel"
+  prototype: "/game_objects/tutorial_wheel.go"
+}
 scale_along_z: 0
 embedded_instances {
   id: "upgrade_menu_button"

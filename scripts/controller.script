@@ -166,7 +166,10 @@ function on_message(self, message_id, message, sender)
 		end
 		-- msg.post(self.current_collection .."/upgrade_menu#upgrade_menu", "upgrade_menu", {part = self.part})
 		self.level_prompted = message.prompted
-		timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)
+		timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)	
+		if upgrades.parts.robot_brain == true and self.current_level == 5 then
+			msg.post(self.current_collection .."/loader#game_loader", "level_complete")
+		end		
 	end
 
 	--[[_if message_id == hash("spawn") then

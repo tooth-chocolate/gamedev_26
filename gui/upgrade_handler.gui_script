@@ -24,8 +24,8 @@ function init(self)
 	self.keys = {"robot_arms", "robot_legs", "robot_eyes", "robot_torso", "robot_brain"}
 
 	-- list for prompts
-	self.parts_functions = {"to make you hold on tighter", "to make you jump higher", "to make you see further", "to make your body sturdier", "to make you more precise"}
-	self.current_phrase = "Do you want to replace your " ..self.parts[self.current_level] ..self.parts_functions[self.current_level] .."\n yes (y), no (n)"
+	self.parts_functions = {"to make me hold on tighter?", "to make me jump higher?", "to make me see further?", "to make my body sturdier?", "to make me overcome any obstacle?"}
+	self.current_phrase = "Do I want to replace my " ..self.parts[self.current_level] ..self.parts_functions[self.current_level] .."\n yes (y), no (n)"
 
 	-- maybe not relevant
 	self.state = invisible
@@ -64,7 +64,7 @@ local function show_prompt(self)
 	-- print("display prompt")
 
 	-- display prompt phrase
-	self.current_phrase = "Do you want to replace your " ..self.parts[upgrade_state.n_upgrades + 1] ..self.parts_functions[upgrade_state.n_upgrades + 1] .."\n yes (y), no (n)"
+	self.current_phrase = "Do I want to replace my " ..self.parts[upgrade_state.n_upgrades + 1] ..self.parts_functions[upgrade_state.n_upgrades + 1] .."\n yes (y), no (n)"
 	-- print(self.current_phrase)
 	gui.set_text(self.prompt_text, self.current_phrase)
 	return true
@@ -73,6 +73,7 @@ end
 local function display_state(self)
 	if self.state == "prompt" then
 		gui.set_enabled(self.prompt_text, true)
+		gui.set_enabled(gui.get_node("upgrade_prompt/prompt_box"), true)
 		show_prompt(self)
 		return
 	else
@@ -142,6 +143,7 @@ function on_input(self, action_id, action)
 		if action_id == yes then
 			-- has the controller prompted the last time for this level? 
 			-- is true if answer no at prompt or the last available upgrade prompt has been answered yes
+			msg.post("main_testing:/sound_manager#sound_manager", "play_sfx", {sfx = "select"})
 			local last_prompted = false
 			-- update upgrades modul
 			upgrade_state.n_upgrades = upgrade_state.n_upgrades + 1
@@ -152,6 +154,8 @@ function on_input(self, action_id, action)
 				last_prompted = true
 			end
 			gui.set_text(self.prompt_text, " ")
+			gui.set_enabled(gui.get_node("upgrade_prompt/prompt_box"), false)
+			
 
 			if self.from_death then
 				msg.post(self.levels[self.current_level] .."/game_controller#controller", "prompt_spawn", {upgraded = true, prompted = last_prompted})
@@ -165,8 +169,15 @@ function on_input(self, action_id, action)
 		end
 
 		if action_id == no then
+			msg.post("main_testing:/sound_manager#sound_manager", "play_sfx", {sfx = "cursor"})
 			msg.post(".", "disable")
 			gui.set_text(self.prompt_text, " ")
+			gui.set_enabled(gui.get_node("upgrade_prompt/prompt_box"), false)
+			if not upgrade_state.tutorial_shown then
+				upgrade_state.tutorial_shown = true
+				msg.post("/tutorial_wheel#tutorial_wheel", "enable")
+			end
+			
 			if self.from_death then
 				msg.post(self.levels[self.current_level] .."/game_controller#controller", "prompt_spawn", {upgraded = false, prompted = true})
 			end

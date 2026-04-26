@@ -24,7 +24,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("add_rescues") then
 		self.rescue = self.rescue + message.rescue
 		local rescue_node = gui.get_node("rescue")
-		gui.set_text(rescue_node, "RESCUES: " ..self.rescue)
+		gui.set_text(rescue_node, "Rescues: " ..self.rescue)
 	end
 end
 

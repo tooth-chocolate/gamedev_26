@@ -56,7 +56,6 @@ end
 -- handles what happens if you complete a level. current level gets disabled and next level get loaded.
 local function level_completion_handler(self, message_id)
 	if self.cur_index == self.n_levels then
-		print("game complete, n_upgrades:", upgrades.n_upgrades)
 		-- disable level
 		msg.post(self.current_level, "disable")
 		msg.post(self.current_level, "unload")

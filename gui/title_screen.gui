@@ -3,21 +3,17 @@ fonts {
   name: "rescue_font"
   font: "/gui/rescue_font.font"
 }
+textures {
+  name: "backgrounds"
+  texture: "/assets/backgrounds/backgrounds.atlas"
+}
 nodes {
   position {
     x: 240.0
     y: 135.0
   }
-  size {
-    x: 480.0
-    y: 270.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
   type: TYPE_BOX
+  texture: "backgrounds/level_1"
   id: "box"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
@@ -25,7 +21,7 @@ nodes {
 nodes {
   position {
     x: 240.0
-    y: 180.0
+    y: 158.0
   }
   scale {
     x: 0.5
@@ -48,6 +44,31 @@ nodes {
     y: 80.0
   }
   scale {
+    x: 0.55
+    y: 0.35
+    z: 1.0E-6
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.5019608
+    y: 0.5019608
+    z: 0.5019608
+  }
+  type: TYPE_BOX
+  id: "start_box"
+  alpha: 0.7
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 240.0
+    y: 80.0
+    z: 1.0
+  }
+  scale {
     x: 0.25
     y: 0.25
     z: 0.25
@@ -60,28 +81,6 @@ nodes {
   text: "start game"
   font: "rescue_font"
   id: "start"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 240.0
-    y: 80.0
-    z: 1.0
-  }
-  scale {
-    x: 0.55
-    y: 0.35
-    z: 1.0E-6
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_BOX
-  id: "start_box"
-  inherit_alpha: true
-  alpha: 0.45
-  size_mode: SIZE_MODE_AUTO
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

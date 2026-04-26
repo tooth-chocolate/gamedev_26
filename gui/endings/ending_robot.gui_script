@@ -24,6 +24,7 @@ function next_frame(self)
 				upgrades.parts = {robot_arms = false, robot_legs = false, robot_eyes = false, robot_torso = false, robot_brain = false}
 				upgrades.n_upgrades = 0
 				upgrades.prompted = {false, false, false, false, false}
+				upgrades.tutorial_shown = false
 				-- show title screen
 				msg.post("/title_screen#title_screen", "enable")
 				msg.post(".", "disable")

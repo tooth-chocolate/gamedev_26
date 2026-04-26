@@ -1,0 +1,19 @@
+local close_actions = {
+	[hash("jump")] = true,
+	[hash("select")] = true,
+	[hash("close")] = true,
+}
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	msg.post(".", "disable")  -- hidden by default
+end
+
+function on_input(self, action_id, action)
+	if action.pressed and close_actions[action_id] then
+		msg.post("main_testing:/sound_manager#sound_manager", "play_sfx", {sfx = "cursor"})
+		msg.post(".", "disable")
+		msg.post(".", "release_input_focus")
+	end
+	return true  -- consume input so nothing else fires while open
+end

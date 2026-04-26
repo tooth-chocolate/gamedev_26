@@ -25,6 +25,8 @@ M.anims = {
 
 M.n_upgrades = 0
 
+M.tutorial_shown = false
+
 M.prompted = {
 	robot_arms = false, 
 	robot_legs = false, 
