@@ -2,6 +2,7 @@
 local level_complete = hash("level_complete")
 local proxy_loaded = hash("proxy_loaded")
 local open = hash("open")
+local upgrades = require "modules.upgrade_state"
 
 -- arms: 5 rescues
 -- legs: 4 rescues
@@ -23,7 +24,6 @@ function init(self)
 	-- self.rescue_thresholds = {5, 4, 3, 7, 2}
 	msg.post("/upgrade_menu_button#upgrade_menu_button", "disable")
 	msg.post(".", "acquire_input_focus")
-	msg.post(self.current_level, "load")
 end
 
 function final(self)
@@ -56,7 +56,23 @@ end
 -- handles what happens if you complete a level. current level gets disabled and next level get loaded.
 local function level_completion_handler(self, message_id)
 	if self.cur_index == self.n_levels then
-		-- print("game complete")
+		-- disable level
+		msg.post(self.current_level, "disable")
+		msg.post(self.current_level, "unload")
+		-- disable other UI elements
+		msg.post("/rescue_board#rescue", "disable")
+		msg.post("/upgrade_menu_button#upgrade_menu_button", "disable")
+		if upgrades.n_upgrades >= 4 then
+			msg.post("/endings#ending_robot", "enable")
+			msg.post("/endings#ending_robot", "start")
+		elseif upgrades.n_upgrades >= 1 then
+			msg.post("/endings#ending_halfrobot", "enable")
+			msg.post("/endings#ending_halfrobot", "start")
+		else
+			msg.post("/endings#ending_true", "enable")
+			msg.post("/endings#ending_true", "start")
+			-- print("game complete")
+		end
 	else
 		local next_level = self.levels[self.cur_index + 1]
 		msg.post(self.current_level, "disable")
@@ -81,16 +97,19 @@ function on_message(self, message_id, message, sender)
 		msg.post(sender, "enable")
 		-- msg.post(controller, "current_level_configure", {current_level = self.cur_index, rescue_threshold = self.rescue_thresholds[self.cur_index]})
 		msg.post(controller, "current_level_configure", {current_level = self.cur_index})
-		msg.post("/upgrade_menu#upgrade_menu", "current_level_configure", {current_level = self.cur_index})
-		msg.post("/upgrade_prompt#upgrade_prompt", "current_level_configure", {current_level = self.cur_index})
 		msg.post("/upgrade_handler#upgrade_handler", "current_level_configure", {current_level = self.cur_index})
-		msg.post("/upgrade_menu#upgrade_menu", "disable")
 	end
 
 	if message_id == open then
 		local path = "/upgrade_menu_button#upgrade_menu_button"
 		msg.post(path, "open_menu")
 		msg.post(path, "enable")
+	end
+
+	if message_id == hash("start_game") then
+		self.cur_index = 1
+		self.current_level = self.levels[1]
+		msg.post(self.current_level, "load")
 	end
 end
 
