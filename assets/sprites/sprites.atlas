@@ -13,6 +13,9 @@ images {
 images {
   image: "/assets/sprites/trail_start.png"
 }
+images {
+  image: "/assets/sprites/flower.png"
+}
 animations {
   id: "player_idle"
   images {
