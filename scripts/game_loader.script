@@ -62,9 +62,15 @@ local function level_completion_handler(self, message_id)
 		-- disable other UI elements
 		msg.post("/rescue_board#rescue", "disable")
 		msg.post("/upgrade_menu_button#upgrade_menu_button", "disable")
-		if upgrades.n_upgrades >= 4 then
+		if upgrades.n_upgrades >= 5 then
 			msg.post("/endings#ending_robot", "enable")
 			msg.post("/endings#ending_robot", "start")
+			timer.delay(2.0, false, function()
+				msg.post("/sound_manager#sound_manager", "play_music", {track = "ending_robot"})
+			end)
+		elseif upgrades.n_upgrades >= 4 then
+			msg.post("/endings#ending_robot_torso", "enable")
+			msg.post("/endings#ending_robot_torso", "start")
 			timer.delay(2.0, false, function()
 				msg.post("/sound_manager#sound_manager", "play_music", {track = "ending_robot"})
 			end)

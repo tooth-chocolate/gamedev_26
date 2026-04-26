@@ -46,5 +46,9 @@ embedded_instances {
   "  id: \"ending_true\"\n"
   "  component: \"/gui/endings/ending_true.gui\"\n"
   "}\n"
+  "components {\n"
+  "  id: \"ending_robot_torso\"\n"
+  "  component: \"/gui/endings/ending_robot_torso.gui\"\n"
+  "}\n"
   ""
 }

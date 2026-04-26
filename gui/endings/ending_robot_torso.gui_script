@@ -46,6 +46,9 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("start") then
+		if upgrades.n_upgrades == 4 then
+			frames[3] = "frame3_torso"
+		end
 		local blackout = gui.get_node("blackout")
 		gui.set_enabled(blackout, true)
 		-- wait 2 seconds on black
