@@ -1,7 +1,7 @@
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "default_animation: \"tent_level_5\"\n"
+  data: "default_animation: \"flower\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
@@ -9,8 +9,8 @@ embedded_components {
   "}\n"
   ""
   position {
-    x: -28.0
-    y: 32.0
+    x: -17.0
+    y: -14.0
   }
 }
 embedded_components {
@@ -26,8 +26,8 @@ embedded_components {
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
   "    position {\n"
-  "      x: -19.0\n"
-  "      y: 25.0\n"
+  "      x: -17.0\n"
+  "      y: -4.0\n"
   "    }\n"
   "    rotation {\n"
   "    }\n"
