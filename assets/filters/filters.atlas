@@ -7,15 +7,30 @@ images {
 animations {
   id: "filter_snow"
   images {
-    image: "/assets/filters/filter_second_draft1.png"
+    image: "/assets/filters/snow_filter_v1.png"
   }
   images {
-    image: "/assets/filters/filter_second_draft2.png"
+    image: "/assets/filters/snow_filter_v2.png"
   }
   images {
-    image: "/assets/filters/filter_second_draft3.png"
+    image: "/assets/filters/snow_filter_v3.png"
+  }
+  images {
+    image: "/assets/filters/snow_filter_v4.png"
+  }
+  images {
+    image: "/assets/filters/snow_filter_v5.png"
+  }
+  images {
+    image: "/assets/filters/snow_filter_v6.png"
+  }
+  images {
+    image: "/assets/filters/snow_filter_v7.png"
+  }
+  images {
+    image: "/assets/filters/snow_filter_v8.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 3
+  fps: 8
 }
 extrude_borders: 2
