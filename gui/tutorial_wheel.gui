@@ -1,12 +1,16 @@
-script: "/gui/upgrade_prompt.gui_script"
+script: "/gui/tutorial_wheel.gui_script"
 fonts {
   name: "rescue_font"
   font: "/gui/rescue_font.font"
 }
 nodes {
   position {
-    x: 240.0
-    y: 170.0
+    x: 158.0
+    y: 213.0
+  }
+  scale {
+    x: 1.1
+    y: 0.4
   }
   size {
     x: 200.0
@@ -22,12 +26,11 @@ nodes {
   inherit_alpha: true
   alpha: 0.7
   size_mode: SIZE_MODE_AUTO
-  visible: false
 }
 nodes {
   position {
-    x: 240.0
-    y: 170.0
+    x: 158.0
+    y: 213.0
   }
   scale {
     x: 0.15
@@ -38,8 +41,9 @@ nodes {
     y: 100.0
   }
   type: TYPE_TEXT
+  text: "<- If I change my mind I can do it here."
   font: "rescue_font"
-  id: "ask"
+  id: "tutorial_text"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
