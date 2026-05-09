@@ -1,8 +1,7 @@
--- prehashing
+local level_collection = require "modules.level_collection"
 local level_complete = hash("level_complete")
 local proxy_loaded = hash("proxy_loaded")
-local open = hash("open")
-local upgrades = require "modules.upgrade_state"
+local start_game = hash("start_game")
 
 -- arms: 5 rescues
 -- legs: 4 rescues
@@ -16,8 +15,9 @@ function init(self)
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
 	--self.levels = {"#testing_level_3"}
-	self.levels = {"#testing_level_0", "#testing_level_1", "#testing_level_2", "#testing_level_3", "#testing_level_4", "#testing_level_5"}
-
+	self.cur_collection = level_collection.collection
+	-- self.levels = {"#testing_level_0", "#testing_level_1", "#testing_level_2", "#testing_level_3", "#testing_level_4", "#testing_level_5"}
+	self.levels = level_collection.levels[self.cur_collection]
 	self.current_level = self.levels[1]
 	self.cur_index = 1
 	self.n_levels = #self.levels
@@ -57,36 +57,21 @@ end
 local function level_completion_handler(self, message_id)
 	if self.cur_index == self.n_levels then
 		-- disable level
-		msg.post(self.current_level, "disable")
-		msg.post(self.current_level, "unload")
+		msg.post("#" ..self.current_level, "disable")
+		msg.post("#" ..self.current_level, "unload")
 		-- disable other UI elements
 		msg.post("/rescue_board#rescue", "disable")
 		msg.post("/upgrade_menu_button#upgrade_menu_button", "disable")
-		if upgrades.n_upgrades >= 4 then
-			msg.post("/endings#ending_robot", "enable")
-			msg.post("/endings#ending_robot", "start")
-			timer.delay(2.0, false, function()
-				msg.post("/sound_manager#sound_manager", "play_music", {track = "ending_robot"})
-			end)
-		elseif upgrades.n_upgrades >= 1 then
-			msg.post("/endings#ending_halfrobot", "enable")
-			msg.post("/endings#ending_halfrobot", "start")
-			timer.delay(2.0, false, function()
-				msg.post("/sound_manager#sound_manager", "play_music", {track = "ending_halfrobot"})
-			end)
-		else
-			msg.post("/endings#ending_true", "enable")
-			msg.post("/endings#ending_true", "start")
-			timer.delay(2.0, false, function()
-				msg.post("/sound_manager#sound_manager", "play_music", {track = "ending"})
-			end)
-			-- print("game complete")
-		end
+		msg.post("/endings#ending_gui", "enable")
+		msg.post("/endings#ending_gui", "start")
+		timer.delay(2.0, false, function()
+			msg.post("/sound_manager#sound_manager", "play_music", {track = "ending"})
+		end)
 	else
 		local next_level = self.levels[self.cur_index + 1]
-		msg.post(self.current_level, "disable")
-		msg.post(self.current_level, "unload")
-		msg.post(next_level, "load")
+		msg.post("#" ..self.current_level, "disable")
+		msg.post("#" ..self.current_level, "unload")
+		msg.post("#" ..next_level, "load")
 		self.cur_index = self.cur_index + 1
 		self.current_level = next_level
 	end
@@ -102,6 +87,7 @@ function on_message(self, message_id, message, sender)
 
 	if message_id == proxy_loaded then
 		local controller = msg.url(sender.fragment, "/game_controller", "controller")
+		-- print(controller)
 		-- print("controller url: ", controller)
 		msg.post(sender, "enable")
 		-- msg.post(controller, "current_level_configure", {current_level = self.cur_index, rescue_threshold = self.rescue_thresholds[self.cur_index]})
@@ -109,16 +95,10 @@ function on_message(self, message_id, message, sender)
 		msg.post("/upgrade_handler#upgrade_handler", "current_level_configure", {current_level = self.cur_index})
 	end
 
-	if message_id == open then
-		local path = "/upgrade_menu_button#upgrade_menu_button"
-		msg.post(path, "open_menu")
-		msg.post(path, "enable")
-	end
-
-	if message_id == hash("start_game") then
+	if message_id == start_game then
 		self.cur_index = 1
 		self.current_level = self.levels[1]
-		msg.post(self.current_level, "load")
+		msg.post("#" ..self.current_level, "load")
 	end
 end
 

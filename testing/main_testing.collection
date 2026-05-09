@@ -35,16 +35,8 @@ embedded_instances {
 embedded_instances {
   id: "endings"
   data: "components {\n"
-  "  id: \"ending_halfrobot\"\n"
-  "  component: \"/gui/endings/ending_halfrobot.gui\"\n"
-  "}\n"
-  "components {\n"
-  "  id: \"ending_robot\"\n"
-  "  component: \"/gui/endings/ending_robot.gui\"\n"
-  "}\n"
-  "components {\n"
-  "  id: \"ending_true\"\n"
-  "  component: \"/gui/endings/ending_true.gui\"\n"
+  "  id: \"ending_gui\"\n"
+  "  component: \"/gui/endings/ending_gui.gui\"\n"
   "}\n"
   ""
 }

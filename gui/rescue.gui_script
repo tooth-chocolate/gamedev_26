@@ -1,3 +1,5 @@
+local add_rescues = hash("add_rescues")
+
 function init(self)
 	-- Add initialization code here
 	-- Learn more: https://defold.com/manuals/script/
@@ -21,7 +23,7 @@ function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
-	if message_id == hash("add_rescues") then
+	if message_id == add_rescues then
 		self.rescue = self.rescue + message.rescue
 		local rescue_node = gui.get_node("rescue")
 		gui.set_text(rescue_node, "Rescues: " ..self.rescue)
