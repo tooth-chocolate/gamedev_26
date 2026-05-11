@@ -24,4 +24,25 @@ animations {
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
+animations {
+  id: "level_1_fore"
+  images {
+    image: "/assets/backgrounds/level_1_foreground.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "level_1_back"
+  images {
+    image: "/assets/backgrounds/level_1_background.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "level_1_middle"
+  images {
+    image: "/assets/backgrounds/level_1_midground.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
 extrude_borders: 2

@@ -1,27 +1,27 @@
-name: "level_1"
-instances {
-  id: "completion"
-  prototype: "/game_objects/completion_objects/completion_lv1.go"
-  position {
-    x: 1890.0
-    y: 1630.0
-  }
-}
+name: "testing_level_0"
 instances {
   id: "game_controller"
   prototype: "/game_objects/game_controller.go"
+}
+instances {
+  id: "completion_lv1"
+  prototype: "/game_objects/completion_objects/completion_lv1.go"
+  position {
+    x: 7647.0
+    y: 56.0
+  }
 }
 scale_along_z: 0
 embedded_instances {
   id: "map"
   data: "components {\n"
   "  id: \"level1\"\n"
-  "  component: \"/scenes/level1.tilemap\"\n"
+  "  component: \"/scenes/parallax_testing.tilemap\"\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"obstacle\"\n"
   "  type: \"collisionobject\"\n"
-  "  data: \"collision_shape: \\\"/scenes/level1.tilemap\\\"\\n"
+  "  data: \"collision_shape: \\\"/scenes/parallax_testing.tilemap\\\"\\n"
   "type: COLLISION_OBJECT_TYPE_STATIC\\n"
   "mass: 0.0\\n"
   "friction: 0.1\\n"
@@ -33,7 +33,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"death\"\n"
   "  type: \"collisionobject\"\n"
-  "  data: \"collision_shape: \\\"/scenes/level1.tilemap\\\"\\n"
+  "  data: \"collision_shape: \\\"/scenes/parallax_testing.tilemap\\\"\\n"
   "type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
   "mass: 0.0\\n"
   "friction: 0.1\\n"
@@ -97,35 +97,6 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "foreground_2"
-  data: "components {\n"
-  "  id: \"parallax\"\n"
-  "  component: \"/scripts/parallax.script\"\n"
-  "  properties {\n"
-  "    id: \"speed\"\n"
-  "    value: \"0.4\"\n"
-  "    type: PROPERTY_TYPE_NUMBER\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"layer_f\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"level_1_fore\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "textures {\\n"
-  "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/assets/backgrounds/backgrounds.atlas\\\"\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  ""
-  position {
-    x: 720.0
-    y: 135.0
-    z: -0.1
-  }
-}
-embedded_instances {
   id: "background"
   data: "components {\n"
   "  id: \"parallax\"\n"
@@ -166,13 +137,8 @@ embedded_instances {
   "  component: \"/scripts/parallax.script\"\n"
   "  properties {\n"
   "    id: \"speed\"\n"
-  "    value: \"0.4\"\n"
+  "    value: \"0.1\"\n"
   "    type: PROPERTY_TYPE_NUMBER\n"
-  "  }\n"
-  "  properties {\n"
-  "    id: \"infinite_scroll\"\n"
-  "    value: \"true\"\n"
-  "    type: PROPERTY_TYPE_BOOLEAN\n"
   "  }\n"
   "}\n"
   "embedded_components {\n"
@@ -193,6 +159,39 @@ embedded_instances {
   ""
   position {
     x: 240.0
+    y: 135.0
+    z: -0.1
+  }
+}
+embedded_instances {
+  id: "foreground_2"
+  data: "components {\n"
+  "  id: \"parallax\"\n"
+  "  component: \"/scripts/parallax.script\"\n"
+  "  properties {\n"
+  "    id: \"speed\"\n"
+  "    value: \"0.1\"\n"
+  "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"layer_f\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"level_1_fore\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 480.0\\n"
+  "  y: 270.0\\n"
+  "}\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/backgrounds/backgrounds.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 720.0
     y: 135.0
     z: -0.1
   }
@@ -237,7 +236,7 @@ embedded_instances {
   "  component: \"/scripts/parallax.script\"\n"
   "  properties {\n"
   "    id: \"speed\"\n"
-  "    value: \"0.9\"\n"
+  "    value: \"0.2\"\n"
   "    type: PROPERTY_TYPE_NUMBER\n"
   "  }\n"
   "}\n"

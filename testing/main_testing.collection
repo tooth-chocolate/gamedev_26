@@ -4,10 +4,6 @@ instances {
   prototype: "/game_objects/rescue_board.go"
 }
 instances {
-  id: "loader"
-  prototype: "/game_objects/loader.go"
-}
-instances {
   id: "sound_manager"
   prototype: "/game_objects/sound_manager.go"
 }
@@ -37,6 +33,20 @@ embedded_instances {
   data: "components {\n"
   "  id: \"ending_gui\"\n"
   "  component: \"/gui/endings/ending_gui.gui\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "loader"
+  data: "components {\n"
+  "  id: \"game_loader\"\n"
+  "  component: \"/scripts/game_loader.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"testing_level_0\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/testing/try.collection\\\"\\n"
+  "\"\n"
   "}\n"
   ""
 }
