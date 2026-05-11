@@ -3,38 +3,38 @@ components {
   component: "/scripts/game_loader.script"
 }
 embedded_components {
-  id: "testing_level_0"
+  id: "level_1"
   type: "collectionproxy"
-  data: "collection: \"/testing/testing_main_level_0.collection\"\n"
+  data: "collection: \"/main/level_1.collection\"\n"
   ""
 }
 embedded_components {
-  id: "testing_level_1"
+  id: "level_2"
   type: "collectionproxy"
-  data: "collection: \"/testing/testing_main_level_1.collection\"\n"
+  data: "collection: \"/main/level_2.collection\"\n"
   ""
 }
 embedded_components {
-  id: "testing_level_2"
+  id: "level_3"
   type: "collectionproxy"
-  data: "collection: \"/testing/testing_main_level_2.collection\"\n"
+  data: "collection: \"/main/level_3.collection\"\n"
   ""
 }
 embedded_components {
-  id: "testing_level_3"
+  id: "level_4"
   type: "collectionproxy"
-  data: "collection: \"/testing/testing_main_level_3.collection\"\n"
+  data: "collection: \"/main/level_4.collection\"\n"
   ""
 }
 embedded_components {
-  id: "testing_level_4"
+  id: "level_5"
   type: "collectionproxy"
-  data: "collection: \"/testing/testing_main_level_4.collection\"\n"
+  data: "collection: \"/main/level_5.collection\"\n"
   ""
 }
 embedded_components {
-  id: "testing_level_5"
+  id: "level_6"
   type: "collectionproxy"
-  data: "collection: \"/testing/testing_main_level_5.collection\"\n"
+  data: "collection: \"/main/level_6.collection\"\n"
   ""
 }

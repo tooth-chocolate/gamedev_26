@@ -4,15 +4,44 @@
 -- in any script using the functions.
 local L = {}
 
-L.collection =  "main_testing:"
+L.collection =  "main"
+
+L.testing_levels = {
+	"testing_level_0",
+	"testing_level_1",
+	"testing_level_2",
+	"testing_level_3",
+	"testing_level_4",
+	"testing_level_5",
+}
+
+L.main_levels = {
+	"level_1",
+	"level_2",
+	"level_3",
+	"level_4",
+	"level_5",
+	"level_6",
+}
+
 
 L.levels = {
-	"testing_level_0:",
-	"testing_level_1:",
-	"testing_level_2:",
-	"testing_level_3:",
-	"testing_level_4:",
-	"testing_level_5:",
+	main_testing = {	
+		"testing_level_0",
+		"testing_level_1",
+		"testing_level_2",
+		"testing_level_3",
+		"testing_level_4",
+		"testing_level_5",
+	},
+	main = {
+		"level_1",
+		"level_2",
+		"level_3",
+		"level_4",
+		"level_5",
+		"level_6",
+	}
 }
 
 L.boundaries = {

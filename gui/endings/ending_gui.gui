@@ -1,0 +1,252 @@
+script: "/gui/endings/ending_handler.gui_script"
+fonts {
+  name: "rescue_font"
+  font: "/gui/rescue_font.font"
+}
+textures {
+  name: "ending_frames"
+  texture: "/assets/ending_frames/ending_frames.atlas"
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  type: TYPE_BOX
+  texture: "ending_frames/frame_1_scaled"
+  id: "frame_1"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  type: TYPE_BOX
+  texture: "ending_frames/frame_2_scaled"
+  id: "frame_2"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  type: TYPE_BOX
+  texture: "ending_frames/frame_3_arms_scaled"
+  id: "frame_3_arms"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  type: TYPE_BOX
+  texture: "ending_frames/frame_3_eyes_scaled"
+  id: "frame_3_eyes"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  type: TYPE_BOX
+  texture: "ending_frames/frame_3_torso_scaled"
+  id: "frame_3_torso"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  type: TYPE_BOX
+  texture: "ending_frames/frame_3_brain_scaled"
+  id: "frame_3_brain"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  type: TYPE_BOX
+  texture: "ending_frames/frame_3_human_scaled"
+  id: "frame_3_human"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  type: TYPE_BOX
+  texture: "ending_frames/frame_4_true_scaled"
+  id: "frame_4_normal"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  type: TYPE_BOX
+  texture: "ending_frames/frame_4_alt_scaled"
+  id: "frame_4_alt"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+    z: 1.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_BOX
+  id: "blackout"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  enabled: false
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  type: TYPE_BOX
+  texture: "ending_frames/frame_5_true_scaled"
+  id: "credits_true"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 235.0
+    y: -99.0
+  }
+  scale {
+    x: 0.1
+    y: 0.1
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Made By\n"
+  "\n"
+  "github.com/tooth-chocolate\n"
+  "github.com/pploner\n"
+  "github.com/MichaelaSchertler"
+  font: "rescue_font"
+  id: "credits_text_"
+  pivot: PIVOT_NE
+  parent: "credits_true"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 240.0
+    y: 135.0
+  }
+  size {
+    x: 480.0
+    y: 270.0
+  }
+  type: TYPE_BOX
+  texture: "ending_frames/frame_5_alt_scaled"
+  id: "credits_alt"
+  inherit_alpha: true
+  enabled: false
+}
+nodes {
+  position {
+    x: 235.0
+    y: -99.0
+  }
+  scale {
+    x: 0.1
+    y: 0.1
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Made By\n"
+  "\n"
+  "github.com/tooth-chocolate\n"
+  "github.com/pploner\n"
+  "github.com/MichaelaSchertler"
+  font: "rescue_font"
+  id: "credits_text"
+  pivot: PIVOT_NE
+  parent: "credits_alt"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

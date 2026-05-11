@@ -1,8 +1,12 @@
 local upgrades = require "modules.upgrade_state"
 local level_collection = require "modules.level_collection"
+local current_collection = level_collection.collection
 
 local normal_spawn = hash("normal_spawn")
 local prompt_spawn = hash("prompt_spawn")
+local player_died = hash("player_died")
+local current_level_configure = hash("current_level_configure")
+local delete_player = hash("delete_player")
 
 local function get_track_name(self)
 	if self.current_level == 6 then
@@ -31,7 +35,7 @@ local function spawn_player(self, spawn_location)
 		current_level = self.current_level
 	})
 	
-	msg.post(self.current_collection .. "/sound_manager#sound_manager", "play_music", {track = get_track_name(self)})
+	msg.post(current_collection .. ":/sound_manager#sound_manager", "play_music", {track = get_track_name(self)})
 end
 		
 function init(self)
@@ -42,7 +46,6 @@ function init(self)
 	self.rescue_thresholds = {5, 4, 3 ,7, 2}
 	self.rescues = 0
 	self.current_level = 1
-	self.current_collection = level_collection.collection
 	self.level_prompted = false
 	-- self.upgrade_prompted = {false, false, false, false, false}
 	self.part = 1
@@ -80,16 +83,8 @@ function fixed_update(self, dt)
 	-- Remove this function if not needed
 end
 
---[[local function upgrade_ui_caller(self)
-	if self.rescues > self.rescue_threshold then
-		msg.post(self.current_collection .."/upgrade_menu#upgrade_menu", "adapt_menu")
-		-- msg.post("main_testing:/loader#game_loader", "release_input_focus")
-		msg.post(self.current_collection .."/upgrade_menu#upgrade_menu", "enable")
-	end
-end]]
-
 local function upgrade_ui_caller(self)
-	local path = self.current_collection .."/upgrade_handler#upgrade_handler"
+	local path = current_collection ..":/upgrade_handler#upgrade_handler"
 	local next_idx = math.min(upgrades.n_upgrades + 1, 5)
 	local threshold_reached = self.rescues > self.rescue_thresholds[next_idx]
 	local not_yet_prompted = not upgrades.prompted[next_idx]
@@ -119,13 +114,13 @@ function on_message(self, message_id, message, sender)
 	-- Learn more: https://defold.com/manuals/message-passing/
 	-- Remove this function if not needed
 	
-	if message_id == hash("player_died") then
+	if message_id == player_died then
 		-- local spawn_location = vmath.vector3(40, 40, 1)
 		-- timer.delay(1.0, false, function() spawn_player(self, spawn_location) end)
 		respawn_handler(self, message)
 	end
 
-	if message_id == hash("current_level_configure") then
+	if message_id == current_level_configure then
 		self.current_level = message.current_level
 		spawn_player(self, self.init_spawn)
 		-- self.rescue_threshold = message.rescue_threshold
@@ -135,7 +130,7 @@ function on_message(self, message_id, message, sender)
 		]]
 	end
 
-	if message_id == hash("delete_player") then
+	if message_id == delete_player then
 		go.delete(self.player)
 	end
 
@@ -168,7 +163,7 @@ function on_message(self, message_id, message, sender)
 		self.level_prompted = message.prompted
 		timer.delay(1.0, false, function() spawn_player(self, self.current_spawn_location) end)	
 		if upgrades.parts.robot_brain == true and self.current_level == 5 then
-			msg.post(self.current_collection .."/loader#game_loader", "level_complete")
+			msg.post(current_collection ..":/loader#game_loader", "level_complete")
 		end		
 	end
 

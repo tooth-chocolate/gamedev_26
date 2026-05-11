@@ -1,0 +1,92 @@
+local frames = {
+	"blackout", --1
+	"frame_1", -- 2
+	"frame_2", -- 3
+	"frame_3_arms", -- 4
+	"frame_3_eyes",  -- 5
+	"frame_3_torso",  -- 6
+	"frame_3_brain", -- 7
+	"frame_3_human", -- 8
+	"frame_4_normal", -- 9
+	"frame_4_alt", -- 10
+	"credits_alt", -- 11
+	"credits_true", -- 12
+}
+
+local timings = {2, 12, 12, 18, 15, 15}  -- seconds per frame, tune to music
+local upgrades = require("modules.upgrade_state")
+local start = hash("start")
+
+
+function init(self)
+	-- Add initialization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+	self.sequence = {1, 2, 3, 4, 10, 11}
+end
+
+local function set_sequence(self)
+	local n_upgrades = upgrades.n_upgrades
+	if n_upgrades == 0 then
+		self.sequence[4] = 8
+		self.sequence[5] = 9
+		self.sequence[6] = 12
+	elseif n_upgrades < 3 then
+		return
+	elseif n_upgrades == 3 then
+		self.sequence[4] = 5
+	elseif n_upgrades == 4 then
+		self.sequence[5] = 6
+	else 
+		self.sequence[4] = 7
+	end
+end
+
+local function restart(self)
+	upgrades.parts = {robot_arms = false, robot_legs = false, robot_eyes = false, robot_torso = false, robot_brain = false}
+	upgrades.n_upgrades = 0
+	upgrades.prompted = {false, false, false, false, false}
+	upgrades.tutorial_shown = false
+	-- show title screen
+	msg.post("/title_screen#title_screen", "enable")
+	msg.post(".", "disable")
+end
+
+
+local function wait(seconds)
+	local co = coroutine.running()
+	assert(co, "Must be called from within a coroutine")
+	timer.delay(seconds, false, function()
+		coroutine.resume(co)
+	end)
+	coroutine.yield()
+end
+
+
+local function play_frame(self, node, t)
+	gui.set_enabled(node, true)
+	gui.set_color(node, vmath.vector4(1,1,1,0))
+	gui.animate(node, "color.w", 1, gui.EASING_LINEAR, 0.5, 0, function() 
+		gui.animate(node, "color.w", 1, gui.EASING_LINEAR, 0.5, t) end)
+end
+
+local function handle_ending_restart(self)
+	for i, index in ipairs(self.sequence) do
+		local t = timings[i]
+		local cur_node = gui.get_node(frames[index])
+		play_frame(self, cur_node, t)
+		wait(t)
+		gui.set_enabled(cur_node, false)
+	end
+	wait(2)
+	restart(self)
+end
+
+
+function on_message(self, message_id, message, sender)
+	if message_id == start then
+		set_sequence(self)
+		coroutine.wrap(function() handle_ending_restart(self) end)()
+	end
+end
+

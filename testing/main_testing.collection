@@ -4,10 +4,6 @@ instances {
   prototype: "/game_objects/rescue_board.go"
 }
 instances {
-  id: "loader"
-  prototype: "/game_objects/loader.go"
-}
-instances {
   id: "sound_manager"
   prototype: "/game_objects/sound_manager.go"
 }
@@ -35,20 +31,22 @@ embedded_instances {
 embedded_instances {
   id: "endings"
   data: "components {\n"
-  "  id: \"ending_halfrobot\"\n"
-  "  component: \"/gui/endings/ending_halfrobot.gui\"\n"
+  "  id: \"ending_gui\"\n"
+  "  component: \"/gui/endings/ending_gui.gui\"\n"
   "}\n"
-  "components {\n"
-  "  id: \"ending_robot\"\n"
-  "  component: \"/gui/endings/ending_robot.gui\"\n"
+  ""
+}
+embedded_instances {
+  id: "loader"
+  data: "components {\n"
+  "  id: \"game_loader\"\n"
+  "  component: \"/scripts/game_loader.script\"\n"
   "}\n"
-  "components {\n"
-  "  id: \"ending_true\"\n"
-  "  component: \"/gui/endings/ending_true.gui\"\n"
-  "}\n"
-  "components {\n"
-  "  id: \"ending_robot_torso\"\n"
-  "  component: \"/gui/endings/ending_robot_torso.gui\"\n"
+  "embedded_components {\n"
+  "  id: \"testing_level_0\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/testing/try.collection\\\"\\n"
+  "\"\n"
   "}\n"
   ""
 }
