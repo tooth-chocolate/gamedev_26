@@ -6,12 +6,17 @@ nodes {
   template: "/gui/upgrade_prompt.gui"
 }
 nodes {
+  position {
+    x: 320.0
+    y: 170.0
+  }
   scale {
     x: 1.5
   }
   type: TYPE_BOX
   id: "upgrade_prompt/prompt_box"
   parent: "upgrade_prompt"
+  overridden_fields: 1
   overridden_fields: 3
   overridden_fields: 45
   overridden_fields: 46
@@ -19,9 +24,14 @@ nodes {
   enabled: false
 }
 nodes {
+  position {
+    x: 320.0
+    y: 170.0
+  }
   type: TYPE_TEXT
   id: "upgrade_prompt/ask"
   parent: "upgrade_prompt"
+  overridden_fields: 1
   template_node_child: true
 }
 material: "/builtins/materials/gui.material"
