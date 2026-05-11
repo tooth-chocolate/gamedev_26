@@ -9,12 +9,12 @@ textures {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   type: TYPE_BOX
   texture: "ending_frames/frame_1_scaled"
@@ -24,12 +24,12 @@ nodes {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   type: TYPE_BOX
   texture: "ending_frames/frame_2_scaled"
@@ -39,12 +39,12 @@ nodes {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   type: TYPE_BOX
   texture: "ending_frames/frame_3_arms_scaled"
@@ -54,12 +54,12 @@ nodes {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   type: TYPE_BOX
   texture: "ending_frames/frame_3_eyes_scaled"
@@ -69,12 +69,12 @@ nodes {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   type: TYPE_BOX
   texture: "ending_frames/frame_3_torso_scaled"
@@ -84,12 +84,12 @@ nodes {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   type: TYPE_BOX
   texture: "ending_frames/frame_3_brain_scaled"
@@ -99,12 +99,12 @@ nodes {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   type: TYPE_BOX
   texture: "ending_frames/frame_3_human_scaled"
@@ -114,12 +114,12 @@ nodes {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   type: TYPE_BOX
   texture: "ending_frames/frame_4_true_scaled"
@@ -129,12 +129,12 @@ nodes {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   type: TYPE_BOX
   texture: "ending_frames/frame_4_alt_scaled"
@@ -144,13 +144,13 @@ nodes {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
     z: 1.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   color {
     x: 0.0
@@ -165,12 +165,12 @@ nodes {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   type: TYPE_BOX
   texture: "ending_frames/frame_5_true_scaled"
@@ -180,8 +180,8 @@ nodes {
 }
 nodes {
   position {
-    x: 235.0
-    y: -99.0
+    x: 313.0
+    y: -139.0
   }
   scale {
     x: 0.1
@@ -210,12 +210,12 @@ nodes {
 }
 nodes {
   position {
-    x: 240.0
-    y: 135.0
+    x: 320.0
+    y: 180.0
   }
   size {
-    x: 480.0
-    y: 270.0
+    x: 640.0
+    y: 360.0
   }
   type: TYPE_BOX
   texture: "ending_frames/frame_5_alt_scaled"
@@ -225,8 +225,8 @@ nodes {
 }
 nodes {
   position {
-    x: 235.0
-    y: -99.0
+    x: 313.0
+    y: -139.0
   }
   scale {
     x: 0.1

@@ -10,6 +10,27 @@ images {
 images {
   image: "/assets/backgrounds/level_5.png"
 }
+images {
+  image: "/assets/backgrounds/level_1_background_640.png"
+}
+images {
+  image: "/assets/backgrounds/level_1_grass_640.png"
+}
+images {
+  image: "/assets/backgrounds/level_1_foreground_640.png"
+}
+images {
+  image: "/assets/backgrounds/level_1_sky_640.png"
+}
+images {
+  image: "/assets/backgrounds/level_1_clouds_1_640.png"
+}
+images {
+  image: "/assets/backgrounds/level_1_clouds_2_640.png"
+}
+images {
+  image: "/assets/backgrounds/level_1_mountain_640.png"
+}
 animations {
   id: "level_1"
   images {
@@ -42,6 +63,34 @@ animations {
   id: "level_1_middle"
   images {
     image: "/assets/backgrounds/level_1_midground.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "level_1_fore_v2_1"
+  images {
+    image: "/assets/backgrounds/level_1_forground_v2_1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "level_1_fore_v2_2"
+  images {
+    image: "/assets/backgrounds/level_1_forground_v2_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "level_1_sky"
+  images {
+    image: "/assets/backgrounds/level_1_sky.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "level_1_grass"
+  images {
+    image: "/assets/backgrounds/level_1_grass.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }

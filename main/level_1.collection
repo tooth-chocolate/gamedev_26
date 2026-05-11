@@ -97,41 +97,12 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "foreground_2"
-  data: "components {\n"
-  "  id: \"parallax\"\n"
-  "  component: \"/scripts/parallax.script\"\n"
-  "  properties {\n"
-  "    id: \"speed\"\n"
-  "    value: \"0.4\"\n"
-  "    type: PROPERTY_TYPE_NUMBER\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"layer_f\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"level_1_fore\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "textures {\\n"
-  "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/assets/backgrounds/backgrounds.atlas\\\"\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  ""
-  position {
-    x: 720.0
-    y: 135.0
-    z: -0.1
-  }
-}
-embedded_instances {
   id: "background"
   data: "components {\n"
   "  id: \"parallax\"\n"
   "  component: \"/scripts/parallax.script\"\n"
   "  properties {\n"
-  "    id: \"speed\"\n"
+  "    id: \"x_speed\"\n"
   "    value: \"1.0\"\n"
   "    type: PROPERTY_TYPE_NUMBER\n"
   "  }\n"
@@ -140,12 +111,21 @@ embedded_instances {
   "    value: \"false\"\n"
   "    type: PROPERTY_TYPE_BOOLEAN\n"
   "  }\n"
+  "  properties {\n"
+  "    id: \"static_y\"\n"
+  "    value: \"true\"\n"
+  "    type: PROPERTY_TYPE_BOOLEAN\n"
+  "  }\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"layer_b\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"level_1_back\\\"\\n"
+  "  data: \"default_animation: \\\"level_1_background_640\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 640.0\\n"
+  "  y: 360.0\\n"
+  "}\\n"
   "textures {\\n"
   "  sampler: \\\"texture_sampler\\\"\\n"
   "  texture: \\\"/assets/backgrounds/backgrounds.atlas\\\"\\n"
@@ -154,23 +134,182 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 240.0
-    y: 135.0
-    z: -0.3
+    x: 320.0
+    y: 180.0
+    z: -8.0
   }
 }
 embedded_instances {
-  id: "foreground_1"
+  id: "fore"
+  children: "fore_1"
+  children: "fore_2"
+  data: ""
+}
+embedded_instances {
+  id: "fore_1"
   data: "components {\n"
   "  id: \"parallax\"\n"
   "  component: \"/scripts/parallax.script\"\n"
   "  properties {\n"
-  "    id: \"speed\"\n"
-  "    value: \"0.4\"\n"
+  "    id: \"x_speed\"\n"
+  "    value: \"0.5\"\n"
   "    type: PROPERTY_TYPE_NUMBER\n"
   "  }\n"
   "  properties {\n"
-  "    id: \"infinite_scroll\"\n"
+  "    id: \"static_y\"\n"
+  "    value: \"false\"\n"
+  "    type: PROPERTY_TYPE_BOOLEAN\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"layer_f\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"level_1_foreground_640\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 640.0\\n"
+  "  y: 360.0\\n"
+  "}\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/backgrounds/backgrounds.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 320.0
+    y: 180.0
+    z: -0.1
+  }
+}
+embedded_instances {
+  id: "fore_2"
+  data: "components {\n"
+  "  id: \"parallax\"\n"
+  "  component: \"/scripts/parallax.script\"\n"
+  "  properties {\n"
+  "    id: \"x_speed\"\n"
+  "    value: \"0.5\"\n"
+  "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"static_y\"\n"
+  "    value: \"false\"\n"
+  "    type: PROPERTY_TYPE_BOOLEAN\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"layer_f\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"level_1_foreground_640\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 640.0\\n"
+  "  y: 360.0\\n"
+  "}\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/backgrounds/backgrounds.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 960.0
+    y: 180.0
+    z: -0.1
+  }
+}
+embedded_instances {
+  id: "grass_1"
+  data: "components {\n"
+  "  id: \"parallax\"\n"
+  "  component: \"/scripts/parallax.script\"\n"
+  "  properties {\n"
+  "    id: \"x_speed\"\n"
+  "    value: \"0.9\"\n"
+  "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"static_y\"\n"
+  "    value: \"false\"\n"
+  "    type: PROPERTY_TYPE_BOOLEAN\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"layer_f\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"level_1_grass_640\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 640.0\\n"
+  "  y: 360.0\\n"
+  "}\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/backgrounds/backgrounds.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 320.0
+    y: 180.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "grass_2"
+  data: "components {\n"
+  "  id: \"parallax\"\n"
+  "  component: \"/scripts/parallax.script\"\n"
+  "  properties {\n"
+  "    id: \"x_speed\"\n"
+  "    value: \"0.9\"\n"
+  "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"static_y\"\n"
+  "    value: \"false\"\n"
+  "    type: PROPERTY_TYPE_BOOLEAN\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"layer_f\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"level_1_grass_640\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 640.0\\n"
+  "  y: 360.0\\n"
+  "}\\n"
+  "offset: 0.23\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/backgrounds/backgrounds.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 960.0
+    y: 180.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "sky_1"
+  data: "components {\n"
+  "  id: \"parallax\"\n"
+  "  component: \"/scripts/parallax.script\"\n"
+  "  properties {\n"
+  "    id: \"x_speed\"\n"
+  "    value: \"0.1\"\n"
+  "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"static_y\"\n"
   "    value: \"true\"\n"
   "    type: PROPERTY_TYPE_BOOLEAN\n"
   "  }\n"
@@ -178,11 +317,11 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"layer_f\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"level_1_fore\\\"\\n"
+  "  data: \"default_animation: \\\"level_1_sky_640\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "size {\\n"
-  "  x: 480.0\\n"
-  "  y: 270.0\\n"
+  "  x: 640.0\\n"
+  "  y: 360.0\\n"
   "}\\n"
   "textures {\\n"
   "  sampler: \\\"texture_sampler\\\"\\n"
@@ -192,30 +331,35 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 240.0
-    y: 135.0
-    z: -0.1
+    x: 320.0
+    y: 180.0
+    z: -7.0
   }
 }
 embedded_instances {
-  id: "middleground_1"
+  id: "sky_2"
   data: "components {\n"
   "  id: \"parallax\"\n"
   "  component: \"/scripts/parallax.script\"\n"
   "  properties {\n"
-  "    id: \"speed\"\n"
-  "    value: \"0.9\"\n"
+  "    id: \"x_speed\"\n"
+  "    value: \"0.1\"\n"
   "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"static_y\"\n"
+  "    value: \"true\"\n"
+  "    type: PROPERTY_TYPE_BOOLEAN\n"
   "  }\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"layer_f\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"level_1_middle\\\"\\n"
+  "  data: \"default_animation: \\\"level_1_sky_640\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "size {\\n"
-  "  x: 480.0\\n"
-  "  y: 270.0\\n"
+  "  x: 640.0\\n"
+  "  y: 360.0\\n"
   "}\\n"
   "textures {\\n"
   "  sampler: \\\"texture_sampler\\\"\\n"
@@ -225,41 +369,8 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 240.0
-    y: 135.0
-    z: -0.2
-  }
-}
-embedded_instances {
-  id: "middleground_2"
-  data: "components {\n"
-  "  id: \"parallax\"\n"
-  "  component: \"/scripts/parallax.script\"\n"
-  "  properties {\n"
-  "    id: \"speed\"\n"
-  "    value: \"0.9\"\n"
-  "    type: PROPERTY_TYPE_NUMBER\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"layer_f\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"level_1_middle\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "size {\\n"
-  "  x: 480.0\\n"
-  "  y: 270.0\\n"
-  "}\\n"
-  "textures {\\n"
-  "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/assets/backgrounds/backgrounds.atlas\\\"\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  ""
-  position {
-    x: 720.0
-    y: 135.0
-    z: -0.2
+    x: 960.0
+    y: 180.0
+    z: -7.0
   }
 }

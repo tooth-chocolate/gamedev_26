@@ -1,5 +1,6 @@
-go.property("speed", 0.5)
+go.property("x_speed", 0.5)
 go.property("infinite_scroll", true)
+go.property("static_y", true)
 
 function init(self)
 	-- Add initialization code here
@@ -10,7 +11,7 @@ function init(self)
 	-- go.set_position(vmath.vector3(self.width / 2, self.height/ 2, go.get_position().z))
 	self.pos = go.get_position()
 	self.camera = "/test_camera"
-	self.start_pos_camera = vmath.vector3(240, 135, 10)
+	self.start_pos_camera = vmath.vector3(self.width/2, self.height/2, 10)
 	-- print(go.get_position(self.camera))
 	-- print(go.get_position())
 end
@@ -28,21 +29,30 @@ function update(self, dt)
 	local pos_camera = go.get_position(self.camera)
 	local delta_x = pos_camera.x - self.start_pos_camera.x
 	local delta_y = pos_camera.y - self.start_pos_camera.y 
+	local y_speed = self.x_speed
 
-	local raw_x = self.pos.x - delta_x * self.speed
+	-- local raw_x = self.pos.x - delta_x * self.x_speed
+	local raw_x = self.pos.x + delta_x * self.x_speed
+	local dist_from_cam = raw_x - pos_camera.x
+	local cycles = math.floor((dist_from_cam + self.width)/(2*self.width))
 	local left = pos_camera.x
 	local rel_x = raw_x - left
 	rel_x = ((rel_x + self.width) % (2 * self.width)) - self.width
 	-- print("camera: ", pos_camera)
-	local new_x = self.pos.x + delta_x * self.speed
+	local new_x = self.pos.x + delta_x * self.x_speed
+	local new_y = self.pos.y + delta_y * y_speed
 	
 	if self.infinite_scroll then
-		new_x = left + rel_x
+		new_x = raw_x - cycles * 2 *self.width
+	end
+
+	if self.static_y then
+		new_y = self.pos.y + delta_y
 	end
 	local pos_new = vmath.vector3(
 	--self.pos.x + delta_x *self.speed,
 		new_x,
-		self.pos.y + delta_y * self.speed,
+		new_y,
 		-- self.pos.y, 
 		-- pos_camera.y,
 		self.pos.z

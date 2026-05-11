@@ -12,6 +12,8 @@ function init(self)
 	self.smoothing = 0.1
 	self.tracking = false
 	self.offset = vmath.vector3(0, 0, 0)
+	self.width = sys.get_config_int("display.width")
+	self.height = sys.get_config_int("display.height")
 	-- print(msg.url())
 	msg.post("#test_camera", "acquire_camera_focus")
 	-- disable filter if robot_eyes are available
@@ -59,10 +61,12 @@ function fixed_update(self, dt)
 	new_pos.z = current.z  -- preserve camera z
 
 	-- correct for level boundaries
-	new_pos.x = math.max(new_pos.x, self.boundaries.left + 240)
-	new_pos.x = math.min(new_pos.x, self.boundaries.right - 240)
-	new_pos.y = math.max(new_pos.y, self.boundaries.bottom + 135)
-	new_pos.y = math.min(new_pos.y, self.boundaries.top - 135)
+	local tmp_x = self.width/2
+	local tmp_y = self.height/2
+	new_pos.x = math.max(new_pos.x, self.boundaries.left + tmp_x)
+	new_pos.x = math.min(new_pos.x, self.boundaries.right - tmp_x)
+	new_pos.y = math.max(new_pos.y, self.boundaries.bottom + tmp_y)
+	new_pos.y = math.min(new_pos.y, self.boundaries.top - tmp_y)
 
 	go.set_position(new_pos)
 end

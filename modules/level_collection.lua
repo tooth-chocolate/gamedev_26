@@ -4,7 +4,7 @@
 -- in any script using the functions.
 local L = {}
 
-L.collection =  "main"
+L.collection =  "main_testing"
 
 L.testing_levels = {
 	"testing_level_0",

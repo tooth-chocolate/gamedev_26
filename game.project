@@ -1,13 +1,13 @@
 [bootstrap]
-main_collection = /main/main.collectionc
+main_collection = /testing/main_testing.collectionc
 render = /builtins/render/default.renderc
 
 [script]
 shared_state = 1
 
 [display]
-width = 480
-height = 270
+width = 640
+height = 360
 high_dpi = 1
 fullscreen = 0
 
